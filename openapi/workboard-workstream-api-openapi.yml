@@ -1,0 +1,567 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Workstream API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Workstream
+  description: '[WorkBoard''s help center documentation on Workstreams.](https://support.workboard.com/hc/en-us/articles/115005163567-Workstreams#workstreams-0-0)'
+paths:
+  /workstream:
+    get:
+      summary: Get the details of Team Workstreams to which the authenticated user (token user) has access.
+      description: <strong>Note:</strong><br/>The use of a `Data-Admin` token will not return all Workstreams for all users.<br/>If no query string parameters are set, this will return Team Workstreams for Teams which the authenticated user (token user) is a member of. Personal Workstreams are not returned in the response.
+      tags:
+      - Workstream
+      parameters:
+      - name: ws_id
+        description: The unique numerical id assigned to each Workstream in WorkBoard.
+        in: query
+        schema:
+          type: integer
+      - name: ws_owner
+        description: '`Data-Admin` The numerical user id or email address of the user. The response will include all team Workstreams the user has access to.'
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      workstream:
+                        description: Returns an array of Workstream if `ws_id` is not passed. Returns a single Workstream object when `ws_id` is passed.
+                        oneOf:
+                        - type: object
+                          properties:
+                            ws_id:
+                              type: string
+                            ws_name:
+                              type: string
+                            ws_objective:
+                              type: string
+                            ws_owner:
+                              type: string
+                            ws_lead:
+                              type: string
+                            ws_status:
+                              type: string
+                            ws_type:
+                              type: string
+                            ws_effort:
+                              type: object
+                              properties:
+                                low_effort:
+                                  type: string
+                                medium_effort:
+                                  type: string
+                                large_effort:
+                                  type: string
+                            ws_pace:
+                              type: string
+                            ws_health:
+                              type: string
+                            ws_priority:
+                              type: string
+                            ws_progress:
+                              type: string
+                              nullable: true
+                            ws_start_date:
+                              type: string
+                            ws_target_date:
+                              type: string
+                              nullable: true
+                            ws_completion_date:
+                              type: string
+                              nullable: true
+                            ws_team_id:
+                              type: string
+                            ws_team_name:
+                              type: string
+                        - type: array
+                          items:
+                            type: object
+                            properties:
+                              ws_id:
+                                type: string
+                              ws_name:
+                                type: string
+                              ws_objective:
+                                type: string
+                              ws_owner:
+                                type: string
+                              ws_lead:
+                                type: string
+                              ws_status:
+                                type: string
+                              ws_type:
+                                type: string
+                              ws_effort:
+                                type: object
+                                properties:
+                                  low_effort:
+                                    type: string
+                                  medium_effort:
+                                    type: string
+                                  large_effort:
+                                    type: string
+                              ws_pace:
+                                type: string
+                              ws_health:
+                                type: string
+                              ws_priority:
+                                type: string
+                              ws_progress:
+                                type: string
+                                nullable: true
+                              ws_start_date:
+                                type: string
+                              ws_target_date:
+                                type: string
+                                nullable: true
+                              ws_completion_date:
+                                type: string
+                                nullable: true
+                              ws_team_id:
+                                type: string
+                              ws_team_name:
+                                type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a Workstream for a team.
+      description: Create a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users.
+      tags:
+      - Workstream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ws_data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ws_name:
+                        type: string
+                        description: The name of the Workstream.
+                      ws_objective:
+                        type: string
+                        description: A descriptive narrative or objective statement for the Workstream.
+                      team_id:
+                        type: string
+                        description: The unique numerical id of the Workstream's parent team.
+                      ws_owner:
+                        type: string
+                        description: The user id of the team's manager or co-manager.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                        description: Returns the number of Workstreams created.
+                      workstream:
+                        description: ''
+                        type: array
+                        items:
+                          type: array
+                          items:
+                            type: object
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /workstream/{ws_id_path}:
+    put:
+      summary: Update a Workstream for a team.
+      description: Update a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users.
+      tags:
+      - Workstream
+      parameters:
+      - name: ws_id_path
+        description: The unique numerical id assigned to each Workstream in WorkBoard.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                ws_name:
+                  type: string
+                  description: The name of the Workstream.
+                ws_start_date:
+                  type: string
+                  description: The start date for the Workstream as a valid date string or time-stamp.
+                ws_end_date:
+                  type: string
+                  description: The end date for the Workstream as a valid date string or time-stamp.
+                ws_pace:
+                  type: string
+                  description: 'The subjective pace at which work is progressing. Permitted values are: "slow" "fast" "steady"'
+                ws_health:
+                  type: string
+                  description: 'The subjective health of the Workstream. Permitted values are: "ok" "good" "risk"'
+                ws_priority:
+                  type: string
+                  description: 'The Workstream''s priority level, from 1 (highest) to 5 (lowest). Permitted values are: "p1" "p2" "p3" "p4" "p5"'
+                ws_shared_with:
+                  type: array
+                  description: 'Add or remove user access to the Workstream (passed as an array): user_id : Required the numerical id or email address associated with the user''s WorkBoard account. ws_access : To remove a user''s access to the Workstream, pass this parameter with the value "revoke"'
+                  items:
+                    type: object
+                    properties:
+                      user_id:
+                        type: string
+                      ws_access:
+                        type: string
+                        description: To remove a user's access to the Workstream, pass this parameter with the value "revoke"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                        description: Returns the number of Workstreams created.
+                      workstream:
+                        description: ''
+                        type: array
+                        items:
+                          type: array
+                          items:
+                            type: object
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    patch:
+      summary: Delete a Workstream with all its action items. A successful request will return a 204 code.
+      description: Delete a Workstream with all its action items. A successful request will return a 204 code.
+      tags:
+      - Workstream
+      parameters:
+      - name: ws_id_path
+        description: The unique numerical id assigned to each Workstream in WorkBoard.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Success returns a 204 header.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /workstream/{ws_id_path}/activity:
+    get:
+      summary: List details of all action items belonging to the specified Workstream.
+      description: List details of all action items belonging to the specified Workstream. <br/><strong>Note:</strong> This will only return Workstreams the user has access to.
+      tags:
+      - Workstream
+      parameters:
+      - name: ws_id_path
+        description: The unique numerical id assigned to each Workstream in WorkBoard.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      workstream:
+                        description: ''
+                        type: object
+                        properties:
+                          ws_id:
+                            type: string
+                          ws_name:
+                            type: string
+                          ws_objective:
+                            type: string
+                          ws_owner:
+                            type: string
+                          ws_lead:
+                            type: string
+                          ws_status:
+                            type: string
+                          ws_type:
+                            type: string
+                          ws_effort:
+                            type: object
+                            properties:
+                              low_effort:
+                                type: string
+                              medium_effort:
+                                type: string
+                              large_effort:
+                                type: string
+                          ws_pace:
+                            type: string
+                          ws_health:
+                            type: string
+                          ws_priority:
+                            type: string
+                          ws_progress:
+                            type: string
+                            nullable: true
+                          ws_start_date:
+                            type: string
+                          ws_target_date:
+                            type: string
+                            nullable: true
+                          ws_completion_date:
+                            type: string
+                            nullable: true
+                          ws_team_id:
+                            type: string
+                          ws_team_name:
+                            type: string
+                          ws_activity:
+                            type: object
+                            properties:
+                              activity:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    ai_id:
+                                      type: string
+                                    ai_description:
+                                      type: string
+                                    ai_created_at:
+                                      type: string
+                                    ai_state:
+                                      type: string
+                                    ai_rating:
+                                      type: string
+                                    ai_priority:
+                                      type: string
+                                    ai_effort:
+                                      type: string
+                                    ai_files:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          file_id:
+                                            type: string
+                                          file_name:
+                                            type: string
+                                          file_url:
+                                            type: string
+                                          file_owner:
+                                            type: string
+                                    ai_sub_actions:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          sub_ai_id:
+                                            type: string
+                                          sub_ai_description:
+                                            type: string
+                                          sub_ai_owner:
+                                            type: string
+                                    ai_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_timestamp:
+                                            type: string
+                                    ai_due_date:
+                                      type: string
+                                    ai_workstream:
+                                      type: string
+                                    ai_team:
+                                      type: string
+                                      nullable: true
+                                    ai_workstream_name:
+                                      type: string
+                                    ai_loop_members:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          user_id:
+                                            type: string
+                                          user_email:
+                                            type: string
+                                    ai_tags:
+                                      type: string
+                                      nullable: true
+                                    ai_due_before:
+                                      type: string
+                                    ai_owner:
+                                      type: string
+                                    ai_created_by:
+                                      type: string
+                                    ai_url:
+                                      type: string
+                                    ai_completed_at:
+                                      type: string
+                                      nullable: true
+                              activity_count:
+                                type: integer
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT

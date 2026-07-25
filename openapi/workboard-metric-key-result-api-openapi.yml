@@ -1,0 +1,1921 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Metric (Key Result) API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Metric (Key Result)
+paths:
+  /metric:
+    get:
+      summary: Request metrics (key results) the user (token owner) has access to. Use a Data-Admin token to gain access to metrics across your organization.
+      description: By default, when no additional parameters are passed, this returns the Metrics the token owner has ownership of. If the token owner doesn't own any Metrics, the results will be empty.
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id
+        description: The unique numerical id assigned to each metric in WorkBoard. Include the metric_id parameter in the request to limit the response to a specific metric.
+        in: query
+        schema:
+          type: integer
+      - name: goal_id
+        description: The unique numerical id assigned to each goal in WorkBoard. Include this parameter to return metrics from the specified goal only.
+        in: query
+        schema:
+          type: integer
+      - name: team_id
+        description: The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team.
+        in: query
+        schema:
+          type: integer
+      - name: include_metric_data
+        description: Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments.
+        in: query
+        schema:
+          enum:
+          - 'yes'
+      - name: limit
+        description: The number of team metrics returned per page when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          type: integer
+      - name: offset
+        description: Specify the starting point for the number of team metrics returned when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metric:
+                        description: Returns an array of metrics if `metric_id` is not passed. Returns a single metric object when `metric_id` is passed.
+                        oneOf:
+                        - type: object
+                          properties:
+                            metric_id:
+                              type: string
+                            metric_goal_id:
+                              type: string
+                            metric_owner:
+                              type: string
+                            metric_real_owner:
+                              type: string
+                            metric_name:
+                              type: string
+                            metric_update_interval:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            metric_update_interval_day:
+                              type: string
+                            metric_unit:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            metric_progress_type:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            metric_counting_type:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            metric_initial_data:
+                              type: string
+                            metric_target:
+                              type: string
+                            metric_progress:
+                              description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                              type: string
+                            metric_progress_color:
+                              type: string
+                            metric_last_update:
+                              type: string
+                            metric_next_update:
+                              type: string
+                            metric_source_from:
+                              description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                              type: string
+                            metric_create_at:
+                              type: string
+                              description: The GMT timestamp value for the created at time.
+                            metric_modified_at:
+                              type: string
+                            metric_created_by:
+                              type: string
+                            metric_updated_by:
+                              type: string
+                            metric_status:
+                              description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                              type: string
+                            metric_permission:
+                              type: string
+                            metric_confidence:
+                              type: array
+                              items:
+                                properties:
+                                  confidence:
+                                    type: string
+                                  comment:
+                                    type: string
+                                  modified_at:
+                                    type: string
+                                  metric_data_id:
+                                    type: integer
+                                    nullable: true
+                                    description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
+                            child_kr:
+                              description: The children of the current metric (Key Result).
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  metric_id:
+                                    type: string
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  metric:
+                                    type: string
+                                  target:
+                                    type: string
+                                  initial_data:
+                                    type: string
+                                  graph_type:
+                                    type: string
+                                  counting:
+                                    type: string
+                                  owner:
+                                    type: string
+                                  interval:
+                                    type: string
+                                  create_at:
+                                    type: string
+                                    description: The GMT timestamp value for the created at time.
+                                  last_mod:
+                                    type: string
+                                    description: The GMT timestamp value for the modified at time.
+                                  goal_id:
+                                    type: string
+                                  permission:
+                                    type: string
+                                  progress:
+                                    type: string
+                                  progress_color:
+                                    type: string
+                                  last_run:
+                                    type: string
+                                  next_run:
+                                    type: string
+                                  repeat_id:
+                                    type: string
+                                  source:
+                                    description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                    type: string
+                                  status:
+                                    description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                                    type: string
+                                  weekly_update_day:
+                                    type: string
+                                  progress_type:
+                                    type: string
+                                  measure_metric_data:
+                                    type: string
+                                  multiply_data:
+                                    type: string
+                                  lower_limit:
+                                    type: string
+                                  upper_limit:
+                                    type: string
+                                  progress_consider:
+                                    type: string
+                                  type:
+                                    type: string
+                                  message:
+                                    type: string
+                                  goal_align_check:
+                                    type: string
+                                  goal_roll_up_check:
+                                    type: string
+                                  is_encrypted:
+                                    type: string
+                                  multiplier:
+                                    type: string
+                                  weightage:
+                                    type: string
+                                  stop_update:
+                                    type: string
+                                  achieve_target:
+                                    type: string
+                                  cascade_goal_id:
+                                    type: string
+                                  created_by:
+                                    type: string
+                                  modified_at:
+                                    type: string
+                                  start_date:
+                                    description: The start date of the metric.
+                                    type: string
+                                  end_date:
+                                    description: The end date of the metric.
+                                    type: string
+                                  description:
+                                    type: string
+                                  parent_goal_id:
+                                    type: string
+                                  real_owner:
+                                    type: string
+                                  parent:
+                                    description: The parent metric ID.
+                                    type: string
+                                  quarter_target_type:
+                                    type: string
+                                  quarter_name:
+                                    type: string
+                                  period_name:
+                                    type: object
+                                  rag_score:
+                                    type: string
+                                  last_update:
+                                    type: string
+                                  created_from:
+                                    type: string
+                                  stretch_target:
+                                    type: string
+                                  fy_quarter_kr:
+                                    type: string
+                            metric_automation:
+                              description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
+                              type: object
+                              nullable: true
+                              oneOf:
+                              - type: object
+                                properties:
+                                  source_plugins:
+                                    description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from a plugin.'
+                                    type: array
+                                    items:
+                                      type: object
+                              - type: object
+                                properties:
+                                  external_sources:
+                                    description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from an external application.'
+                                    type: array
+                                    items:
+                                      type: object
+                            metric_achieve_target:
+                              description: What has been achieved against the `metric_target`.
+                              type: string
+                            metric_data:
+                              description: Included if `include_metric_data=yes`.
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  metric_data_id:
+                                    description: The ID for the specific metric update field in WorkBoard.
+                                    type: string
+                                  metric_data_value:
+                                    description: Will be `null` when there was not an update.
+                                    type: string
+                                    nullable: true
+                                  metric_data_created_at:
+                                    description: The timestamp for when the metric should be updated based upon the update cadence.
+                                    type: string
+                                  metric_data_created_by:
+                                    description: The user ID for the user that updated the metric (Key Result).
+                                    type: string
+                                  metric_data_updated_at:
+                                    description: The timestamp for when the metric was actually updated by the user, application or integration. Will be `"0"` when there was not an update.
+                                    type: string
+                                  metric_data_comment:
+                                    type: string
+                            metric_comments:
+                              description: Included if `include_metric_data=yes`
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  comment:
+                                    type: string
+                                  modified_at:
+                                    type: string
+                            metric_mit_start_date:
+                              description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the start of the multiple interval time period (MIT) metric. This is based upon the earliest `child_kr`'s `start_date`.
+                              type: string
+                            metric_mit_end_date:
+                              description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the end of the multiple interval time period (MIT) metric. This is based upon the latest `child_kr`'s `end_date`.
+                              type: string
+                            metric_goal_source:
+                              description: An array of the active Goal IDs when the `metric_source_from` is 7 (source from other Goals). Available when requesting a single Metric and Metric ID is used in the path (`metric_id_path`).
+                              type: array
+                              items:
+                                type: string
+                        - type: array
+                          items:
+                            type: object
+                            properties:
+                              metric_id:
+                                type: string
+                              metric_goal_id:
+                                type: string
+                              metric_owner:
+                                type: string
+                              metric_real_owner:
+                                type: string
+                              metric_name:
+                                type: string
+                              metric_update_interval:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                              metric_update_interval_day:
+                                type: string
+                              metric_unit:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                              metric_progress_type:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                              metric_counting_type:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                              metric_initial_data:
+                                type: string
+                              metric_target:
+                                type: string
+                              metric_progress:
+                                description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                type: string
+                              metric_progress_color:
+                                type: string
+                              metric_last_update:
+                                type: string
+                              metric_next_update:
+                                type: string
+                              metric_source_from:
+                                description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                type: string
+                              metric_create_at:
+                                type: string
+                                description: The GMT timestamp value for the created at time.
+                              metric_modified_at:
+                                type: string
+                              metric_created_by:
+                                type: string
+                              metric_updated_by:
+                                type: string
+                              metric_status:
+                                description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                                type: string
+                              metric_permission:
+                                type: string
+                              metric_confidence:
+                                type: array
+                                items:
+                                  properties:
+                                    confidence:
+                                      type: string
+                                    comment:
+                                      type: string
+                                    modified_at:
+                                      type: string
+                                    metric_data_id:
+                                      type: integer
+                                      nullable: true
+                                      description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
+                              child_kr:
+                                description: The children of the current metric (Key Result).
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    metric_id:
+                                      type: string
+                                    id:
+                                      type: string
+                                    name:
+                                      type: string
+                                    metric:
+                                      type: string
+                                    target:
+                                      type: string
+                                    initial_data:
+                                      type: string
+                                    graph_type:
+                                      type: string
+                                    counting:
+                                      type: string
+                                    owner:
+                                      type: string
+                                    interval:
+                                      type: string
+                                    create_at:
+                                      type: string
+                                      description: The GMT timestamp value for the created at time.
+                                    last_mod:
+                                      type: string
+                                      description: The GMT timestamp value for the modified at time.
+                                    goal_id:
+                                      type: string
+                                    permission:
+                                      type: string
+                                    progress:
+                                      type: string
+                                    progress_color:
+                                      type: string
+                                    last_run:
+                                      type: string
+                                    next_run:
+                                      type: string
+                                    repeat_id:
+                                      type: string
+                                    source:
+                                      description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                      type: string
+                                    status:
+                                      description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                                      type: string
+                                    weekly_update_day:
+                                      type: string
+                                    progress_type:
+                                      type: string
+                                    measure_metric_data:
+                                      type: string
+                                    multiply_data:
+                                      type: string
+                                    lower_limit:
+                                      type: string
+                                    upper_limit:
+                                      type: string
+                                    progress_consider:
+                                      type: string
+                                    type:
+                                      type: string
+                                    message:
+                                      type: string
+                                    goal_align_check:
+                                      type: string
+                                    goal_roll_up_check:
+                                      type: string
+                                    is_encrypted:
+                                      type: string
+                                    multiplier:
+                                      type: string
+                                    weightage:
+                                      type: string
+                                    stop_update:
+                                      type: string
+                                    achieve_target:
+                                      type: string
+                                    cascade_goal_id:
+                                      type: string
+                                    created_by:
+                                      type: string
+                                    modified_at:
+                                      type: string
+                                    start_date:
+                                      description: The start date of the metric.
+                                      type: string
+                                    end_date:
+                                      description: The end date of the metric.
+                                      type: string
+                                    description:
+                                      type: string
+                                    parent_goal_id:
+                                      type: string
+                                    real_owner:
+                                      type: string
+                                    parent:
+                                      description: The parent metric ID.
+                                      type: string
+                                    quarter_target_type:
+                                      type: string
+                                    quarter_name:
+                                      type: string
+                                    period_name:
+                                      type: object
+                                    rag_score:
+                                      type: string
+                                    last_update:
+                                      type: string
+                                    created_from:
+                                      type: string
+                                    stretch_target:
+                                      type: string
+                                    fy_quarter_kr:
+                                      type: string
+                              metric_automation:
+                                description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
+                                type: object
+                                nullable: true
+                                oneOf:
+                                - type: object
+                                  properties:
+                                    source_plugins:
+                                      description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from a plugin.'
+                                      type: array
+                                      items:
+                                        type: object
+                                - type: object
+                                  properties:
+                                    external_sources:
+                                      description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from an external application.'
+                                      type: array
+                                      items:
+                                        type: object
+                              metric_achieve_target:
+                                description: What has been achieved against the `metric_target`.
+                                type: string
+                              metric_data:
+                                description: Included if `include_metric_data=yes`.
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    metric_data_id:
+                                      description: The ID for the specific metric update field in WorkBoard.
+                                      type: string
+                                    metric_data_value:
+                                      description: Will be `null` when there was not an update.
+                                      type: string
+                                      nullable: true
+                                    metric_data_created_at:
+                                      description: The timestamp for when the metric should be updated based upon the update cadence.
+                                      type: string
+                                    metric_data_created_by:
+                                      description: The user ID for the user that updated the metric (Key Result).
+                                      type: string
+                                    metric_data_updated_at:
+                                      description: The timestamp for when the metric was actually updated by the user, application or integration. Will be `"0"` when there was not an update.
+                                      type: string
+                                    metric_data_comment:
+                                      type: string
+                              metric_comments:
+                                description: Included if `include_metric_data=yes`
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    comment:
+                                      type: string
+                                    modified_at:
+                                      type: string
+                              metric_mit_start_date:
+                                description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the start of the multiple interval time period (MIT) metric. This is based upon the earliest `child_kr`'s `start_date`.
+                                type: string
+                              metric_mit_end_date:
+                                description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the end of the multiple interval time period (MIT) metric. This is based upon the latest `child_kr`'s `end_date`.
+                                type: string
+                              metric_goal_source:
+                                description: An array of the active Goal IDs when the `metric_source_from` is 7 (source from other Goals). Available when requesting a single Metric and Metric ID is used in the path (`metric_id_path`).
+                                type: array
+                                items:
+                                  type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /metric/{metric_id_path}:
+    get:
+      summary: GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: include_metric_data
+        description: Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments.
+        in: query
+        schema:
+          enum:
+          - 'yes'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metric:
+                        type: object
+                        properties:
+                          metric_id:
+                            type: string
+                          metric_goal_id:
+                            type: string
+                          metric_owner:
+                            type: string
+                          metric_real_owner:
+                            type: string
+                          metric_name:
+                            type: string
+                          metric_update_interval:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_update_interval_day:
+                            type: string
+                          metric_unit:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_progress_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_counting_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_initial_data:
+                            type: string
+                          metric_target:
+                            type: string
+                          metric_progress:
+                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                            type: string
+                          metric_progress_color:
+                            type: string
+                          metric_last_update:
+                            type: string
+                          metric_next_update:
+                            type: string
+                          metric_source_from:
+                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                            type: string
+                          metric_create_at:
+                            type: string
+                            description: The GMT timestamp value for the created at time.
+                          metric_modified_at:
+                            type: string
+                          metric_created_by:
+                            type: string
+                          metric_updated_by:
+                            type: string
+                          metric_status:
+                            description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                            type: string
+                          metric_permission:
+                            type: string
+                          metric_confidence:
+                            type: array
+                            items:
+                              properties:
+                                confidence:
+                                  type: string
+                                comment:
+                                  type: string
+                                modified_at:
+                                  type: string
+                                metric_data_id:
+                                  type: integer
+                                  nullable: true
+                                  description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
+                          child_kr:
+                            description: The children of the current metric (Key Result).
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                metric_id:
+                                  type: string
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                                metric:
+                                  type: string
+                                target:
+                                  type: string
+                                initial_data:
+                                  type: string
+                                graph_type:
+                                  type: string
+                                counting:
+                                  type: string
+                                owner:
+                                  type: string
+                                interval:
+                                  type: string
+                                create_at:
+                                  type: string
+                                  description: The GMT timestamp value for the created at time.
+                                last_mod:
+                                  type: string
+                                  description: The GMT timestamp value for the modified at time.
+                                goal_id:
+                                  type: string
+                                permission:
+                                  type: string
+                                progress:
+                                  type: string
+                                progress_color:
+                                  type: string
+                                last_run:
+                                  type: string
+                                next_run:
+                                  type: string
+                                repeat_id:
+                                  type: string
+                                source:
+                                  description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                  type: string
+                                status:
+                                  description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                                  type: string
+                                weekly_update_day:
+                                  type: string
+                                progress_type:
+                                  type: string
+                                measure_metric_data:
+                                  type: string
+                                multiply_data:
+                                  type: string
+                                lower_limit:
+                                  type: string
+                                upper_limit:
+                                  type: string
+                                progress_consider:
+                                  type: string
+                                type:
+                                  type: string
+                                message:
+                                  type: string
+                                goal_align_check:
+                                  type: string
+                                goal_roll_up_check:
+                                  type: string
+                                is_encrypted:
+                                  type: string
+                                multiplier:
+                                  type: string
+                                weightage:
+                                  type: string
+                                stop_update:
+                                  type: string
+                                achieve_target:
+                                  type: string
+                                cascade_goal_id:
+                                  type: string
+                                created_by:
+                                  type: string
+                                modified_at:
+                                  type: string
+                                start_date:
+                                  description: The start date of the metric.
+                                  type: string
+                                end_date:
+                                  description: The end date of the metric.
+                                  type: string
+                                description:
+                                  type: string
+                                parent_goal_id:
+                                  type: string
+                                real_owner:
+                                  type: string
+                                parent:
+                                  description: The parent metric ID.
+                                  type: string
+                                quarter_target_type:
+                                  type: string
+                                quarter_name:
+                                  type: string
+                                period_name:
+                                  type: object
+                                rag_score:
+                                  type: string
+                                last_update:
+                                  type: string
+                                created_from:
+                                  type: string
+                                stretch_target:
+                                  type: string
+                                fy_quarter_kr:
+                                  type: string
+                          metric_automation:
+                            description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
+                            type: object
+                            nullable: true
+                            oneOf:
+                            - type: object
+                              properties:
+                                source_plugins:
+                                  description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from a plugin.'
+                                  type: array
+                                  items:
+                                    type: object
+                            - type: object
+                              properties:
+                                external_sources:
+                                  description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from an external application.'
+                                  type: array
+                                  items:
+                                    type: object
+                          metric_achieve_target:
+                            description: What has been achieved against the `metric_target`.
+                            type: string
+                          metric_data:
+                            description: Included if `include_metric_data=yes`.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                metric_data_id:
+                                  description: The ID for the specific metric update field in WorkBoard.
+                                  type: string
+                                metric_data_value:
+                                  description: Will be `null` when there was not an update.
+                                  type: string
+                                  nullable: true
+                                metric_data_created_at:
+                                  description: The timestamp for when the metric should be updated based upon the update cadence.
+                                  type: string
+                                metric_data_created_by:
+                                  description: The user ID for the user that updated the metric (Key Result).
+                                  type: string
+                                metric_data_updated_at:
+                                  description: The timestamp for when the metric was actually updated by the user, application or integration. Will be `"0"` when there was not an update.
+                                  type: string
+                                metric_data_comment:
+                                  type: string
+                          metric_comments:
+                            description: Included if `include_metric_data=yes`
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                comment:
+                                  type: string
+                                modified_at:
+                                  type: string
+                          metric_mit_start_date:
+                            description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the start of the multiple interval time period (MIT) metric. This is based upon the earliest `child_kr`'s `start_date`.
+                            type: string
+                          metric_mit_end_date:
+                            description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the end of the multiple interval time period (MIT) metric. This is based upon the latest `child_kr`'s `end_date`.
+                            type: string
+                          metric_goal_source:
+                            description: An array of the active Goal IDs when the `metric_source_from` is 7 (source from other Goals). Available when requesting a single Metric and Metric ID is used in the path (`metric_id_path`).
+                            type: array
+                            items:
+                              type: string
+                        description: Returns a single metric object for `metric_id` passed.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    put:
+      summary: Update metric information
+      description: Update progress of an individual metric. If you do not include the `metric_data_id` parameter, the value will be applied to the most recent update date according to the metric update frequency set in WorkBoard.
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: force_update
+        in: query
+        required: false
+        description: Set to `yes` to force the update through. This allows updating closed metrics, metrics on closed objectives, metrics on objectives that have passed their target date, and applying updates to previous data points via `update_start_date` and `update_end_date` that fall outside the objective's time period.
+        schema:
+          type: string
+          enum:
+          - 'yes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - metric_data
+              properties:
+                metric_data:
+                  description: The value you want to use to update the metric.
+                  type: string
+                metric_data_id:
+                  description: The unique numerical id assigned to each metric update value. If you do not include this parameter, the value passed in the `metric_data` parameter will be applied to the most recent update date according to the metric update frequency set in WorkBoard.
+                  type: string
+                metric_comment:
+                  description: Include this parameter to add a comment to this metric data update.
+                  type: string
+                update_start_date:
+                  description: Used in combination with update_end_date. Beginning of the date range to target which specific metric data point to update. Supports relative formats like "-46 days" or absolute dates.
+                  type: string
+                update_end_date:
+                  description: End of the date range (supports same formats as update_start_date; if omitted, defaults to update_start_date). The API searches for a metric data point with a create_at timestamp within the specified date range. If found, that data point is updated. If no exact match exists, the closest data point to the start date is selected. If both dates are identical, it targets the specific data point for that date.
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metric:
+                        description: Returns an array of metrics if `metric_id` is not passed. Returns a single metric object when `metric_id` is passed.
+                        type: object
+                        properties:
+                          metric_id:
+                            description: The numerical ID assigned to the Metric.
+                            type: string
+                          metric_goal_id:
+                            type: string
+                          metric_owner:
+                            type: string
+                          metric_real_owner:
+                            type: string
+                          metric_name:
+                            type: string
+                          metric_update_interval:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_update_interval_day:
+                            type: string
+                          metric_unit:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_progress_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_counting_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_initial_data:
+                            type: string
+                          metric_target:
+                            type: string
+                          metric_progress:
+                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                            type: string
+                          metric_progress_color:
+                            type: string
+                          metric_last_update:
+                            type: string
+                          metric_next_update:
+                            type: string
+                          metric_source_from:
+                            description: The source for metric data updates. Possible values are:<br/>"1" - An individual user<br/>"2" - Progress on a workstream<br/>"3" - Another WorkBoard metric<br/>"4" - A workstream's cycle time<br/>"5" - A multi-user survey<br/>"6" - Rolled up from other goals
+                            type: string
+                          metric_create_at:
+                            type: string
+                            description: The GMT timestamp value for the created at time.
+                          metric_modified_at:
+                            type: string
+                          metric_created_by:
+                            type: string
+                          metric_updated_by:
+                            type: string
+                          metric_status:
+                            description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                            type: string
+                          metric_permission:
+                            type: string
+                          metric_confidence:
+                            type: array
+                            items:
+                              properties:
+                                confidence:
+                                  type: string
+                                comment:
+                                  type: string
+                                modified_at:
+                                  type: string
+                          metric_achieve_target:
+                            description: What has been achieved against the `metric_target`.
+                            type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /metric/{metric_id_path}/confidence:
+    put:
+      summary: Update the confidence score (RAG) of a metric (key result)
+      description: 'Update the confidence score and comment on a metric. The confidence_score values map to: 0 = No Rating, 1 = Low, 2 = Medium, 3 = High.
+
+
+        This would appear as a separate confidence update in the Metric history and not a progress update with a confidence update.
+
+
+        **Note:** The metric must be in an active state. Attempting to update confidence on a deleted metric will result in a 500 error with the message "deleted_metric".'
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - confidence_score
+              - confidence_comment
+              properties:
+                confidence_score:
+                  description: The confidence level for the metric. 0 = No Rating, 1 = Low, 2 = Medium, 3 = High.
+                  type: integer
+                  enum:
+                  - 0
+                  - 1
+                  - 2
+                  - 3
+                confidence_comment:
+                  description: A comment explaining the confidence rating.
+                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metric:
+                        type: object
+                        properties:
+                          metric_id:
+                            type: string
+                          metric_goal_id:
+                            type: string
+                          metric_owner:
+                            type: string
+                          metric_real_owner:
+                            type: string
+                          metric_name:
+                            type: string
+                          metric_update_interval:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_update_interval_day:
+                            type: string
+                          metric_unit:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_progress_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_counting_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          metric_initial_data:
+                            type: string
+                          metric_target:
+                            type: string
+                          metric_progress:
+                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                            type: string
+                          metric_progress_color:
+                            type: string
+                          metric_last_update:
+                            type: string
+                          metric_next_update:
+                            type: string
+                          metric_source_from:
+                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                            type: string
+                          metric_create_at:
+                            type: string
+                            description: The GMT timestamp value for the created at time.
+                          metric_modified_at:
+                            type: string
+                          metric_created_by:
+                            type: string
+                          metric_updated_by:
+                            type: string
+                          metric_status:
+                            description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                            type: string
+                          metric_permission:
+                            type: string
+                          metric_confidence:
+                            type: array
+                            items:
+                              properties:
+                                confidence:
+                                  type: string
+                                comment:
+                                  type: string
+                                modified_at:
+                                  type: string
+                                metric_data_id:
+                                  type: integer
+                                  nullable: true
+                                  description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
+                          child_kr:
+                            description: The children of the current metric (Key Result).
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                metric_id:
+                                  type: string
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                                metric:
+                                  type: string
+                                target:
+                                  type: string
+                                initial_data:
+                                  type: string
+                                graph_type:
+                                  type: string
+                                counting:
+                                  type: string
+                                owner:
+                                  type: string
+                                interval:
+                                  type: string
+                                create_at:
+                                  type: string
+                                  description: The GMT timestamp value for the created at time.
+                                last_mod:
+                                  type: string
+                                  description: The GMT timestamp value for the modified at time.
+                                goal_id:
+                                  type: string
+                                permission:
+                                  type: string
+                                progress:
+                                  type: string
+                                progress_color:
+                                  type: string
+                                last_run:
+                                  type: string
+                                next_run:
+                                  type: string
+                                repeat_id:
+                                  type: string
+                                source:
+                                  description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                  type: string
+                                status:
+                                  description: The current state of the metric. Possible values are:<br/>"0" - Deleted<br/>"1" - Active<br/>"2" - Closed<br/>"3" - Excluded from Calculation
+                                  type: string
+                                weekly_update_day:
+                                  type: string
+                                progress_type:
+                                  type: string
+                                measure_metric_data:
+                                  type: string
+                                multiply_data:
+                                  type: string
+                                lower_limit:
+                                  type: string
+                                upper_limit:
+                                  type: string
+                                progress_consider:
+                                  type: string
+                                type:
+                                  type: string
+                                message:
+                                  type: string
+                                goal_align_check:
+                                  type: string
+                                goal_roll_up_check:
+                                  type: string
+                                is_encrypted:
+                                  type: string
+                                multiplier:
+                                  type: string
+                                weightage:
+                                  type: string
+                                stop_update:
+                                  type: string
+                                achieve_target:
+                                  type: string
+                                cascade_goal_id:
+                                  type: string
+                                created_by:
+                                  type: string
+                                modified_at:
+                                  type: string
+                                start_date:
+                                  description: The start date of the metric.
+                                  type: string
+                                end_date:
+                                  description: The end date of the metric.
+                                  type: string
+                                description:
+                                  type: string
+                                parent_goal_id:
+                                  type: string
+                                real_owner:
+                                  type: string
+                                parent:
+                                  description: The parent metric ID.
+                                  type: string
+                                quarter_target_type:
+                                  type: string
+                                quarter_name:
+                                  type: string
+                                period_name:
+                                  type: object
+                                rag_score:
+                                  type: string
+                                last_update:
+                                  type: string
+                                created_from:
+                                  type: string
+                                stretch_target:
+                                  type: string
+                                fy_quarter_kr:
+                                  type: string
+                          metric_automation:
+                            description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
+                            type: object
+                            nullable: true
+                            oneOf:
+                            - type: object
+                              properties:
+                                source_plugins:
+                                  description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from a plugin.'
+                                  type: array
+                                  items:
+                                    type: object
+                            - type: object
+                              properties:
+                                external_sources:
+                                  description: '* This object is subject to change and is intentionally not documented. This denotes that the Metric progress is sourced from an external application.'
+                                  type: array
+                                  items:
+                                    type: object
+                          metric_achieve_target:
+                            description: What has been achieved against the `metric_target`.
+                            type: string
+                          metric_data:
+                            description: Included if `include_metric_data=yes`.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                metric_data_id:
+                                  description: The ID for the specific metric update field in WorkBoard.
+                                  type: string
+                                metric_data_value:
+                                  description: Will be `null` when there was not an update.
+                                  type: string
+                                  nullable: true
+                                metric_data_created_at:
+                                  description: The timestamp for when the metric should be updated based upon the update cadence.
+                                  type: string
+                                metric_data_created_by:
+                                  description: The user ID for the user that updated the metric (Key Result).
+                                  type: string
+                                metric_data_updated_at:
+                                  description: The timestamp for when the metric was actually updated by the user, application or integration. Will be `"0"` when there was not an update.
+                                  type: string
+                                metric_data_comment:
+                                  type: string
+                          metric_comments:
+                            description: Included if `include_metric_data=yes`
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                comment:
+                                  type: string
+                                modified_at:
+                                  type: string
+                          metric_mit_start_date:
+                            description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the start of the multiple interval time period (MIT) metric. This is based upon the earliest `child_kr`'s `start_date`.
+                            type: string
+                          metric_mit_end_date:
+                            description: Returned when the `metric_id` or `metric_id_path` is part of the request and `metric_source_from` = 12 or 13 or 14 (MIT). The unix timestamp for the end of the multiple interval time period (MIT) metric. This is based upon the latest `child_kr`'s `end_date`.
+                            type: string
+                          metric_goal_source:
+                            description: An array of the active Goal IDs when the `metric_source_from` is 7 (source from other Goals). Available when requesting a single Metric and Metric ID is used in the path (`metric_id_path`).
+                            type: array
+                            items:
+                              type: string
+                        description: Returns the updated metric object.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+        '500':
+          description: The metric has been deleted and cannot be updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: deleted_metric
+                  data:
+                    type: object
+                    properties:
+                      errorCode:
+                        type: integer
+                        example: 500
+                      message:
+                        type: string
+                        example: deleted_metric
+      security:
+      - bearerAuth: []
+  /metric/{metric_id_path}/tags:
+    get:
+      summary: Returns all tags mapped to the given metric in the system.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                            group_id:
+                              type: string
+                            group_name:
+                              type: string
+                            group_status:
+                              type: string
+                            updated_by:
+                              type: string
+                            updated_date:
+                              type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    put:
+      summary: Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tag_ids:
+                  description: Array list of tag ids.
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    delete:
+      summary: Delete given tag lists mapped to the metric.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tag_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - metric_id
+              - metric_data
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /metric/krtags:
+    get:
+      summary: Returns all key result tags mapped to the given metrics in the system.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: metric_ids
+        description: The comma separated list of unique numerical ids assigned to each metric in WorkBoard.
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metrics:
+                        type: array
+                        items:
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            tags:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  status:
+                                    type: string
+                                  group_id:
+                                    type: string
+                                  group_name:
+                                    type: string
+                                  group_status:
+                                    type: string
+                                  updated_by:
+                                    type: string
+                                  updated_date:
+                                    type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /metric/tags:
+    get:
+      summary: Returns all metrics mapped to the given `tag_id`.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      parameters:
+      - name: tag_id
+        description: A unique numerical id assigned to each tag, which returns all metrics mapped to that tag.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: offset
+        description: Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      - name: limit
+        description: The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metrics:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: integer
+                            updated_by:
+                              type: string
+                            updated_date:
+                              type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      description: ''
+      tags:
+      - Metric (Key Result)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                metrics:
+                  description: JSON list of metric_id & tag_ids.
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      metric_id:
+                        type: string
+                      tag_ids:
+                        type: array
+                        items:
+                          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT

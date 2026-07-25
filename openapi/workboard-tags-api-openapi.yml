@@ -1,0 +1,509 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Tags API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Tags
+paths:
+  /metric/{metric_id_path}/tags:
+    get:
+      summary: Returns all tags mapped to the given metric in the system.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                            group_id:
+                              type: string
+                            group_name:
+                              type: string
+                            group_status:
+                              type: string
+                            updated_by:
+                              type: string
+                            updated_date:
+                              type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    put:
+      summary: Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tag_ids:
+                  description: Array list of tag ids.
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    delete:
+      summary: Delete given tag lists mapped to the metric.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tag_ids:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - metric_id
+              - metric_data
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /metric/tags:
+    get:
+      summary: Returns all metrics mapped to the given `tag_id`.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: tag_id
+        description: A unique numerical id assigned to each tag, which returns all metrics mapped to that tag.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: offset
+        description: Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      - name: limit
+        description: The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      metrics:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: integer
+                            updated_by:
+                              type: string
+                            updated_date:
+                              type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      description: ''
+      tags:
+      - Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                metrics:
+                  description: JSON list of metric_id & tag_ids.
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      metric_id:
+                        type: string
+                      tag_ids:
+                        type: array
+                        items:
+                          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /tags:
+    get:
+      summary: Returns all key result tags in the system and allows for filtering tags by parameters.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: id
+        description: Optional. A unique numerical id assigned to each tag. Include this parameter to return attributes of the specified tag only; otherwise all tags will be returned.
+        in: query
+        schema:
+          type: integer
+      - name: status
+        description: 1 for Active, 2 archived. Include the status parameter in the request to limit the response of tags with a particular status.
+        in: query
+        schema:
+          type: integer
+      - name: group_id
+        description: A numeric value for filtering tags available in the specific Tag group.
+        in: query
+        schema:
+          type: integer
+      - name: limit
+        description: The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          type: integer
+      - name: offset
+        description: Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                            group_id:
+                              type: string
+                            group_name:
+                              type: string
+                            group_status:
+                              type: string
+                            created_date:
+                              type: string
+                            created_by:
+                              type: string
+                            updated_date:
+                              type: string
+                              nullable: true
+                            updated_by:
+                              type: string
+                              nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /tags/{tag_id_path}:
+    get:
+      summary: Returns the specified key result tag.
+      description: ''
+      tags:
+      - Tags
+      parameters:
+      - name: tag_id_path
+        description: A unique numerical id assigned to each tag. Include this parameter to return attributes of the specified tag only; otherwise all tags will be returned.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            status:
+                              type: string
+                            group_id:
+                              type: string
+                            group_name:
+                              type: string
+                            group_status:
+                              type: string
+                            created_date:
+                              type: string
+                            created_by:
+                              type: string
+                            updated_date:
+                              type: string
+                              nullable: true
+                            updated_by:
+                              type: string
+                              nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT

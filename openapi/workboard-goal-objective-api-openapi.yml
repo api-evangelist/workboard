@@ -1,0 +1,2133 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Goal (Objective) API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Goal (Objective)
+paths:
+  /goal:
+    get:
+      summary: Get Goals using parameters to filter results.
+      description: ''
+      tags:
+      - Goal (Objective)
+      parameters:
+      - name: id
+        description: Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned.
+        in: query
+        schema:
+          type: integer
+      - name: goal_owner_id
+        description: Either the unique user id or email address belonging to the goal owner. Include this parameter to return all goals belonging to the specified owner. (Note, if both `goal_owner_id` and `goal_id` parameters are include in the request, `goal_owner_id` will be ignored).
+        in: query
+        schema:
+          type: integer
+      - name: team_id
+        description: The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team.
+        in: query
+        schema:
+          type: integer
+      - name: team_owner_id
+        description: Either the unique user id or email address belonging to the team owner. Include this parameter to return all goals belonging to the specified team owner. (Note, if both `team_owner_id` and `team_id` parameters are include in the request, `team_owner_id` will be ignored.)
+        in: query
+        schema:
+          type: string
+      - name: goal_status
+        description: 'The current state of the goal; permitted values are "1" (active) or "2" (closed). If you want both closed and active goals, then set `goal_status` to the comma separated values: "1,2"'
+        in: query
+        schema:
+          type: integer
+      - name: include
+        description: This will return the `goal_custom_permission` object, which includes data related to any custom permissions.
+        in: query
+        schema:
+          enum:
+          - custom_permission
+      - name: custom_attributes
+        description: This will return the `custom_attributes` array when set to 1, which includes goals custom fields.
+        in: query
+        schema:
+          enum:
+          - '1'
+      - name: limit
+        description: The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          default: 15
+          type: integer
+      - name: offset
+        description: Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      goal:
+                        description: 'Returns one of the responses below depending upon the parameters: `goal_id`, no ID or `team_id`.'
+                        oneOf:
+                        - type: object
+                          description: A single goal object.
+                          properties:
+                            goal_id:
+                              type: string
+                            goal_name:
+                              type: string
+                            goal_narrative:
+                              type: string
+                            goal_type:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            goal_owner:
+                              type: string
+                            goal_create_at:
+                              type: string
+                            goal_modified_at:
+                              type: string
+                            goal_created_by:
+                              type: string
+                            goal_updated_by:
+                              type: string
+                            goal_start_date:
+                              type: string
+                            goal_target_date:
+                              type: string
+                            goal_progress:
+                              type: string
+                            goal_progress_color:
+                              type: string
+                            goal_status:
+                              description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                              type: string
+                            goal_permission:
+                              type: string
+                            goal_category:
+                              type: array
+                              items:
+                                type: object
+                                description: An array of objects with the category identifier and name for the category.
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                            goal_workstreams:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                            custom_attributes:
+                              nullable: true
+                              type: array
+                              items:
+                                type: object
+                                description: An array of objects for each custom attribute value.
+                                properties:
+                                  id:
+                                    description: The unique identifier for the custom attribute.
+                                    type: string
+                                  name:
+                                    description: The name of the custom attribute.
+                                    type: string
+                                  value:
+                                    description: The value of the custom attribute.
+                                    type: string
+                                  status:
+                                    description: 'The status of the custom attribute: '
+                                    type: string
+                            goal_custom_permission:
+                              description: Returned when `include=custom_permission` is included.
+                              type: object
+                              nullable: true
+                              properties:
+                                goal_permission_team_ids:
+                                  description: Comma separated string of the team identifiers that have permission to view the goal.
+                                  type: string
+                            goal_owner_full_name:
+                              type: string
+                            goal_team_id:
+                              type: string
+                            goal_team_name:
+                              type: string
+                            goal_metrics:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  metric_id:
+                                    type: string
+                                  metric_owner:
+                                    type: string
+                                  metric_real_owner:
+                                    type: string
+                                  metric_name:
+                                    type: string
+                                  metric_update_interval:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_update_interval_day:
+                                    type: string
+                                  metric_unit:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_progress_type:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_counting_type:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_initial_data:
+                                    type: string
+                                  metric_target:
+                                    type: string
+                                  metric_achieve_target:
+                                    description: What has been achieved against the `metric_target`.
+                                    type: string
+                                  metric_create_at:
+                                    type: string
+                                    description: The GMT timestamp value for the created at time.
+                                  metric_modified_at:
+                                    type: string
+                                  metric_created_by:
+                                    type: string
+                                  metric_updated_by:
+                                    type: string
+                                  metric_progress:
+                                    description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                    type: string
+                                  metric_progress_color:
+                                    type: string
+                                  metric_last_update:
+                                    type: string
+                                  metric_next_update:
+                                    type: string
+                                  metric_source_from:
+                                    description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                    type: string
+                                  metric_source_from_id:
+                                    description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                    type: string
+                                  last_metric_comment:
+                                    description: Only returned when querying for an individual goal.
+                                    type: object
+                                    properties:
+                                      comment:
+                                        type: string
+                                      comment_last_updated:
+                                        type: string
+                            goal_metrics_count:
+                              type: string
+                            goal_comments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  comment_id:
+                                    type: string
+                                  comment_text:
+                                    type: string
+                                  comment_owner:
+                                    type: string
+                                  comment_owner_name:
+                                    type: string
+                                  comment_added_at:
+                                    type: string
+                                  comment_last_updated:
+                                    type: string
+                            goal_comments_count:
+                              type: string
+                        - type: array
+                          items:
+                            type: object
+                            description: Returns if no `goal_id` or `team_id` is included in the parameters.
+                            properties:
+                              user_id:
+                                type: string
+                              user_email:
+                                type: string
+                              user_first_name:
+                                type: string
+                              user_last_name:
+                                type: string
+                              people_goals:
+                                type: array
+                                items:
+                                  type: object
+                                  description: A single goal object.
+                                  properties:
+                                    goal_id:
+                                      type: string
+                                    goal_name:
+                                      type: string
+                                    goal_narrative:
+                                      type: string
+                                    goal_type:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        name:
+                                          type: string
+                                    goal_owner:
+                                      type: string
+                                    goal_create_at:
+                                      type: string
+                                    goal_modified_at:
+                                      type: string
+                                    goal_created_by:
+                                      type: string
+                                    goal_updated_by:
+                                      type: string
+                                    goal_start_date:
+                                      type: string
+                                    goal_target_date:
+                                      type: string
+                                    goal_progress:
+                                      type: string
+                                    goal_progress_color:
+                                      type: string
+                                    goal_status:
+                                      description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                                      type: string
+                                    goal_permission:
+                                      type: string
+                                    goal_category:
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects with the category identifier and name for the category.
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    goal_workstreams:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    custom_attributes:
+                                      nullable: true
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects for each custom attribute value.
+                                        properties:
+                                          id:
+                                            description: The unique identifier for the custom attribute.
+                                            type: string
+                                          name:
+                                            description: The name of the custom attribute.
+                                            type: string
+                                          value:
+                                            description: The value of the custom attribute.
+                                            type: string
+                                          status:
+                                            description: 'The status of the custom attribute: '
+                                            type: string
+                                    goal_custom_permission:
+                                      description: Returned when `include=custom_permission` is included.
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        goal_permission_team_ids:
+                                          description: Comma separated string of the team identifiers that have permission to view the goal.
+                                          type: string
+                                    goal_owner_full_name:
+                                      type: string
+                                    goal_team_id:
+                                      type: string
+                                    goal_team_name:
+                                      type: string
+                                    goal_metrics:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          metric_id:
+                                            type: string
+                                          metric_owner:
+                                            type: string
+                                          metric_real_owner:
+                                            type: string
+                                          metric_name:
+                                            type: string
+                                          metric_update_interval:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_update_interval_day:
+                                            type: string
+                                          metric_unit:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_progress_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_counting_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_initial_data:
+                                            type: string
+                                          metric_target:
+                                            type: string
+                                          metric_achieve_target:
+                                            description: What has been achieved against the `metric_target`.
+                                            type: string
+                                          metric_create_at:
+                                            type: string
+                                            description: The GMT timestamp value for the created at time.
+                                          metric_modified_at:
+                                            type: string
+                                          metric_created_by:
+                                            type: string
+                                          metric_updated_by:
+                                            type: string
+                                          metric_progress:
+                                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                            type: string
+                                          metric_progress_color:
+                                            type: string
+                                          metric_last_update:
+                                            type: string
+                                          metric_next_update:
+                                            type: string
+                                          metric_source_from:
+                                            description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                            type: string
+                                          metric_source_from_id:
+                                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                            type: string
+                                          last_metric_comment:
+                                            description: Only returned when querying for an individual goal.
+                                            type: object
+                                            properties:
+                                              comment:
+                                                type: string
+                                              comment_last_updated:
+                                                type: string
+                                    goal_metrics_count:
+                                      type: string
+                                    goal_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment_text:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_owner_name:
+                                            type: string
+                                          comment_added_at:
+                                            type: string
+                                          comment_last_updated:
+                                            type: string
+                                    goal_comments_count:
+                                      type: string
+                        - type: array
+                          description: Returned when `team_id` parameter is passed.
+                          items:
+                            type: object
+                            description: Returns if `team_id` is included in the parameters.
+                            properties:
+                              team_id:
+                                type: integer
+                              team_name:
+                                type: string
+                              team_owner_id:
+                                type: string
+                              team_owner_email:
+                                type: string
+                              team_goals:
+                                type: array
+                                items:
+                                  type: object
+                                  description: A single goal object.
+                                  properties:
+                                    goal_id:
+                                      type: string
+                                    goal_name:
+                                      type: string
+                                    goal_narrative:
+                                      type: string
+                                    goal_type:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        name:
+                                          type: string
+                                    goal_owner:
+                                      type: string
+                                    goal_create_at:
+                                      type: string
+                                    goal_modified_at:
+                                      type: string
+                                    goal_created_by:
+                                      type: string
+                                    goal_updated_by:
+                                      type: string
+                                    goal_start_date:
+                                      type: string
+                                    goal_target_date:
+                                      type: string
+                                    goal_progress:
+                                      type: string
+                                    goal_progress_color:
+                                      type: string
+                                    goal_status:
+                                      description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                                      type: string
+                                    goal_permission:
+                                      type: string
+                                    goal_category:
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects with the category identifier and name for the category.
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    goal_workstreams:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    custom_attributes:
+                                      nullable: true
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects for each custom attribute value.
+                                        properties:
+                                          id:
+                                            description: The unique identifier for the custom attribute.
+                                            type: string
+                                          name:
+                                            description: The name of the custom attribute.
+                                            type: string
+                                          value:
+                                            description: The value of the custom attribute.
+                                            type: string
+                                          status:
+                                            description: 'The status of the custom attribute: '
+                                            type: string
+                                    goal_custom_permission:
+                                      description: Returned when `include=custom_permission` is included.
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        goal_permission_team_ids:
+                                          description: Comma separated string of the team identifiers that have permission to view the goal.
+                                          type: string
+                                    goal_owner_full_name:
+                                      type: string
+                                    goal_team_id:
+                                      type: string
+                                    goal_team_name:
+                                      type: string
+                                    goal_metrics:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          metric_id:
+                                            type: string
+                                          metric_owner:
+                                            type: string
+                                          metric_real_owner:
+                                            type: string
+                                          metric_name:
+                                            type: string
+                                          metric_update_interval:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_update_interval_day:
+                                            type: string
+                                          metric_unit:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_progress_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_counting_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_initial_data:
+                                            type: string
+                                          metric_target:
+                                            type: string
+                                          metric_achieve_target:
+                                            description: What has been achieved against the `metric_target`.
+                                            type: string
+                                          metric_create_at:
+                                            type: string
+                                            description: The GMT timestamp value for the created at time.
+                                          metric_modified_at:
+                                            type: string
+                                          metric_created_by:
+                                            type: string
+                                          metric_updated_by:
+                                            type: string
+                                          metric_progress:
+                                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                            type: string
+                                          metric_progress_color:
+                                            type: string
+                                          metric_last_update:
+                                            type: string
+                                          metric_next_update:
+                                            type: string
+                                          metric_source_from:
+                                            description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                            type: string
+                                          metric_source_from_id:
+                                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                            type: string
+                                          last_metric_comment:
+                                            description: Only returned when querying for an individual goal.
+                                            type: object
+                                            properties:
+                                              comment:
+                                                type: string
+                                              comment_last_updated:
+                                                type: string
+                                    goal_metrics_count:
+                                      type: string
+                                    goal_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment_text:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_owner_name:
+                                            type: string
+                                          comment_added_at:
+                                            type: string
+                                          comment_last_updated:
+                                            type: string
+                                    goal_comments_count:
+                                      type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.
+      description: Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.
+      tags:
+      - Goal (Objective)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                goals:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      goal_name:
+                        description: The name of your goal.
+                        type: string
+                      goal_narrative:
+                        description: A description or narrative for your goal.
+                        type: string
+                      goal_owner:
+                        description: Either the unique user id or email address belonging to the goal owner.
+                        type: string
+                      goal_type:
+                        description: The goal type. Permitted values are "1" (Team goal) or "2" (Personal goal).
+                        type: string
+                      goal_start_date:
+                        description: The start date for the goal as a valid date string.
+                        type: string
+                      goal_target_date:
+                        description: The end date for the goal as a valid date string (must be later than the goal_start_date).
+                        type: string
+                      goal_permission:
+                        description: Comma-separated list of view permissions for the goal. Permitted values for team goals are "team", "report", "internal", "any". Permitted values for personal goals are "owner", "manager", "internal".
+                        type: string
+                      goal_team:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              description: An array of team_id or team_name that your team members have created in the organization
+                              type: string
+                      goal_category:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              description: An array of category_id or category_name that your team members have created in the organization
+                              type: string
+                      goal_metrics:
+                        description: An array of goal metrics, formatted as an array.
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - metric_name
+                          properties:
+                            metric_name:
+                              description: Required The name of your metric.
+                              type: string
+                            metric_owner:
+                              description: Either the unique user id or email address belonging to the goal owner.
+                              type: string
+                            metric_source_from:
+                              description: The source of the metric. Currently, the only permitted value is "1".
+                              type: string
+                            metric_update_interval:
+                              description: The update interval for the metric. Permitted values "1" (daily), "2" (weekly), "3" (monthly), "4" (quarterly).
+                              type: string
+                            metric_counting_type:
+                              description: The relationship between the starting value and the target. Permitted values "1" (counting up), "2" (counting down), "3" (exact to target).
+                              type: string
+                            metric_progress_type:
+                              description: The progress calculation type. Permitted values "1" (last update), "2" (total), "3" (average).
+                              type: string
+                            metric_initial_data:
+                              description: The starting value for the metric.
+                              type: string
+                            metric_target:
+                              description: The target value for the metric.
+                              type: string
+                            metric_unit:
+                              description: The data type for your metric. Permitted values "1" (number), "2" (currency), "3" (percentage).
+                              type: string
+                            metric_permission:
+                              description: Optional Comma-separated list of view permissions for the metric. Permitted values for team goals are "team", "report", "internal", "any". Permitted values for personal goals are "owner", "manager", "internal". (If this parameter is not included in your request, it will automatically be set to the values in goal_permission.
+                              type: string
+              required:
+              - goal_name
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      goal:
+                        description: Returns the array of goals.
+                        type: object
+                        properties:
+                          goals:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                goal_id:
+                                  type: string
+                                goal_name:
+                                  type: string
+                                goal_narrative:
+                                  type: string
+                                goal_type:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: integer
+                                    name:
+                                      description: Individual or Team
+                                      type: string
+                                goal_owner:
+                                  description: The `user_id` for the owner of the goal.
+                                  type: string
+                                goal_create_at:
+                                  type: string
+                                goal_modified_at:
+                                  type: string
+                                goal_created_by:
+                                  type: string
+                                goal_start_date:
+                                  type: string
+                                goal_target_date:
+                                  type: string
+                                goal_progress:
+                                  type: string
+                                goal_status:
+                                  description: 1 (active) or 2 (closed)
+                                  type: string
+                                goal_permission:
+                                  type: string
+                                goal_category:
+                                  type: array
+                                  items:
+                                    type: object
+                                goal_workstreams:
+                                  type: array
+                                  items:
+                                    type: object
+                                goal_owner_full_name:
+                                  type: string
+                          error:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                error:
+                                  type: string
+                                for_row:
+                                  type: object
+                                  description: Return the failing object that was passed in the request.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /goal/{goal_id_path}:
+    get:
+      summary: Get Goals using parameters to filter results.
+      description: ''
+      tags:
+      - Goal (Objective)
+      parameters:
+      - name: goal_id_path
+        description: Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned.
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: include
+        description: This will return the `goal_custom_permission` object, which includes data related to any custom permissions.
+        in: query
+        schema:
+          enum:
+          - custom_permission
+      - name: custom_attributes
+        description: This will return the `custom_attributes` array when set to 1, which includes goals custom fields.
+        in: query
+        schema:
+          enum:
+          - '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      goal:
+                        description: 'Returns one of the responses below depending upon the parameters: `goal_id`, no ID or `team_id`.'
+                        oneOf:
+                        - type: object
+                          description: A single goal object.
+                          properties:
+                            goal_id:
+                              type: string
+                            goal_name:
+                              type: string
+                            goal_narrative:
+                              type: string
+                            goal_type:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                            goal_owner:
+                              type: string
+                            goal_create_at:
+                              type: string
+                            goal_modified_at:
+                              type: string
+                            goal_created_by:
+                              type: string
+                            goal_updated_by:
+                              type: string
+                            goal_start_date:
+                              type: string
+                            goal_target_date:
+                              type: string
+                            goal_progress:
+                              type: string
+                            goal_progress_color:
+                              type: string
+                            goal_status:
+                              description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                              type: string
+                            goal_permission:
+                              type: string
+                            goal_category:
+                              type: array
+                              items:
+                                type: object
+                                description: An array of objects with the category identifier and name for the category.
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                            goal_workstreams:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                            custom_attributes:
+                              nullable: true
+                              type: array
+                              items:
+                                type: object
+                                description: An array of objects for each custom attribute value.
+                                properties:
+                                  id:
+                                    description: The unique identifier for the custom attribute.
+                                    type: string
+                                  name:
+                                    description: The name of the custom attribute.
+                                    type: string
+                                  value:
+                                    description: The value of the custom attribute.
+                                    type: string
+                                  status:
+                                    description: 'The status of the custom attribute: '
+                                    type: string
+                            goal_custom_permission:
+                              description: Returned when `include=custom_permission` is included.
+                              type: object
+                              nullable: true
+                              properties:
+                                goal_permission_team_ids:
+                                  description: Comma separated string of the team identifiers that have permission to view the goal.
+                                  type: string
+                            goal_owner_full_name:
+                              type: string
+                            goal_team_id:
+                              type: string
+                            goal_team_name:
+                              type: string
+                            goal_metrics:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  metric_id:
+                                    type: string
+                                  metric_owner:
+                                    type: string
+                                  metric_real_owner:
+                                    type: string
+                                  metric_name:
+                                    type: string
+                                  metric_update_interval:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_update_interval_day:
+                                    type: string
+                                  metric_unit:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_progress_type:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_counting_type:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: string
+                                      name:
+                                        type: string
+                                  metric_initial_data:
+                                    type: string
+                                  metric_target:
+                                    type: string
+                                  metric_achieve_target:
+                                    description: What has been achieved against the `metric_target`.
+                                    type: string
+                                  metric_create_at:
+                                    type: string
+                                    description: The GMT timestamp value for the created at time.
+                                  metric_modified_at:
+                                    type: string
+                                  metric_created_by:
+                                    type: string
+                                  metric_updated_by:
+                                    type: string
+                                  metric_progress:
+                                    description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                    type: string
+                                  metric_progress_color:
+                                    type: string
+                                  metric_last_update:
+                                    type: string
+                                  metric_next_update:
+                                    type: string
+                                  metric_source_from:
+                                    description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                    type: string
+                                  metric_source_from_id:
+                                    description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                    type: string
+                                  last_metric_comment:
+                                    description: Only returned when querying for an individual goal.
+                                    type: object
+                                    properties:
+                                      comment:
+                                        type: string
+                                      comment_last_updated:
+                                        type: string
+                            goal_metrics_count:
+                              type: string
+                            goal_comments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  comment_id:
+                                    type: string
+                                  comment_text:
+                                    type: string
+                                  comment_owner:
+                                    type: string
+                                  comment_owner_name:
+                                    type: string
+                                  comment_added_at:
+                                    type: string
+                                  comment_last_updated:
+                                    type: string
+                            goal_comments_count:
+                              type: string
+                        - type: array
+                          items:
+                            type: object
+                            description: Returns if no `goal_id` or `team_id` is included in the parameters.
+                            properties:
+                              user_id:
+                                type: string
+                              user_email:
+                                type: string
+                              user_first_name:
+                                type: string
+                              user_last_name:
+                                type: string
+                              people_goals:
+                                type: array
+                                items:
+                                  type: object
+                                  description: A single goal object.
+                                  properties:
+                                    goal_id:
+                                      type: string
+                                    goal_name:
+                                      type: string
+                                    goal_narrative:
+                                      type: string
+                                    goal_type:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        name:
+                                          type: string
+                                    goal_owner:
+                                      type: string
+                                    goal_create_at:
+                                      type: string
+                                    goal_modified_at:
+                                      type: string
+                                    goal_created_by:
+                                      type: string
+                                    goal_updated_by:
+                                      type: string
+                                    goal_start_date:
+                                      type: string
+                                    goal_target_date:
+                                      type: string
+                                    goal_progress:
+                                      type: string
+                                    goal_progress_color:
+                                      type: string
+                                    goal_status:
+                                      description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                                      type: string
+                                    goal_permission:
+                                      type: string
+                                    goal_category:
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects with the category identifier and name for the category.
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    goal_workstreams:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    custom_attributes:
+                                      nullable: true
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects for each custom attribute value.
+                                        properties:
+                                          id:
+                                            description: The unique identifier for the custom attribute.
+                                            type: string
+                                          name:
+                                            description: The name of the custom attribute.
+                                            type: string
+                                          value:
+                                            description: The value of the custom attribute.
+                                            type: string
+                                          status:
+                                            description: 'The status of the custom attribute: '
+                                            type: string
+                                    goal_custom_permission:
+                                      description: Returned when `include=custom_permission` is included.
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        goal_permission_team_ids:
+                                          description: Comma separated string of the team identifiers that have permission to view the goal.
+                                          type: string
+                                    goal_owner_full_name:
+                                      type: string
+                                    goal_team_id:
+                                      type: string
+                                    goal_team_name:
+                                      type: string
+                                    goal_metrics:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          metric_id:
+                                            type: string
+                                          metric_owner:
+                                            type: string
+                                          metric_real_owner:
+                                            type: string
+                                          metric_name:
+                                            type: string
+                                          metric_update_interval:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_update_interval_day:
+                                            type: string
+                                          metric_unit:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_progress_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_counting_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_initial_data:
+                                            type: string
+                                          metric_target:
+                                            type: string
+                                          metric_achieve_target:
+                                            description: What has been achieved against the `metric_target`.
+                                            type: string
+                                          metric_create_at:
+                                            type: string
+                                            description: The GMT timestamp value for the created at time.
+                                          metric_modified_at:
+                                            type: string
+                                          metric_created_by:
+                                            type: string
+                                          metric_updated_by:
+                                            type: string
+                                          metric_progress:
+                                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                            type: string
+                                          metric_progress_color:
+                                            type: string
+                                          metric_last_update:
+                                            type: string
+                                          metric_next_update:
+                                            type: string
+                                          metric_source_from:
+                                            description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                            type: string
+                                          metric_source_from_id:
+                                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                            type: string
+                                          last_metric_comment:
+                                            description: Only returned when querying for an individual goal.
+                                            type: object
+                                            properties:
+                                              comment:
+                                                type: string
+                                              comment_last_updated:
+                                                type: string
+                                    goal_metrics_count:
+                                      type: string
+                                    goal_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment_text:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_owner_name:
+                                            type: string
+                                          comment_added_at:
+                                            type: string
+                                          comment_last_updated:
+                                            type: string
+                                    goal_comments_count:
+                                      type: string
+                        - type: array
+                          description: Returned when `team_id` parameter is passed.
+                          items:
+                            type: object
+                            description: Returns if `team_id` is included in the parameters.
+                            properties:
+                              team_id:
+                                type: integer
+                              team_name:
+                                type: string
+                              team_owner_id:
+                                type: string
+                              team_owner_email:
+                                type: string
+                              team_goals:
+                                type: array
+                                items:
+                                  type: object
+                                  description: A single goal object.
+                                  properties:
+                                    goal_id:
+                                      type: string
+                                    goal_name:
+                                      type: string
+                                    goal_narrative:
+                                      type: string
+                                    goal_type:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        name:
+                                          type: string
+                                    goal_owner:
+                                      type: string
+                                    goal_create_at:
+                                      type: string
+                                    goal_modified_at:
+                                      type: string
+                                    goal_created_by:
+                                      type: string
+                                    goal_updated_by:
+                                      type: string
+                                    goal_start_date:
+                                      type: string
+                                    goal_target_date:
+                                      type: string
+                                    goal_progress:
+                                      type: string
+                                    goal_progress_color:
+                                      type: string
+                                    goal_status:
+                                      description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                                      type: string
+                                    goal_permission:
+                                      type: string
+                                    goal_category:
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects with the category identifier and name for the category.
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    goal_workstreams:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          id:
+                                            type: string
+                                          name:
+                                            type: string
+                                    custom_attributes:
+                                      nullable: true
+                                      type: array
+                                      items:
+                                        type: object
+                                        description: An array of objects for each custom attribute value.
+                                        properties:
+                                          id:
+                                            description: The unique identifier for the custom attribute.
+                                            type: string
+                                          name:
+                                            description: The name of the custom attribute.
+                                            type: string
+                                          value:
+                                            description: The value of the custom attribute.
+                                            type: string
+                                          status:
+                                            description: 'The status of the custom attribute: '
+                                            type: string
+                                    goal_custom_permission:
+                                      description: Returned when `include=custom_permission` is included.
+                                      type: object
+                                      nullable: true
+                                      properties:
+                                        goal_permission_team_ids:
+                                          description: Comma separated string of the team identifiers that have permission to view the goal.
+                                          type: string
+                                    goal_owner_full_name:
+                                      type: string
+                                    goal_team_id:
+                                      type: string
+                                    goal_team_name:
+                                      type: string
+                                    goal_metrics:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          metric_id:
+                                            type: string
+                                          metric_owner:
+                                            type: string
+                                          metric_real_owner:
+                                            type: string
+                                          metric_name:
+                                            type: string
+                                          metric_update_interval:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_update_interval_day:
+                                            type: string
+                                          metric_unit:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_progress_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_counting_type:
+                                            type: object
+                                            properties:
+                                              id:
+                                                type: string
+                                              name:
+                                                type: string
+                                          metric_initial_data:
+                                            type: string
+                                          metric_target:
+                                            type: string
+                                          metric_achieve_target:
+                                            description: What has been achieved against the `metric_target`.
+                                            type: string
+                                          metric_create_at:
+                                            type: string
+                                            description: The GMT timestamp value for the created at time.
+                                          metric_modified_at:
+                                            type: string
+                                          metric_created_by:
+                                            type: string
+                                          metric_updated_by:
+                                            type: string
+                                          metric_progress:
+                                            description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                            type: string
+                                          metric_progress_color:
+                                            type: string
+                                          metric_last_update:
+                                            type: string
+                                          metric_next_update:
+                                            type: string
+                                          metric_source_from:
+                                            description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                            type: string
+                                          metric_source_from_id:
+                                            description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                            type: string
+                                          last_metric_comment:
+                                            description: Only returned when querying for an individual goal.
+                                            type: object
+                                            properties:
+                                              comment:
+                                                type: string
+                                              comment_last_updated:
+                                                type: string
+                                    goal_metrics_count:
+                                      type: string
+                                    goal_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment_text:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_owner_name:
+                                            type: string
+                                          comment_added_at:
+                                            type: string
+                                          comment_last_updated:
+                                            type: string
+                                    goal_comments_count:
+                                      type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /goal/{goal_id_path}/metric/{metric_id_path}:
+    get:
+      summary: List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.
+      description: List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.
+      tags:
+      - Goal (Objective)
+      parameters:
+      - name: goal_id_path
+        description: A unique numerical id assigned to each goal.
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: metric_id_path
+        description: The unique metric_id to each metric.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      goal:
+                        type: object
+                        description: A single goal object.
+                        properties:
+                          goal_id:
+                            type: string
+                          goal_name:
+                            type: string
+                          goal_narrative:
+                            type: string
+                          goal_type:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              name:
+                                type: string
+                          goal_owner:
+                            type: string
+                          goal_create_at:
+                            type: string
+                          goal_modified_at:
+                            type: string
+                          goal_created_by:
+                            type: string
+                          goal_updated_by:
+                            type: string
+                          goal_start_date:
+                            type: string
+                          goal_target_date:
+                            type: string
+                          goal_progress:
+                            type: string
+                          goal_progress_color:
+                            type: string
+                          goal_status:
+                            description: The status of the goal. Possible values are 1 = active and 2 = closed.
+                            type: string
+                          goal_permission:
+                            type: string
+                          goal_category:
+                            type: array
+                            items:
+                              type: object
+                              description: An array of objects with the category identifier and name for the category.
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                          goal_workstreams:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                name:
+                                  type: string
+                          custom_attributes:
+                            nullable: true
+                            type: array
+                            items:
+                              type: object
+                              description: An array of objects for each custom attribute value.
+                              properties:
+                                id:
+                                  description: The unique identifier for the custom attribute.
+                                  type: string
+                                name:
+                                  description: The name of the custom attribute.
+                                  type: string
+                                value:
+                                  description: The value of the custom attribute.
+                                  type: string
+                                status:
+                                  description: 'The status of the custom attribute: '
+                                  type: string
+                          goal_custom_permission:
+                            description: Returned when `include=custom_permission` is included.
+                            type: object
+                            nullable: true
+                            properties:
+                              goal_permission_team_ids:
+                                description: Comma separated string of the team identifiers that have permission to view the goal.
+                                type: string
+                          goal_owner_full_name:
+                            type: string
+                          goal_team_id:
+                            type: string
+                          goal_team_name:
+                            type: string
+                          goal_metrics:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                metric_id:
+                                  type: string
+                                metric_owner:
+                                  type: string
+                                metric_real_owner:
+                                  type: string
+                                metric_name:
+                                  type: string
+                                metric_update_interval:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                    name:
+                                      type: string
+                                metric_update_interval_day:
+                                  type: string
+                                metric_unit:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                    name:
+                                      type: string
+                                metric_progress_type:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                    name:
+                                      type: string
+                                metric_counting_type:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                    name:
+                                      type: string
+                                metric_initial_data:
+                                  type: string
+                                metric_target:
+                                  type: string
+                                metric_achieve_target:
+                                  description: What has been achieved against the `metric_target`.
+                                  type: string
+                                metric_create_at:
+                                  type: string
+                                  description: The GMT timestamp value for the created at time.
+                                metric_modified_at:
+                                  type: string
+                                metric_created_by:
+                                  type: string
+                                metric_updated_by:
+                                  type: string
+                                metric_progress:
+                                  description: The `metric_achieve_target` divided by the `metric_target` as a percent.
+                                  type: string
+                                metric_progress_color:
+                                  type: string
+                                metric_last_update:
+                                  type: string
+                                metric_next_update:
+                                  type: string
+                                metric_source_from:
+                                  description: The textual source for the Metric update. In the case of a mirrored Metric, this will be the user responsible for the update and the source Metric name.
+                                  type: string
+                                metric_source_from_id:
+                                  description: 'The source for metric data updates. Possible values are:<br/>"1" - For an individual user.<br/>"2" - For a Workstream<br/>"3" - For a rollup of another Goal or Metric<br/>"4" - A workstream''s cycle time<br/>"5" - Survey<br/>"7" - Other Goals<br/>"8" - External sources<br/>"10" - Datastream(s)<br/>"11" - For a mirrored Metric<br/>"12" - MIT: Multi-interval time period person<br/>"13" - MIT: Multi-interval time period automated datastream<br/>"14" - MIT: Multi-interval time period populates Q1,Q2, Q3, Q4.'
+                                  type: string
+                                last_metric_comment:
+                                  description: Only returned when querying for an individual goal.
+                                  type: object
+                                  properties:
+                                    comment:
+                                      type: string
+                                    comment_last_updated:
+                                      type: string
+                          goal_metrics_count:
+                            type: string
+                          goal_comments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                comment_id:
+                                  type: string
+                                comment_text:
+                                  type: string
+                                comment_owner:
+                                  type: string
+                                comment_owner_name:
+                                  type: string
+                                comment_added_at:
+                                  type: string
+                                comment_last_updated:
+                                  type: string
+                          goal_comments_count:
+                            type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /goal/{goal_id_path}/pillars:
+    get:
+      summary: Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.
+      description: List the associated `strategies` and `pillars` to which the `goal_id_path` is related. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.
+      tags:
+      - Goal (Objective)
+      parameters:
+      - name: goal_id_path
+        description: A unique numerical id assigned to each goal.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      strategies:
+                        type: array
+                        nullable: true
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            endDate:
+                              type: string
+                              format: date
+                            startDate:
+                              type: string
+                              format: date
+                            narrative:
+                              type: string
+                            strategyType:
+                              type: string
+                            timeHorizon:
+                              type: string
+                            iterationCadence:
+                              type: string
+                            pillars:
+                              description: An array of the pillars associated with the strategy
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  name:
+                                    type: string
+                                  narrative:
+                                    type: string
+                                  objectives:
+                                    type: array
+                                    items:
+                                      description: An array of the associated objective IDs
+                                      type: string
+                                  outcomes:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        narrative:
+                                          type: string
+                                        endDate:
+                                          type: string
+                                          format: date
+                                        startValue:
+                                          type: string
+                                        targetValue:
+                                          type: string
+                                        currentValue:
+                                          type: string
+                                        description:
+                                          type: string
+                                        unitOfMeasurement:
+                                          type: string
+                                        keyResults:
+                                          type: array
+                                          items:
+                                            description: An array of the associated Metric IDs
+                                            type: string
+                                        automatedCalcType:
+                                          type: string
+                                  assumptions:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        narrative:
+                                          type: string
+                                        status:
+                                          type: string
+                                        description:
+                                          type: string
+                                        keyResults:
+                                          type: array
+                                          items:
+                                            description: An array of the associated Metric IDs
+                                            type: string
+                                  investmentPlans:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: string
+                                        narrative:
+                                          type: string
+                                        startValue:
+                                          type: string
+                                        targetValue:
+                                          type: string
+                                        currentValue:
+                                          type: string
+                                        description:
+                                          type: string
+                                        keyResults:
+                                          type: array
+                                          items:
+                                            description: An array of the associated Metric IDs
+                                            type: string
+                                        unitOfMeasurement:
+                                          type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /goal/{goal_id_path}/alignment:
+    get:
+      summary: List aligned and dependent goals associated with the goal specified by the goal_id parameter. Note, the logged in user must have Data-Admin permission in order to view the goal alignment.
+      description: List aligned and dependent goals associated with the goal specified by the `goal_id` parameter. Note, the logged in user must have `Data-Admin` permission in order to view the goal alignment. If `goal_id` is aligned to another goal, the first goal returned will be the goal that `goal_id` is aligned to. If `goal_id` is not aligned and has goals aligned to it, `goal_id` will be the first goal. If `goal_id` has no aligned goals, then `goal_id` goal will be returned without any `goal_alignments`.
+      tags:
+      - Goal (Objective)
+      parameters:
+      - name: goal_id_path
+        description: A unique numerical id assigned to each goal.
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      alignment:
+                        description: Returns the goal object.
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            goal_id:
+                              type: string
+                            goal_name:
+                              type: string
+                            goal_owner:
+                              type: string
+                            goal_team_name:
+                              type: string
+                            goal_target_date:
+                              type: string
+                            goal_progress:
+                              type: string
+                            goal_progress_color:
+                              type: string
+                            goal_alignments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  goal_id:
+                                    type: string
+                                  goal_name:
+                                    type: string
+                                  goal_owner:
+                                    type: string
+                                  goal_team_name:
+                                    type: string
+                                  goal_target_date:
+                                    type: string
+                                  goal_progress:
+                                    type: string
+                                  goal_progress_color:
+                                    type: string
+                                  goal_alignments:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        goal_id:
+                                          type: string
+                                        goal_name:
+                                          type: string
+                                        goal_owner:
+                                          type: string
+                                        goal_team_name:
+                                          type: string
+                                        goal_target_date:
+                                          type: string
+                                        goal_progress:
+                                          type: string
+                                        goal_progress_color:
+                                          type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT

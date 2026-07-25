@@ -1,0 +1,989 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Team API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Team
+paths:
+  /team:
+    get:
+      summary: Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team.
+      description: ''
+      tags:
+      - Team
+      parameters:
+      - name: team_id
+        description: The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs.
+        in: query
+        schema:
+          type: integer
+      - name: id
+        description: This behaves the same as the `team_id` parameter above. Do not use both `id` and `team_id`.
+        in: query
+        schema:
+          type: integer
+      - name: external_id
+        description: This will get the team by its `external_id`. Do not use in combination with `id` or `team_id`.
+        in: query
+        schema:
+          type: string
+      - name: role
+        description: 'Limit the teams returned based on whether the authenticated user is a team owner or member. Possible values: "owner", "member".'
+        in: query
+        schema:
+          enum:
+          - owner
+          - member
+      - name: include
+        description: If the current authenticated user is an org data admin, pass this parameter with the value "org_teams" to return a dump of all organization teams.
+        in: query
+        schema:
+          enum:
+          - org_teams
+      - name: created_at_range
+        description: 'Return teams with creation dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate'
+        in: query
+        schema:
+          type: integer
+      - name: updated_at_range
+        description: 'Return teams with last modified dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate'
+        in: query
+        schema:
+          type: integer
+      - name: offset
+        description: Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0.
+        in: query
+        schema:
+          type: integer
+      - name: limit
+        description: The number of teams returned per page. Permitted values are integers greater than or equal to 0. The default value is 15.
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        description: Returns an array of teams if `team_id` is not passed. Returns a single object when `team_id` is passed.
+                        oneOf:
+                        - type: object
+                          properties:
+                            team_id:
+                              type: string
+                            external_id:
+                              type: string
+                            parent_team_id:
+                              type: string
+                            dotted_team_ids:
+                              type: array
+                              items:
+                                type: string
+                                description: The team identifiers for the dotted teams
+                            team_name:
+                              type: string
+                            team_owner:
+                              type: string
+                            team_type:
+                              type: string
+                              description: '"functional" or "working_group"'
+                            level:
+                              type: string
+                              nullable: true
+                            created_from:
+                              type: string
+                            created_at:
+                              type: string
+                            updated_at:
+                              type: string
+                            team_state:
+                              type: string
+                              description: '"1" = active or "0" = archived'
+                            team_members:
+                              description: Only returned on a request where a single team object is returned.
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  first_name:
+                                    type: string
+                                  last_name:
+                                    type: string
+                                  email:
+                                    type: string
+                                  team_role:
+                                    type: string
+                        - type: array
+                          items:
+                            type: object
+                            properties:
+                              team_id:
+                                type: string
+                              external_id:
+                                type: string
+                              parent_team_id:
+                                type: string
+                              dotted_team_ids:
+                                type: array
+                                items:
+                                  type: string
+                                  description: The team identifiers for the dotted teams
+                              team_name:
+                                type: string
+                              team_owner:
+                                type: string
+                              team_type:
+                                type: string
+                                description: '"functional" or "working_group"'
+                              level:
+                                type: string
+                                nullable: true
+                              created_from:
+                                type: string
+                              created_at:
+                                type: string
+                              updated_at:
+                                type: string
+                              team_state:
+                                type: string
+                                description: '"1" = active or "0" = archived'
+                              team_role:
+                                description: Return when the `role` parameter is used.
+                                type: string
+                                nullable: true
+                              team_role_name:
+                                description: Return when the `role` parameter is used.
+                                type: string
+                                nullable: true
+                              is_team_owner:
+                                description: Return when the `role` parameter is used.
+                                type: string
+                                nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a new functional team or working group, and add Workstreams and team members.
+      description: ''
+      tags:
+      - Team
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - team_owner
+              - team_name
+              properties:
+                team_owner:
+                  type: string
+                  description: The existing WorkBoard user's `user_id` or email address of the user who will be the team manager.
+                team_name:
+                  type: string
+                  description: The name for the team. Each team owned by an individual user must have a unique name.
+                team_type:
+                  type: string
+                  description: 'The type of team. Permitted values are "functional" and "working_group". Note: if the parent_team_id parameter is not passed, the team will be created as a working group. '
+                parent_team_id:
+                  type: string
+                  description: 'Required for functional teams only. The id of the new team''s parent in the organization''s team hierarchy. If this parameter is not passed, the team will be created as a working group. '
+                external_id:
+                  type: string
+                  description: An immutable ID for mapping between systems.
+                team_members:
+                  type: array
+                  description: The members of the team, and their team roles, as an array.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The `user_id` or existing email address of the member (for existing WorkBoard users only).
+                      email:
+                        type: string
+                        description: The email address of the team member (for new users only — they will receive an invitation to join WorkBoard). A new user cannot be assigned the manager `team_role`.
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      team_role:
+                        type: string
+                        description: The member's role on the team. Permitted values are `manager`, `co_manager`, `exec_viewer`, `team_admin`, `member`. If you are using `manager`, please be certain this matches with the `team_owner` property above.
+                team_workstream:
+                  type: array
+                  description: The Workstreams or projects that should be added to the team, as an array.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+                        description: The type of Board that should be added to the team. Permitted values are "1" (Progress Board) or "2" (Custom Agile Board)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        type: object
+                        properties:
+                          team_id:
+                            type: string
+                          external_id:
+                            type: string
+                          parent_team_id:
+                            type: string
+                          dotted_team_ids:
+                            type: array
+                            items:
+                              type: string
+                              description: The team identifiers for the dotted teams
+                          team_name:
+                            type: string
+                          team_owner:
+                            type: string
+                          team_type:
+                            type: string
+                            description: '"functional" or "working_group"'
+                          level:
+                            type: string
+                            nullable: true
+                          created_from:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          team_state:
+                            type: string
+                            description: '"1" = active or "0" = archived'
+                          team_members:
+                            description: Only returned on a request where a single team object is returned.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                email:
+                                  type: string
+                                team_role:
+                                  type: string
+                        description: Returns an array of teams if `team_id` is not passed. Returns a single object when `team_id` is passed.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    patch:
+      summary: Delete a team.
+      description: '**CAUTION**: Delete an entire team and all its Workstreams and action items. A successful request will return a 204 code. If you are deleting a functional team, the child teams will be deleted as well.'
+      tags:
+      - Team
+      parameters:
+      - name: team_id
+        description: The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs.
+        in: query
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: Success returns a 204 header.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /team/{team_id_path}:
+    get:
+      summary: Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of.
+      description: ''
+      tags:
+      - Team
+      parameters:
+      - name: team_id_path
+        required: true
+        description: The unique numerical identifier in WorkBoard for a team.
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        type: object
+                        properties:
+                          team_id:
+                            type: string
+                          external_id:
+                            type: string
+                          parent_team_id:
+                            type: string
+                          dotted_team_ids:
+                            type: array
+                            items:
+                              type: string
+                              description: The team identifiers for the dotted teams
+                          team_name:
+                            type: string
+                          team_owner:
+                            type: string
+                          team_type:
+                            type: string
+                            description: '"functional" or "working_group"'
+                          level:
+                            type: string
+                            nullable: true
+                          created_from:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          team_state:
+                            type: string
+                            description: '"1" = active or "0" = archived'
+                          team_members:
+                            description: Only returned on a request where a single team object is returned.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                email:
+                                  type: string
+                                team_role:
+                                  type: string
+                        description: Returns an array of teams if `team_id` is not passed. Returns a single object when `team_id` is passed.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    put:
+      summary: Update a team.
+      description: 'Change the name of a team, add new and existing users to the team roster, change a member''s role on the team, remove users from the team, or add new Workstreams. If you are using a personal access token, you must be the manager of the team to use this request.<br/>Note: If you update a team with a new manager, the previous manager will be demoted to a co-manager.'
+      tags:
+      - Team
+      parameters:
+      - name: team_id_path
+        required: true
+        description: The unique numerical identifier in WorkBoard for a team.
+        in: path
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                team_name:
+                  type: string
+                  description: The name for the team. Each team owned by an individual user must have a unique name.
+                team_type:
+                  type: string
+                  description: 'The type of team. Permitted values are "functional" and "working_group". Note: if the parent_team_id parameter is not passed, the team will be created as a working group. '
+                parent_team_id:
+                  type: string
+                  description: 'Required for functional teams only. The id of the new team''s parent in the organization''s team hierarchy. If this parameter is not passed, the team will be created as a working group. '
+                team_members:
+                  type: array
+                  description: The members of the team, and their team roles, as an array.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The `user_id` or existing email address of the member (for existing WorkBoard users only).
+                      email:
+                        type: string
+                        description: The email address of the team member (for new users only — they will receive an invitation to join WorkBoard)
+                      first_name:
+                        type: string
+                      last_name:
+                        type: string
+                      team_role:
+                        type: string
+                        description: The member's role on the team. Permitted values are `manager`, `co_manager`, `exec_viewer`, `team_admin`, `member`. When using the `manager` role to update a team's manager, the prior manager will become a co-manager of the team unless the `team_role` for the prior manager is specified.
+                      team_access:
+                        type: string
+                        description: 'Used together with `id` when removing an existing member from the team. Permitted value: `revoke`.'
+                team_workstream:
+                  type: array
+                  description: The Workstreams or projects that should be added to the team, as an array.
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      type:
+                        type: string
+                        description: The type of Board that should be added to the team. Permitted values are "1" (Progress Board) or "2" (Custom Agile Board)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        type: object
+                        properties:
+                          team_id:
+                            type: string
+                          external_id:
+                            type: string
+                          parent_team_id:
+                            type: string
+                          dotted_team_ids:
+                            type: array
+                            items:
+                              type: string
+                              description: The team identifiers for the dotted teams
+                          team_name:
+                            type: string
+                          team_owner:
+                            type: string
+                          team_type:
+                            type: string
+                            description: '"functional" or "working_group"'
+                          level:
+                            type: string
+                            nullable: true
+                          created_from:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          team_state:
+                            type: string
+                            description: '"1" = active or "0" = archived'
+                          team_members:
+                            description: Only returned on a request where a single team object is returned.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                email:
+                                  type: string
+                                team_role:
+                                  type: string
+                        description: Returns an array of teams if `team_id` is not passed. Returns a single object when `team_id` is passed.
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /team/{team_id_path}/workstream:
+    get:
+      summary: Get all Workstreams belonging to the specified team.
+      description: Get all Workstreams belonging to the specified team.
+      tags:
+      - Team
+      parameters:
+      - name: team_id_path
+        required: true
+        description: The unique numerical identifier in WorkBoard for a team.
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        description: ''
+                        type: object
+                        properties:
+                          team_id:
+                            type: string
+                          external_id:
+                            type: string
+                          parent_team_id:
+                            type: string
+                          dotted_team_ids:
+                            type: array
+                            items:
+                              type: string
+                              description: The team identifiers for the dotted teams
+                          team_name:
+                            type: string
+                          team_owner:
+                            type: string
+                          team_type:
+                            type: string
+                            description: '"functional" or "working_group"'
+                          level:
+                            type: string
+                            nullable: true
+                          created_from:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          team_state:
+                            type: string
+                            description: '"1" = active or "0" = archived'
+                          team_workstream:
+                            type: object
+                            properties:
+                              workstream_count:
+                                type: string
+                              workstream:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    ws_id:
+                                      type: string
+                                    ws_name:
+                                      type: string
+                                    ws_objective:
+                                      type: string
+                                    ws_owner:
+                                      type: string
+                                    ws_lead:
+                                      type: string
+                                    ws_status:
+                                      type: string
+                                    ws_type:
+                                      type: string
+                                    ws_effort:
+                                      type: object
+                                      properties:
+                                        low_effort:
+                                          type: string
+                                        medium_effort:
+                                          type: string
+                                        large_effort:
+                                          type: string
+                                    ws_pace:
+                                      type: string
+                                    ws_health:
+                                      type: string
+                                    ws_priority:
+                                      type: string
+                                    ws_progress:
+                                      type: string
+                                      nullable: true
+                                    ws_start_date:
+                                      type: string
+                                    ws_target_date:
+                                      type: string
+                                      nullable: true
+                                    ws_completion_date:
+                                      type: string
+                                      nullable: true
+                                    ws_team_id:
+                                      type: string
+                                    ws_team_name:
+                                      type: string
+                          team_members:
+                            description: Only returned on a request where a single team object is returned.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                email:
+                                  type: string
+                                team_role:
+                                  type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /team/{team_id_path}/activity:
+    get:
+      summary: List details of all action items belonging to the specified team.
+      description: List details of all action items belonging to the specified team.
+      tags:
+      - Team
+      parameters:
+      - name: team_id_path
+        required: true
+        description: The unique numerical identifier in WorkBoard for a team.
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      team:
+                        description: ''
+                        type: object
+                        properties:
+                          team_id:
+                            type: string
+                          external_id:
+                            type: string
+                          parent_team_id:
+                            type: string
+                          dotted_team_ids:
+                            type: array
+                            items:
+                              type: string
+                              description: The team identifiers for the dotted teams
+                          team_name:
+                            type: string
+                          team_owner:
+                            type: string
+                          team_type:
+                            type: string
+                          level:
+                            type: string
+                            nullable: true
+                          created_from:
+                            type: string
+                          created_at:
+                            type: string
+                          updated_at:
+                            type: string
+                          team_state:
+                            type: string
+                          team_activity:
+                            type: object
+                            properties:
+                              activity_count:
+                                type: string
+                              activity:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    ai_id:
+                                      type: string
+                                    ai_description:
+                                      type: string
+                                    ai_created_at:
+                                      type: string
+                                    ai_state:
+                                      type: string
+                                    ai_rating:
+                                      type: string
+                                    ai_priority:
+                                      type: string
+                                    ai_effort:
+                                      type: string
+                                    ai_files:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          file_id:
+                                            type: string
+                                          file_name:
+                                            type: string
+                                          file_url:
+                                            type: string
+                                          file_owner:
+                                            type: string
+                                    ai_sub_actions:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          sub_ai_id:
+                                            type: string
+                                          sub_ai_description:
+                                            type: string
+                                          sub_ai_owner:
+                                            type: string
+                                    ai_comments:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          comment_id:
+                                            type: string
+                                          comment:
+                                            type: string
+                                          comment_owner:
+                                            type: string
+                                          comment_timestamp:
+                                            type: string
+                                    ai_due_date:
+                                      type: string
+                                    ai_workstream:
+                                      type: string
+                                    ai_team:
+                                      type: string
+                                      nullable: true
+                                    ai_workstream_name:
+                                      type: string
+                                    ai_loop_members:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          user_id:
+                                            type: string
+                                          user_email:
+                                            type: string
+                                    ai_tags:
+                                      type: string
+                                      nullable: true
+                                    ai_due_before:
+                                      type: string
+                                    ai_owner:
+                                      type: string
+                                    ai_created_by:
+                                      type: string
+                                    ai_url:
+                                      type: string
+                                    ai_completed_at:
+                                      type: string
+                                      nullable: true
+                          team_members:
+                            description: Only returned on a request where a single team object is returned.
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                first_name:
+                                  type: string
+                                last_name:
+                                  type: string
+                                email:
+                                  type: string
+                                team_role:
+                                  type: string
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT

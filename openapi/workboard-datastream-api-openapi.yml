@@ -1,0 +1,343 @@
+openapi: 3.0.1
+info:
+  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Datastream API
+  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  version: 1.0.0
+servers:
+- url: https://demo.biz.wobo-int.com/wb/apis
+  description: Demo Server
+tags:
+- name: Datastream
+  description: '[WorkBoard''s help center documentation on Datastreams.](https://support.workboard.com/hc/en-us/articles/360006666652-Pushing-Business-Data-into-Workboard-with-Data-Streams#pushing-business-data-into-workboard-with-data-streams-0-0)'
+paths:
+  /stream:
+    get:
+      summary: Get the details of datastreams to which the authenticated user has access.
+      description: ''
+      tags:
+      - Datastream
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      stream:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            stream_id:
+                              type: string
+                            stream_private_key:
+                              type: string
+                            stream_name:
+                              type: string
+                            stream_frequency:
+                              type: string
+                            stream_category:
+                              type: string
+                            stream_data_type:
+                              type: string
+                            stream_description:
+                              type: string
+                            stream_active:
+                              type: string
+                            stream_connector_id:
+                              type: string
+                              nullable: true
+                            stream_data_last_updated:
+                              type: string
+                              nullable: true
+                            stream_last_data_value:
+                              type: string
+                              nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+    post:
+      summary: Create a datastream.
+      description: ''
+      tags:
+      - Datastream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                stream_name:
+                  type: string
+                stream_description:
+                  type: string
+                stream_data_type:
+                  type: string
+                  enum:
+                  - numbers
+                  - percentage
+                  - currency
+                stream_frequency:
+                  type: string
+                  enum:
+                  - daily
+                  - weekly
+                  - monthly
+                  - quarterly
+                stream_category:
+                  type: string
+                stream_permission:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        description: The `user_id`, `team_id` or `org_id` respective to the type.
+                        type: string
+                      type:
+                        type: string
+                        enum:
+                        - user
+                        - team
+                        - org
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      stream:
+                        type: object
+                        properties:
+                          stream_id:
+                            type: string
+                          stream_private_key:
+                            type: string
+                          stream_name:
+                            type: string
+                          stream_frequency:
+                            type: string
+                          stream_category:
+                            type: string
+                          stream_data_type:
+                            type: string
+                          stream_description:
+                            type: string
+                          stream_active:
+                            type: string
+                          stream_connector_id:
+                            type: string
+                            nullable: true
+                          stream_data_last_updated:
+                            type: string
+                            nullable: true
+                          stream_last_data_value:
+                            type: string
+                            nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+      security:
+      - bearerAuth: []
+  /stream/{stream_id}:
+    post:
+      summary: Update the value(s) in your datastream.
+      description: ''
+      tags:
+      - Datastream
+      parameters:
+      - in: header
+        name: X-Stream-Signature
+        description: Obtained from within WorkBoard when you create a Datastream
+        schema:
+          type: string
+        required: true
+      - in: header
+        name: Content-Type
+        schema:
+          type: string
+          default: application/json
+        required: true
+      - name: stream_id
+        in: path
+        description: Obtained from within WorkBoard when you create a Datastream
+        schema:
+          type: string
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - stream
+                  properties:
+                    stream:
+                      type: object
+                      required:
+                      - connector
+                      properties:
+                        connector:
+                          type: object
+                          required:
+                          - connector_data
+                          properties:
+                            connector_id:
+                              type: string
+                            connector_data:
+                              type: object
+                              required:
+                              - value
+                              properties:
+                                value:
+                                  type: string
+                                date:
+                                  description: A date value for the update in YYYY-MM-DD format.
+                                  type: string
+                            connector_attributes:
+                              type: object
+                              properties:
+                                source:
+                                  type: string
+                                comment:
+                                  type: string
+                            connector_property:
+                              type: object
+                              properties:
+                                comment:
+                                  type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    readOnly: true
+                  message:
+                    type: string
+                    readOnly: true
+                  data:
+                    type: object
+                    readOnly: true
+                    properties:
+                      totalCount:
+                        type: integer
+                      stream:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            stream_id:
+                              type: string
+                            stream_private_key:
+                              type: string
+                            stream_name:
+                              type: string
+                            stream_frequency:
+                              type: string
+                            stream_category:
+                              type: string
+                            stream_data_type:
+                              type: string
+                            stream_description:
+                              type: string
+                            stream_active:
+                              type: string
+                            stream_connector_id:
+                              type: string
+                              nullable: true
+                            stream_data_last_updated:
+                              type: string
+                              nullable: true
+                            stream_last_data_value:
+                              type: string
+                              nullable: true
+        '400':
+          description: Unauthorized / Invalid
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                    description: 'false'
+                  error:
+                    type: string
+                  error_description:
+                    type: string
+                example:
+                  success: false
+                  error: ''
+                  error_description: ''
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer
+      bearerFormat: JWT
