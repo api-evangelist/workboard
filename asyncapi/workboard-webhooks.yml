@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+type: Webhooks
+source: openapi/external-v1-openapi-original.yml, https://workboard.statuspage.io/
+notes: >-
+  WorkBoard publishes no AsyncAPI document and no outbound application event
+  stream. Its documented webhook surface is inbound — generated webhook URLs
+  that external systems POST to in order to update Metric (key result)
+  progress — plus outbound status-incident notifications from the hosted
+  status page. Captured honestly; nothing fabricated.
+webhooks:
+  - name: metric-progress-webhook
+    direction: inbound
+    method: POST
+    path: /hook/{webhook_hash}
+    server: https://www.myworkboard.com/wb/apis
+    description: >-
+      Update progress on Metrics (key results) using webhooks. WorkBoard
+      generates a hashed webhook URL that external tools call to push new
+      metric values (sibling of the Datastream resource: POST /stream and
+      POST /stream/{stream_id}).
+    source: openapi/external-v1-openapi-original.yml#POST /hook/{webhook_hash}
+  - name: status-incident-notifications
+    direction: outbound
+    description: >-
+      workboard.statuspage.io supports webhook subscriptions (alongside
+      email, SMS, Slack, RSS/Atom) for incident created/updated/resolved
+      notifications covering the Web App, Mobile Apps, and API components.
+    source: https://workboard.statuspage.io/

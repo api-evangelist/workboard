@@ -1,0 +1,148 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for WorkBoard External API v1
+  version: 1.0.0
+extends: openapi/external-v1-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: workboard
+      harvested: '2026-07-21'
+      source: https://apidocs.myworkboard.com/openapi.json
+      notes: Original spec published without operationIds; overlay proposes stable ids per operation.
+- target: $.paths['/user'].get
+  update:
+    operationId: listUser
+- target: $.paths['/user'].post
+  update:
+    operationId: createUser
+- target: $.paths['/user'].patch
+  update:
+    operationId: patchUser
+- target: $.paths['/user/{user_id_path}'].get
+  update:
+    operationId: getUser
+- target: $.paths['/user/{user_id_path}'].put
+  update:
+    operationId: updateUser
+- target: $.paths['/user/{user_id_path}/goal'].get
+  update:
+    operationId: getUserGoal
+- target: $.paths['/user/{user_id_path}/goal/{goal_id_path}'].get
+  update:
+    operationId: getUserGoal2
+- target: $.paths['/team'].get
+  update:
+    operationId: listTeam
+- target: $.paths['/team'].post
+  update:
+    operationId: createTeam
+- target: $.paths['/team'].patch
+  update:
+    operationId: patchTeam
+- target: $.paths['/team/{team_id_path}'].get
+  update:
+    operationId: getTeam
+- target: $.paths['/team/{team_id_path}'].put
+  update:
+    operationId: updateTeam
+- target: $.paths['/team/{team_id_path}/workstream'].get
+  update:
+    operationId: getTeamWorkstream
+- target: $.paths['/team/{team_id_path}/activity'].get
+  update:
+    operationId: getTeamActivity
+- target: $.paths['/goal'].get
+  update:
+    operationId: listGoal
+- target: $.paths['/goal'].post
+  update:
+    operationId: createGoal
+- target: $.paths['/goal/{goal_id_path}'].get
+  update:
+    operationId: getGoal
+- target: $.paths['/goal/{goal_id_path}/metric/{metric_id_path}'].get
+  update:
+    operationId: getGoalMetric
+- target: $.paths['/goal/{goal_id_path}/pillars'].get
+  update:
+    operationId: getGoalPillars
+- target: $.paths['/goal/{goal_id_path}/alignment'].get
+  update:
+    operationId: getGoalAlignment
+- target: $.paths['/metric'].get
+  update:
+    operationId: listMetric
+- target: $.paths['/metric/{metric_id_path}'].get
+  update:
+    operationId: getMetric
+- target: $.paths['/metric/{metric_id_path}'].put
+  update:
+    operationId: updateMetric
+- target: $.paths['/metric/{metric_id_path}/confidence'].put
+  update:
+    operationId: updateMetricConfidence
+- target: $.paths['/metric/{metric_id_path}/tags'].get
+  update:
+    operationId: getMetricTags
+- target: $.paths['/metric/{metric_id_path}/tags'].put
+  update:
+    operationId: updateMetricTags
+- target: $.paths['/metric/{metric_id_path}/tags'].delete
+  update:
+    operationId: deleteMetricTags
+- target: $.paths['/metric/krtags'].get
+  update:
+    operationId: listMetricKrtags
+- target: $.paths['/metric/tags'].get
+  update:
+    operationId: listMetricTags
+- target: $.paths['/metric/tags'].post
+  update:
+    operationId: createMetricTags
+- target: $.paths['/tags'].get
+  update:
+    operationId: listTags
+- target: $.paths['/tags/{tag_id_path}'].get
+  update:
+    operationId: getTags
+- target: $.paths['/activity'].get
+  update:
+    operationId: listActivity
+- target: $.paths['/activity'].post
+  update:
+    operationId: createActivity
+- target: $.paths['/activity/{ai_id_path}'].get
+  update:
+    operationId: getActivity
+- target: $.paths['/activity/{ai_id_path}'].put
+  update:
+    operationId: updateActivity
+- target: $.paths['/workstream'].get
+  update:
+    operationId: listWorkstream
+- target: $.paths['/workstream'].post
+  update:
+    operationId: createWorkstream
+- target: $.paths['/workstream/{ws_id_path}'].put
+  update:
+    operationId: updateWorkstream
+- target: $.paths['/workstream/{ws_id_path}'].patch
+  update:
+    operationId: patchWorkstream
+- target: $.paths['/workstream/{ws_id_path}/activity'].get
+  update:
+    operationId: getWorkstreamActivity
+- target: $.paths['/stream'].get
+  update:
+    operationId: listStream
+- target: $.paths['/stream'].post
+  update:
+    operationId: createStream
+- target: $.paths['/stream/{stream_id}'].post
+  update:
+    operationId: createStream2
+- target: $.paths['/hook/{webhook_hash}'].post
+  update:
+    operationId: createHook

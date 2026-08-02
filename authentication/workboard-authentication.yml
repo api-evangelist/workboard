@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/external-v1-openapi-original.yml, openapi/public-v2-openapi-original.yml
+docs: https://www.workboard.com/developer
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: JWT Authorization header using the Bearer scheme. All v1 and v2 requests require it.
+  sources:
+  - openapi/external-v1-openapi-original.yml
+  - openapi/public-v2-openapi-original.yml
+- name: oauth2
+  type: oauth2
+  description: >-
+    OAuth 2.0 documented on the developer portal (not declared in the
+    OpenAPI). Recommended for multi-user applications; apps are registered
+    in WorkBoard at Settings -> Custom Integrations. The access_token is
+    valid for one year and can be revoked.
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.myworkboard.com/wb/oauth/authorize
+    tokenUrl: https://www.myworkboard.com/wb/oauth/token
+    revocationUrl: https://www.myworkboard.com/wb/oauth/revoke/
+  sources:
+  - https://www.workboard.com/developer
+token_types:
+  - name: instant token
+    description: Single-click token generation for testing or single-user apps (Settings -> Custom Integrations, https://www.myworkboard.com/wb/user/profile/edit?do=mgApp).
+  - name: OAuth 2.0 access token
+    description: Browser-based authorization code flow; token valid one year, revocable.
+  - name: SCIM token
+    description: Admin-requested bearer token for the SCIM 2.0 provisioning API (https://myworkboard.com/wb/apis/scim).
+  - name: MCP personal access token
+    description: Generated in Settings -> Custom Integrations -> App tab; shown once; only valid for the MCP server, not other WorkBoard APIs.

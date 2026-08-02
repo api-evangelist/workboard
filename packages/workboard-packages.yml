@@ -1,0 +1,23 @@
+generated: '2026-07-21'
+method: searched
+source: npm, PyPI, RubyGems, NuGet, Maven Central, crates.io, Packagist, pkg.go.dev, github.com/workboard
+notes: >-
+  No first-party client libraries were found on any public package registry
+  (probed 2026-07-21). WorkBoard's GitHub org (github.com/workboard) has zero
+  public repositories. The packages below are community/third-party connectors
+  for the WorkBoard API — none are published by WorkBoard.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@pipedream/workboard"
+    url: https://www.npmjs.com/package/@pipedream/workboard
+    install: npm install @pipedream/workboard
+    official: false
+    description: Pipedream workboard Components (community connector)
+  - language: javascript
+    registry: npm
+    name: n8n-nodes-workboard-sji
+    url: https://www.npmjs.com/package/n8n-nodes-workboard-sji
+    install: npm install n8n-nodes-workboard-sji
+    official: false
+    description: Workboard integration for n8n with OAuth2 support (community connector)

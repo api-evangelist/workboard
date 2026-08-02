@@ -1,24 +1,298 @@
 aid: workboard
-name: Workboard
-description: Workboard is a company surfaced as a portfolio company of a16z, softbank-vision-fund and
-  added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+name: WorkBoard
+description: >-
+  WorkBoard (WorkBoardAI) is an AI-native strategy, OKR, and strategic
+  portfolio management platform used by enterprises like Cisco, AstraZeneca,
+  and Mercedes-Benz to connect strategy pillars, outcomes, investments, and
+  OKRs. Its External REST API (v1) exposes users, teams, goals (objectives),
+  metrics (key results), action items, workstreams, and datastreams; the
+  Public API v2 manages custom attributes; a SCIM 2.0 API handles user
+  provisioning; and a published MCP server gives AI agents scoped access to
+  OKRs, KPIs, scorecards, business reviews, and meetings.
 url: https://raw.githubusercontent.com/api-evangelist/workboard/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://img.cdn.myworkboard.com/wb/images/icons/login_logo.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - a16z
 - softbank-vision-fund
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
-- Company
-apis: []
+- OKRs
+- Strategy Execution
+- Goals
+- Key Results
+- Enterprise
+- AI Agents
+- Performance Management
+- Strategic Portfolio Management
+apis:
+- name: WorkBoard SCIM API
+  description: >-
+    SCIM 2.0 provisioning API for organization users — create, read, update (title and manager), and disable.
+    Groups, bulk operations, and filtering are not supported. Authenticated with an admin-requested bearer
+    token.
+  humanURL: >-
+    https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
+  baseURL: https://myworkboard.com/wb/apis/scim
+  tags:
+  - SCIM
+  - Provisioning
+  - Identity
+  - Users
+  properties:
+  - type: Documentation
+    url: >-
+      https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
+- aid: workboard:workboard-activity-action-items-api
+  name: WorkBoard Activity (Action Items) API
+  description: >-
+    The Activity (Action Items) API from WorkBoard — 2 operation(s) for activity (action items).
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Activity (Action Items)
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-activity-action-items-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-custom-attributes-api
+  name: WorkBoard custom-attributes API
+  description: Read and write custom field values on Objectives, Key Results, Work Items, and Users
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - custom-attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-custom-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-datastream-api
+  name: WorkBoard Datastream API
+  description: >-
+    [WorkBoard's help center documentation on Datastreams.](https://support.workboard.com/hc/en-us/articles/360006666652-Pushing-Business-Data-into-Workboard-with-Data-Streams#pushing-business-data-into-workboard-with-data-streams-0-0)
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Datastream
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-datastream-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-goal-objective-api
+  name: WorkBoard Goal (Objective) API
+  description: The Goal (Objective) API from WorkBoard — 5 operation(s) for goal (objective).
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Goal (Objective)
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-goal-objective-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-metric-key-result-api
+  name: WorkBoard Metric (Key Result) API
+  description: The Metric (Key Result) API from WorkBoard — 6 operation(s) for metric (key result).
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Metric (Key Result)
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-metric-key-result-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-tags-api
+  name: WorkBoard Tags API
+  description: The Tags API from WorkBoard — 4 operation(s) for tags.
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-tags-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-team-api
+  name: WorkBoard Team API
+  description: The Team API from WorkBoard — 4 operation(s) for team.
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Team
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-team-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-user-api
+  name: WorkBoard User API
+  description: The User API from WorkBoard — 2 operation(s) for user.
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-user-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-user-goals-user-objectives-api
+  name: WorkBoard User Goals (User Objectives) API
+  description: >-
+    The User Goals (User Objectives) API from WorkBoard — 2 operation(s) for user goals (user objectives).
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - User Goals (User Objectives)
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-user-goals-user-objectives-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-webhook-api
+  name: WorkBoard Webhook API
+  description: The Webhook API from WorkBoard — 1 operation(s) for webhook.
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-webhook-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-workstream-api
+  name: WorkBoard Workstream API
+  description: >-
+    [WorkBoard's help center documentation on Workstreams.](https://support.workboard.com/hc/en-us/articles/115005163567-Workstreams#workstreams-0-0)
+  humanURL: https://apidocs.myworkboard.com/
+  baseURL: https://www.myworkboard.com/wb/apis
+  tags:
+  - Workstream
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-workstream-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+common:
+- type: AgenticAccess
+  url: agentic-access/workboard-agentic-access.yml
+- type: DomainSecurity
+  url: security/workboard-domain-security.yml
+- type: Authentication
+  url: authentication/workboard-authentication.yml
+- type: DeveloperPortal
+  url: https://www.workboard.com/developer
+- type: Documentation
+  url: https://apidocs.myworkboard.com/
+- type: APIReference
+  url: https://apidocs.myworkboard.com/
+- type: GettingStarted
+  url: https://www.workboard.com/developer
+- type: Support
+  url: https://support.myworkboard.com/en/
+- type: Blog
+  url: https://www.workboard.com/resources/blog
+- type: GitHubOrganization
+  url: https://github.com/workboard
+- type: Login
+  url: https://www.myworkboard.com/
+- type: TermsOfService
+  url: https://www.workboard.com/legal/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.workboard.com/legal/privacy-policy
+- type: StatusPage
+  url: https://workboard.statuspage.io/
+- type: Lifecycle
+  url: lifecycle/workboard-lifecycle.yml
+- type: ChangeLog
+  url: changelog/workboard-changelog.yml
+- type: MCPServer
+  url: https://www.myworkboard.com/wb/mcp
+  name: WorkBoard MCP Server
+- type: MCPServer
+  url: mcp/workboard-mcp.yml
+  name: WorkBoard MCP Server manifest
+- type: AgentSkill
+  url: skills/_index.yml
+  name: WorkBoard Agent Skills
+- type: LLMsTxt
+  url: llms/workboard-llms.txt
+- type: Packages
+  url: packages/workboard-packages.yml
+- type: WellKnown
+  url: well-known/workboard-well-known.yml
+- type: Conformance
+  url: conformance/workboard-conformance.yml
+- type: Compliance
+  url: https://www.workboard.com/security
+- type: TrustCenter
+  url: security/workboard-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/workboard-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.workboard.com/security
+- type: ErrorCatalog
+  url: errors/workboard-problem-types.yml
+- type: Conventions
+  url: conventions/workboard-conventions.yml
+- type: DataModel
+  url: data-model/workboard-data-model.yml
+- type: Webhooks
+  url: asyncapi/workboard-webhooks.yml
+- type: Integrations
+  url: https://www.workboard.com/products/integrations
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1

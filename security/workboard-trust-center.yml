@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+probe: false
+url: https://www.workboard.com/security
+certifications: [SOC 2 Type 2, ISO/IEC 27001, GDPR]
+details:
+  - certification: SOC 2 Type 2
+    evidence: Restricted-use report available upon request via https://www.workboard.com/resources/guides/soc-2-type-2-report
+  - certification: ISO/IEC 27001
+    evidence: Information Security Management System compliance; report available upon request via https://www.workboard.com/resources/guides/iso27001-report
+  - certification: GDPR
+    evidence: Global data compliance stated; Data Processing Agreement published for download.
+practices:
+  - Data encryption in-transit and at-rest (AES-256)
+  - Hosted on Microsoft Azure
+  - Penetration testing performed semi-annually
+  - 24/7 monitoring with incident response
+related:
+  - https://www.workboard.com/ai-trust (Responsible AI commitment)
+  - https://www.workboard.com/legal/privacy-policy
+evidence:
+  - source: https://www.workboard.com/security
+    keywords: [SOC 2 Type 2, ISO/IEC 27001, GDPR, penetration testing, encryption]
+notes: >-
+  Captured from the published security page (fetched 2026-07-21). The
+  automated trust-center probe recorded no hit because the certifications
+  live on the marketing-site /security page rather than a dedicated
+  trust.workboard.com host (which answers 403).

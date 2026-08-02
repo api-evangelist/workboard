@@ -1,0 +1,83 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/external-v1-openapi-original.yml, openapi/public-v2-openapi-original.yml
+notes: >-
+  Derived from v1 resource paths and parameters (the v1 spec publishes no
+  component schemas) and the v2 custom-attributes resource. WorkBoard's
+  domain language maps Goal = Objective, Metric = Key Result,
+  Activity = Action Item.
+entities:
+  - name: User
+    aliases: [Org Member]
+  - name: Team
+    aliases: [Functional Team, Working Group]
+  - name: Goal
+    aliases: [Objective]
+  - name: Metric
+    aliases: [Key Result]
+  - name: Workstream
+  - name: Activity
+    aliases: [Action Item]
+  - name: Tag
+  - name: Datastream
+  - name: Pillar
+    aliases: [Strategy]
+  - name: CustomAttributeDefinition
+  - name: CustomAttributeValue
+relationships:
+  - from: User
+    to: Goal
+    kind: has_many
+    via: GET /user/{user_id_path}/goal
+  - from: Goal
+    to: Metric
+    kind: has_many
+    via: GET /goal/{goal_id_path}/metric/{metric_id_path}
+  - from: Goal
+    to: Pillar
+    kind: belongs_to
+    via: GET /goal/{goal_id_path}/pillars (strategies and pillars)
+  - from: Goal
+    to: Goal
+    kind: has_many
+    via: GET /goal/{goal_id_path}/alignment (aligned and dependent goals)
+  - from: Team
+    to: Workstream
+    kind: has_many
+    via: GET /team/{team_id_path}/workstream
+  - from: Team
+    to: Activity
+    kind: has_many
+    via: GET /team/{team_id_path}/activity
+  - from: Workstream
+    to: Activity
+    kind: has_many
+    via: GET /workstream/{ws_id_path}/activity
+  - from: Metric
+    to: Tag
+    kind: has_many
+    via: GET/PUT/DELETE /metric/{metric_id_path}/tags
+  - from: Datastream
+    to: Metric
+    kind: feeds
+    via: POST /stream/{stream_id} and POST /hook/{webhook_hash} (webhook updates metric progress)
+  - from: CustomAttributeValue
+    to: CustomAttributeDefinition
+    kind: belongs_to
+    via: attributeId path parameter (v2)
+  - from: CustomAttributeValue
+    to: Goal
+    kind: belongs_to
+    via: /attributes/objectives/{id}/{attributeId} (v2)
+  - from: CustomAttributeValue
+    to: Metric
+    kind: belongs_to
+    via: /attributes/key-results/{id}/{attributeId} (v2)
+  - from: CustomAttributeValue
+    to: Activity
+    kind: belongs_to
+    via: /attributes/work-items/{id}/{attributeId} (v2)
+  - from: CustomAttributeValue
+    to: User
+    kind: belongs_to
+    via: /attributes/users/{id}/{attributeId} (v2)

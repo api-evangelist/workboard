@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.myworkboard.com/, https://workboard.statuspage.io/, https://www.workboard.com/developer
+versioning:
+  scheme: uri-path
+  versions:
+    - version: v1
+      root: https://www.myworkboard.com/wb/apis
+      name: WorkBoard External Public API
+      status: active
+    - version: v2
+      root: https://www.myworkboard.com/wb/apis/v2
+      name: Workboard Public API v2
+      status: active
+  docs: https://apidocs.myworkboard.com/
+changelog:
+  url: https://apidocs.myworkboard.com/changes.html
+  format: keep-a-changelog
+  artifact: changelog/workboard-changelog.yml
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No published deprecation policy or Sunset/Deprecation (RFC 8594) header
+    support found. Historical precedent: the /wb/apis/meeting endpoint was
+    removed 2022-08-22 (documented in the API changelog) alongside the
+    deprecation of the prior meetings module.
+sla:
+  url: null
+  notes: No public SLA published.
+status_page: https://workboard.statuspage.io/
+status_page_components: [Web App, Mobile Apps (Android and iOS), API]
+tokens:
+  access_token_lifetime: 1 year (revocable) — per https://www.workboard.com/developer
+deprecated_operations: []

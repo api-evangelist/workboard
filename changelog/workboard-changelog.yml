@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.myworkboard.com/changes.html
+scheme: keep-a-changelog
+scope: WorkBoard REST API v1
+product_updates: https://www.workboard.com/resources/product-updates
+entries:
+  - date: '2025-10-17'
+    type: added
+    highlights:
+      - Document the update_start_date and update_end_date parameters on the metric PUT API.
+  - date: '2023-12-21'
+    type: added
+    highlights:
+      - Add metric_mit_start_date and metric_mit_end_data to GET Metric by ID (duration of multiple interval time period Metrics).
+      - Add the /wb/apis/goal/{goalID}/pillars GET endpoint returning WorkBoard Strategy strategies.
+  - date: '2023-07-11'
+    type: added
+    highlights:
+      - Add the metric_automation object to the GET Metric endpoint.
+  - date: '2023-01-18'
+    type: added
+    highlights:
+      - Add limit and offset query parameters with include=org_members for paginated user lists.
+  - date: '2022-08-22'
+    type: removed
+    breaking: true
+    highlights:
+      - Remove the /wb/apis/meeting endpoint (deprecation of the prior meetings module).
+  - date: '2022-04-14'
+    type: added
+    highlights:
+      - Add org_user_roles with include=org_members (comma-separated list of each user's roles).
+notes: >-
+  The API v1 changelog is published in Keep a Changelog format at
+  apidocs.myworkboard.com/changes.html. Platform-level product updates
+  (WorkBoard MCP Server, Strategic Portfolio Management, AI agents) are
+  published at workboard.com/resources/product-updates without granular dates.

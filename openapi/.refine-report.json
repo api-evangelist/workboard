@@ -1,0 +1,34 @@
+{
+  "provider": "workboard",
+  "sources": [
+    "workboard-activity-action-items-api-openapi.yml",
+    "workboard-custom-attributes-api-openapi.yml",
+    "workboard-datastream-api-openapi.yml",
+    "workboard-goal-objective-api-openapi.yml",
+    "workboard-metric-key-result-api-openapi.yml",
+    "workboard-tags-api-openapi.yml",
+    "workboard-team-api-openapi.yml",
+    "workboard-user-api-openapi.yml",
+    "workboard-user-goals-user-objectives-api-openapi.yml",
+    "workboard-webhook-api-openapi.yml",
+    "workboard-workstream-api-openapi.yml"
+  ],
+  "outputs": [
+    "workboard-activity-action-items-api-openapi.yml",
+    "workboard-custom-attributes-api-openapi.yml",
+    "workboard-datastream-api-openapi.yml",
+    "workboard-goal-objective-api-openapi.yml",
+    "workboard-metric-key-result-api-openapi.yml",
+    "workboard-tags-api-openapi.yml",
+    "workboard-team-api-openapi.yml",
+    "workboard-user-api-openapi.yml",
+    "workboard-user-goals-user-objectives-api-openapi.yml",
+    "workboard-webhook-api-openapi.yml",
+    "workboard-workstream-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

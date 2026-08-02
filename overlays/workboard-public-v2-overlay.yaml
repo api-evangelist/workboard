@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Workboard Public API v2
+  version: 1.0.0
+extends: openapi/public-v2-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      provider: workboard
+      harvested: '2026-07-21'
+      source: https://www.myworkboard.com/wb/apis/v2/docs-json
+      notes: v2 spec ships operationIds, tags, and a full error envelope (ApiErrorResponse); no enhancements required beyond provenance.
+- target: $.info
+  update:
+    contact:
+      url: https://www.workboard.com/developer

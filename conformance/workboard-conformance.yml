@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.workboard.com/developer, https://www.workboard.com/security, support.myworkboard.com, openapi/
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OAuth 2.0 documented on the developer portal with authorize
+      (https://www.myworkboard.com/wb/oauth/authorize), token
+      (https://www.myworkboard.com/wb/oauth/token) and revoke endpoints;
+      also the OAuth2 option for the MCP server.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration published (404 probed 2026-07-21 on www.workboard.com and www.myworkboard.com).
+  - id: scim-2.0
+    conforms: true
+    evidence: >-
+      SCIM 2.0 API at https://myworkboard.com/wb/apis/scim
+      (urn:ietf:params:scim:schemas:core:2.0:User). Users resource only —
+      Groups, Schemas, bulk, and filtering are documented as unsupported.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      v2 errors use a custom envelope (statusCode/error/message/code/details
+      in components.schemas.ApiErrorResponse), not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Offset pagination — v2 responds with limit/offset/nextOffset
+      (AttributeObjectsPagination schema, nextOffset null on final page);
+      v1 supports limit/offset query params with include=org_members
+      (changelog 2023-01-18).
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency key mechanism documented in the OpenAPI or developer docs.
+  - id: keep-a-changelog
+    conforms: true
+    evidence: API v1 changelog (https://apidocs.myworkboard.com/changes.html) states the format is based on Keep a Changelog.
+compliance:
+  - id: soc2-type2
+    conforms: true
+    evidence: SOC 2 Type 2 restricted-use report available on request (https://www.workboard.com/security).
+  - id: iso-27001
+    conforms: true
+    evidence: ISO/IEC 27001 compliance stated, report available on request (https://www.workboard.com/security).
+  - id: gdpr
+    conforms: true
+    evidence: GDPR global data compliance stated on https://www.workboard.com/security; Data Processing Agreement published.

@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: derived
+format: custom
+source: openapi/external-v1-openapi-original.yml, openapi/public-v2-openapi-original.yml
+envelope:
+  api: WorkBoard Public API v2
+  schema: components.schemas.ApiErrorResponse
+  fields:
+    statusCode: HTTP status code for the failure (e.g. 400)
+    error: HTTP status label (e.g. Bad Request)
+    message: Human-readable failure summary
+    code: Stable machine-readable code for client branching (e.g. WB_REQUEST_VALIDATION_FAILED)
+    details: Additional structured context (ApiErrorDetails — errors[], invalidValues[], upstreamStatus)
+problems:
+  - status: 400
+    title: Bad request / validation failed
+    detail: >-
+      Returned across nearly every v1 and v2 operation for invalid parameters
+      or payloads. v2 responds with the ApiErrorResponse envelope and stable
+      codes such as WB_REQUEST_VALIDATION_FAILED, with per-field details in
+      details.errors and rejected custom attribute values in
+      details.invalidValues.
+    source_operations:
+      - openapi/external-v1-openapi-original.yml#GET /user
+      - openapi/public-v2-openapi-original.yml#CustomAttributesController_getDefinitions
+  - status: 401
+    title: Unauthorized
+    detail: Missing or invalid Bearer token (v2 declares 401 on every operation; v1 requires the Authorization Bearer header on all requests).
+    source_operations:
+      - openapi/public-v2-openapi-original.yml#CustomAttributesController_getDefinitions
+  - status: 403
+    title: Forbidden
+    detail: Caller lacks permission on the target object (v2 objective, key-result, and user attribute operations).
+    source_operations:
+      - openapi/public-v2-openapi-original.yml#CustomAttributesController_createObjectiveAttributeValue
+  - status: 404
+    title: Not found
+    detail: Attribute definition or target object (objective, key result, work item, user) does not exist.
+    source_operations:
+      - openapi/public-v2-openapi-original.yml#CustomAttributesController_getObjectsForAttribute
+  - status: 409
+    title: Conflict
+    detail: v1 user and team creation conflicts (e.g. user already exists) on POST /user, PUT /user/{user_id_path}, POST /team.
+    source_operations:
+      - openapi/external-v1-openapi-original.yml#POST /user
+      - openapi/external-v1-openapi-original.yml#POST /team
+  - status: 500
+    title: Internal server error
+    detail: Declared on all v2 operations and on v1 PUT /metric/{metric_id_path}/confidence; v2 surfaces downstream failures via details.upstreamStatus.
+    source_operations:
+      - openapi/external-v1-openapi-original.yml#PUT /metric/{metric_id_path}/confidence
+      - openapi/public-v2-openapi-original.yml#CustomAttributesController_getDefinitions
+notes: >-
+  v1 (WorkBoard External Public API, OpenAPI 3.0.1) declares 200/204/400/409/500
+  responses without a published error schema. v2 publishes the full error
+  envelope with machine-readable WB_* codes.

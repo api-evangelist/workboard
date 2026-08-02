@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: generated
+notes: >-
+  Generated from the harvested OpenAPI specs and captured conventions. The
+  v1 spec publishes no operationIds, so v1 skills reference operations by
+  method + path; the v2 skill uses the spec's real operationIds.
+skills:
+  - file: workboard-okr-progress-update.md
+    name: Update OKR progress in WorkBoard
+    api: openapi/external-v1-openapi-original.yml
+    operations: ["GET /metric", "GET /metric/{metric_id_path}", "PUT /metric/{metric_id_path}", "PUT /metric/{metric_id_path}/confidence"]
+  - file: workboard-custom-attributes.md
+    name: Manage custom attributes in WorkBoard
+    api: openapi/public-v2-openapi-original.yml
+    operations: [CustomAttributesController_getDefinitions, CustomAttributesController_getObjectsForAttribute, CustomAttributesController_getObjectiveAttributes, CustomAttributesController_createObjectiveAttributeValue, CustomAttributesController_setObjectiveAttributeValue, CustomAttributesController_deleteObjectiveAttributeValue]
+  - file: workboard-team-okr-report.md
+    name: Build a team OKR report from WorkBoard
+    api: openapi/external-v1-openapi-original.yml
+    operations: ["GET /team", "GET /team/{team_id_path}", "GET /goal", "GET /goal/{goal_id_path}", "GET /goal/{goal_id_path}/alignment", "GET /goal/{goal_id_path}/pillars", "GET /metric/{metric_id_path}"]

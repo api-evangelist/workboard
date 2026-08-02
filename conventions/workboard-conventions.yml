@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.workboard.com/developer, https://apidocs.myworkboard.com/, openapi/
+authentication:
+  style: bearer
+  header: "Authorization: Bearer <token>"
+  token_types:
+    - instant token (single-click generation for testing / single-user apps)
+    - OAuth 2.0 access token (recommended for multi-user apps; valid one year, revocable)
+  artifact: authentication/workboard-authentication.yml
+idempotency:
+  supported: false
+  notes: No idempotency-key header or replay-safety mechanism is documented in the OpenAPI or developer docs.
+pagination:
+  style: offset
+  v1:
+    params: [limit, offset]
+    notes: Supported with include=org_members on the user resource (added 2023-01-18 per API changelog).
+  v2:
+    params: [limit, offset]
+    response_fields: [pagination.limit, pagination.offset, pagination.nextOffset]
+    notes: nextOffset is null on the final page (AttributeObjectsPagination schema).
+field_expansion:
+  supported: true
+  style: include parameter
+  notes: v1 uses include= query parameters (e.g. include=org_members) to expand related data.
+metadata:
+  supported: true
+  style: custom attributes
+  notes: >-
+    v2 is a dedicated custom-attributes API — org-defined attribute
+    definitions with values attached to objectives, key results, work items,
+    and users.
+request_tracing:
+  supported: false
+  notes: No request-id / correlation header documented.
+versioning:
+  scheme: uri-path
+  current: [v1, v2]
+  notes: v1 at /wb/apis, v2 at /wb/apis/v2; see lifecycle/workboard-lifecycle.yml.
+error_envelope:
+  v1: Status codes only (200/204/400/409/500); no published error schema.
+  v2: statusCode/error/message/code/details envelope with stable WB_* machine codes (ApiErrorResponse).
+  artifact: errors/workboard-problem-types.yml
+rate_limits:
+  published: false
+  notes: No rate-limit documentation or signaling headers published.
+webhooks:
+  inbound: >-
+    POST /hook/{webhook_hash} updates progress on Metrics (key results) via
+    generated webhook URLs — see asyncapi/workboard-webhooks.yml.
+cross_links:
+  - errors/workboard-problem-types.yml
+  - lifecycle/workboard-lifecycle.yml
+  - authentication/workboard-authentication.yml
+  - asyncapi/workboard-webhooks.yml
