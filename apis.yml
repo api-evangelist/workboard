@@ -219,6 +219,8 @@ apis:
   - type: ChangeLog
     url: https://apidocs.myworkboard.com/changes.html
 common:
+- type: Overlay
+  url: overlays/workboard-external-v1-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/workboard-agentic-access.yml
 - type: DomainSecurity
