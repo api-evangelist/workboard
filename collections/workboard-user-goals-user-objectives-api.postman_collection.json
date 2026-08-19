@@ -1,0 +1,374 @@
+{
+  "item": [
+    {
+      "id": "7d563458-2572-46fe-8c27-374ab78fab2a",
+      "name": "User Goals (User Objectives)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e58063fd-f1a4-4bed-a8c0-be208ae561fc",
+          "name": "Get all of a user's goals.",
+          "request": {
+            "name": "Get all of a user's goals.",
+            "description": {
+              "content": "**This will return the user and a goal object with an individual object for each goal's details.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":user_id_path",
+                "goal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id_path",
+                  "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2524e0f3-8097-42e4-b2c5-5be145c93532",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    ":user_id_path",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id_path",
+                      "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 9121,\n    \"user\": {\n      \"user_id\": \"string\",\n      \"user_name\": \"string\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"wb_email\": \"string\",\n      \"cell_num\": \"string\",\n      \"create_at\": 3453,\n      \"last_visited_at\": \"string\",\n      \"picture\": \"string\",\n      \"time_zone\": \"string\",\n      \"external_id\": \"string\",\n      \"created_from\": \"string\",\n      \"org_id\": \"string\",\n      \"status\": \"string\",\n      \"manager\": false,\n      \"profile\": {\n        \"title\": \"string\",\n        \"company\": \"string\"\n      },\n      \"goal\": {\n        \"incrementedGoalIndex\": {\n          \"goal_id\": \"string\",\n          \"goal_name\": \"string\",\n          \"goal_narrative\": \"string\",\n          \"goal_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"goal_owner\": \"string\",\n          \"goal_create_at\": \"string\",\n          \"goal_modified_at\": \"string\",\n          \"goal_created_by\": \"string\",\n          \"goal_updated_by\": \"string\",\n          \"goal_start_date\": \"string\",\n          \"goal_target_date\": \"string\",\n          \"goal_progress\": \"string\",\n          \"goal_progress_color\": \"string\",\n          \"goal_status\": \"string\",\n          \"goal_owner_full_name\": \"string\",\n          \"goal_team_id\": \"string\",\n          \"goal_team_name\": \"string\",\n          \"goal_permission\": \"string\",\n          \"goal_category\": [\n            {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            }\n          ],\n          \"goal_metrics\": [\n            {\n              \"metric_id\": \"string\",\n              \"metric_owner\": \"string\",\n              \"metric_real_owner\": \"string\",\n              \"metric_name\": \"string\",\n              \"metric_update_interval\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_update_interval_day\": \"string\",\n              \"metric_unit\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_progress_type\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_counting_type\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_initial_data\": \"string\",\n              \"metric_target\": \"string\",\n              \"metric_achieve_target\": \"string\",\n              \"metric_create_at\": \"string\",\n              \"metric_modified_at\": \"string\",\n              \"metric_created_by\": \"string\",\n              \"metric_updated_by\": \"string\",\n              \"metric_progress\": \"string\",\n              \"metric_progress_color\": \"string\",\n              \"metric_last_update\": \"string\",\n              \"metric_next_update\": \"string\",\n              \"metric_source_from\": \"string\",\n              \"metric_source_from_id\": \"string\"\n            },\n            {\n              \"metric_id\": \"string\",\n              \"metric_owner\": \"string\",\n              \"metric_real_owner\": \"string\",\n              \"metric_name\": \"string\",\n              \"metric_update_interval\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_update_interval_day\": \"string\",\n              \"metric_unit\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_progress_type\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_counting_type\": {\n                \"id\": \"string\",\n                \"name\": \"string\"\n              },\n              \"metric_initial_data\": \"string\",\n              \"metric_target\": \"string\",\n              \"metric_achieve_target\": \"string\",\n              \"metric_create_at\": \"string\",\n              \"metric_modified_at\": \"string\",\n              \"metric_created_by\": \"string\",\n              \"metric_updated_by\": \"string\",\n              \"metric_progress\": \"string\",\n              \"metric_progress_color\": \"string\",\n              \"metric_last_update\": \"string\",\n              \"metric_next_update\": \"string\",\n              \"metric_source_from\": \"string\",\n              \"metric_source_from_id\": \"string\"\n            }\n          ],\n          \"goal_comments\": [\n            {\n              \"comment_id\": \"string\",\n              \"comment_text\": \"string\",\n              \"comment_owner\": \"string\",\n              \"comment_owner_name\": \"string\",\n              \"comment_added_at\": \"string\",\n              \"comment_last_updated\": \"string\"\n            },\n            {\n              \"comment_id\": \"string\",\n              \"comment_text\": \"string\",\n              \"comment_owner\": \"string\",\n              \"comment_owner_name\": \"string\",\n              \"comment_added_at\": \"string\",\n              \"comment_last_updated\": \"string\"\n            }\n          ],\n          \"goal_comments_count\": \"string\"\n        },\n        \"goals_count\": \"string\"\n      },\n      \"goal_count\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd31cc7f-325d-4964-b2dc-c765c3bd367d",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    ":user_id_path",
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id_path",
+                      "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e189d668-8319-4c97-a705-92824b9cbbe0",
+          "name": "Get a user's specific goal.",
+          "request": {
+            "name": "Get a user's specific goal.",
+            "description": {
+              "content": "**This will return the user and a single goal object.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "user",
+                ":user_id_path",
+                "goal",
+                ":goal_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "user_id_path",
+                  "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "goal_id_path",
+                  "description": "(Required) A unique numerical id assigned to each goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a44e7739-4dfc-4891-97ac-6d733baa4416",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    ":user_id_path",
+                    "goal",
+                    ":goal_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id_path",
+                      "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 2240,\n    \"user\": {\n      \"user_id\": \"string\",\n      \"user_name\": \"string\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"wb_email\": \"string\",\n      \"cell_num\": \"string\",\n      \"create_at\": 8610,\n      \"last_visited_at\": \"string\",\n      \"picture\": \"string\",\n      \"time_zone\": \"string\",\n      \"external_id\": \"string\",\n      \"created_from\": \"string\",\n      \"org_id\": \"string\",\n      \"status\": \"string\",\n      \"manager\": false,\n      \"profile\": {\n        \"title\": \"string\",\n        \"company\": \"string\"\n      },\n      \"goal\": {\n        \"goal_id\": \"string\",\n        \"goal_name\": \"string\",\n        \"goal_narrative\": \"string\",\n        \"goal_type\": {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        \"goal_owner\": \"string\",\n        \"goal_create_at\": \"string\",\n        \"goal_modified_at\": \"string\",\n        \"goal_created_by\": \"string\",\n        \"goal_updated_by\": \"string\",\n        \"goal_start_date\": \"string\",\n        \"goal_target_date\": \"string\",\n        \"goal_progress\": \"string\",\n        \"goal_progress_color\": \"string\",\n        \"goal_status\": \"string\",\n        \"goal_owner_full_name\": \"string\",\n        \"goal_team_id\": \"string\",\n        \"goal_team_name\": \"string\",\n        \"goal_permission\": \"string\",\n        \"goal_category\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          }\n        ],\n        \"goal_metrics\": [\n          {\n            \"metric_id\": \"string\",\n            \"metric_owner\": \"string\",\n            \"metric_real_owner\": \"string\",\n            \"metric_name\": \"string\",\n            \"metric_update_interval\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_update_interval_day\": \"string\",\n            \"metric_unit\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_progress_type\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_counting_type\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_initial_data\": \"string\",\n            \"metric_target\": \"string\",\n            \"metric_achieve_target\": \"string\",\n            \"metric_create_at\": \"string\",\n            \"metric_modified_at\": \"string\",\n            \"metric_created_by\": \"string\",\n            \"metric_updated_by\": \"string\",\n            \"metric_progress\": \"string\",\n            \"metric_progress_color\": \"string\",\n            \"metric_last_update\": \"string\",\n            \"metric_next_update\": \"string\",\n            \"metric_source_from\": \"string\",\n            \"metric_source_from_id\": \"string\"\n          },\n          {\n            \"metric_id\": \"string\",\n            \"metric_owner\": \"string\",\n            \"metric_real_owner\": \"string\",\n            \"metric_name\": \"string\",\n            \"metric_update_interval\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_update_interval_day\": \"string\",\n            \"metric_unit\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_progress_type\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_counting_type\": {\n              \"id\": \"string\",\n              \"name\": \"string\"\n            },\n            \"metric_initial_data\": \"string\",\n            \"metric_target\": \"string\",\n            \"metric_achieve_target\": \"string\",\n            \"metric_create_at\": \"string\",\n            \"metric_modified_at\": \"string\",\n            \"metric_created_by\": \"string\",\n            \"metric_updated_by\": \"string\",\n            \"metric_progress\": \"string\",\n            \"metric_progress_color\": \"string\",\n            \"metric_last_update\": \"string\",\n            \"metric_next_update\": \"string\",\n            \"metric_source_from\": \"string\",\n            \"metric_source_from_id\": \"string\"\n          }\n        ],\n        \"goal_comments\": [\n          {\n            \"comment_id\": \"string\",\n            \"comment_text\": \"string\",\n            \"comment_owner\": \"string\",\n            \"comment_owner_name\": \"string\",\n            \"comment_added_at\": \"string\",\n            \"comment_last_updated\": \"string\"\n          },\n          {\n            \"comment_id\": \"string\",\n            \"comment_text\": \"string\",\n            \"comment_owner\": \"string\",\n            \"comment_owner_name\": \"string\",\n            \"comment_added_at\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        ],\n        \"goal_comments_count\": \"string\"\n      },\n      \"goal_count\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a203e95-9d8c-4d5c-aa77-6f03e169d002",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    ":user_id_path",
+                    "goal",
+                    ":goal_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "user_id_path",
+                      "description": "(Required) The unique numerical identifier for a user in WorkBoard."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d1334da-57fc-4c49-94ec-4458946f863c",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) User Goals (User Objectives) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

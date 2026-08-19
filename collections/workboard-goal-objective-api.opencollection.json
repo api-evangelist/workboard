@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Goal (Objective) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Goal (Objective)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Goals using parameters to filter results.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+              },
+              {
+                "name": "goal_owner_id",
+                "value": "",
+                "type": "query",
+                "description": "Either the unique user id or email address belonging to the goal owner. Include this parameter to return all goals belonging to the specified owner. (Note, if both `goal_owner_id` and `goal_id` parameters are include in the request, `goal_owner_id` will be ignored)."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team."
+              },
+              {
+                "name": "team_owner_id",
+                "value": "",
+                "type": "query",
+                "description": "Either the unique user id or email address belonging to the team owner. Include this parameter to return all goals belonging to the specified team owner. (Note, if both `team_owner_id` and `team_id` parameters are include in the request, `team_owner_id` will be ignored.)"
+              },
+              {
+                "name": "goal_status",
+                "value": "",
+                "type": "query",
+                "description": "The current state of the goal; permitted values are \"1\" (active) or \"2\" (closed). If you want both closed and active goals, then set `goal_status` to the comma separated values: \"1,2\""
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "This will return the `goal_custom_permission` object, which includes data related to any custom permissions."
+              },
+              {
+                "name": "custom_attributes",
+                "value": "",
+                "type": "query",
+                "description": "This will return the `custom_attributes` array when set to 1, which includes goals custom fields."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Goals using parameters to filter results."
+        },
+        {
+          "info": {
+            "name": "Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token."
+        },
+        {
+          "info": {
+            "name": "Get Goals using parameters to filter results.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal/:goal_id_path",
+            "params": [
+              {
+                "name": "goal_id_path",
+                "value": "",
+                "type": "path",
+                "description": "Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "This will return the `goal_custom_permission` object, which includes data related to any custom permissions."
+              },
+              {
+                "name": "custom_attributes",
+                "value": "",
+                "type": "query",
+                "description": "This will return the `custom_attributes` array when set to 1, which includes goals custom fields."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Goals using parameters to filter results."
+        },
+        {
+          "info": {
+            "name": "List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal/:goal_id_path/metric/:metric_id_path",
+            "params": [
+              {
+                "name": "goal_id_path",
+                "value": "",
+                "type": "path",
+                "description": "A unique numerical id assigned to each goal."
+              },
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter."
+        },
+        {
+          "info": {
+            "name": "Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal/:goal_id_path/pillars",
+            "params": [
+              {
+                "name": "goal_id_path",
+                "value": "",
+                "type": "path",
+                "description": "A unique numerical id assigned to each goal."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the associated `strategies` and `pillars` to which the `goal_id_path` is related. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars."
+        },
+        {
+          "info": {
+            "name": "List aligned and dependent goals associated with the goal specified by the goal_id parameter. Note, the logged in user must have Data-Admin permission in order to view the goal alignment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/goal/:goal_id_path/alignment",
+            "params": [
+              {
+                "name": "goal_id_path",
+                "value": "",
+                "type": "path",
+                "description": "A unique numerical id assigned to each goal."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List aligned and dependent goals associated with the goal specified by the `goal_id` parameter. Note, the logged in user must have `Data-Admin` permission in order to view the goal alignment. If `goal_id` is aligned to another goal, the first goal returned will be the goal that `goal_id` is aligned to. If `goal_id` is not aligned and has goals aligned to it, `goal_id` will be the first goal. If `goal_id` has no aligned goals, then `goal_id` goal will be returned without any `goal_alignments`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

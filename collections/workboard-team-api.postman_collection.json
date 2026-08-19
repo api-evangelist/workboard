@@ -1,0 +1,1249 @@
+{
+  "item": [
+    {
+      "id": "bf3935c8-95f5-4c42-9087-3155b16f8874",
+      "name": "Team",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf8b1b24-bab7-46fc-b67d-fe868a8c5a13",
+          "name": "Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team.",
+          "request": {
+            "name": "Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "This behaves the same as the `team_id` parameter above. Do not use both `id` and `team_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "This will get the team by its `external_id`. Do not use in combination with `id` or `team_id`."
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Limit the teams returned based on whether the authenticated user is a team owner or member. Possible values: \"owner\", \"member\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "If the current authenticated user is an org data admin, pass this parameter with the value \"org_teams\" to return a dump of all organization teams."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_range",
+                  "value": "<integer>",
+                  "description": "Return teams with creation dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate"
+                },
+                {
+                  "disabled": false,
+                  "key": "updated_at_range",
+                  "value": "<integer>",
+                  "description": "Return teams with last modified dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of teams returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c4fab43b-fd96-43ae-a7c6-f8ff1714d26e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "updated_at_range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3379,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75244ce5-17ed-4999-90e7-9d996251e70d",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "updated_at_range",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da824017-789e-4da6-8224-f33e174cac04",
+          "name": "Create a new functional team or working group, and add Workstreams and team members.",
+          "request": {
+            "name": "Create a new functional team or working group, and add Workstreams and team members.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"team_owner\": \"<string>\",\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b87c0594-f2b9-42c8-8e04-71c06b39067d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_owner\": \"<string>\",\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3762,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1fac44f-2d79-4535-9db3-55289955e635",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_owner\": \"<string>\",\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96026e8a-c287-40f4-84f1-e9e2452a9461",
+          "name": "Delete a team.",
+          "request": {
+            "name": "Delete a team.",
+            "description": {
+              "content": "**CAUTION**: Delete an entire team and all its Workstreams and action items. A successful request will return a 204 code. If you are deleting a functional team, the child teams will be deleted as well.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "(Required) The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9737370e-532d-453d-be63-c9ce760223f9",
+              "name": "Success returns a 204 header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23b6cd61-a40f-4c87-b774-26664808ed94",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32734e36-1055-4815-9079-8662fc024202",
+          "name": "Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of.",
+          "request": {
+            "name": "Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id_path",
+                  "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1d67208d-dd3d-4f3e-86b7-076f9db7fc0b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3762,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee3a93a-13f6-4def-894b-8118fd1ac4f6",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "084e3a32-b38d-4da2-b3f0-71767263026b",
+          "name": "Update a team.",
+          "request": {
+            "name": "Update a team.",
+            "description": {
+              "content": "Change the name of a team, add new and existing users to the team roster, change a member's role on the team, remove users from the team, or add new Workstreams. If you are using a personal access token, you must be the manager of the team to use this request.<br/>Note: If you update a team with a new manager, the previous manager will be demoted to a co-manager.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id_path",
+                  "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1a1903e-163b-4763-a70a-382dd31d03c8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3762,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ad3f5c2-085b-491a-bcf4-132e4faef7db",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_name\": \"<string>\",\n  \"team_type\": \"<string>\",\n  \"parent_team_id\": \"<string>\",\n  \"team_members\": [\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"team_role\": \"<string>\",\n      \"team_access\": \"<string>\"\n    }\n  ],\n  \"team_workstream\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca7c756e-3a30-4f18-bb36-528ed3e6d51f",
+          "name": "Get all Workstreams belonging to the specified team.",
+          "request": {
+            "name": "Get all Workstreams belonging to the specified team.",
+            "description": {
+              "content": "Get all Workstreams belonging to the specified team.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id_path",
+                "workstream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id_path",
+                  "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e33c1822-5614-4966-9890-71f0c69c6ab1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path",
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 2945,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_workstream\": {\n        \"workstream_count\": \"string\",\n        \"workstream\": [\n          {\n            \"ws_id\": \"string\",\n            \"ws_name\": \"string\",\n            \"ws_objective\": \"string\",\n            \"ws_owner\": \"string\",\n            \"ws_lead\": \"string\",\n            \"ws_status\": \"string\",\n            \"ws_type\": \"string\",\n            \"ws_effort\": {\n              \"low_effort\": \"string\",\n              \"medium_effort\": \"string\",\n              \"large_effort\": \"string\"\n            },\n            \"ws_pace\": \"string\",\n            \"ws_health\": \"string\",\n            \"ws_priority\": \"string\",\n            \"ws_progress\": \"string\",\n            \"ws_start_date\": \"string\",\n            \"ws_target_date\": \"string\",\n            \"ws_completion_date\": \"string\",\n            \"ws_team_id\": \"string\",\n            \"ws_team_name\": \"string\"\n          },\n          {\n            \"ws_id\": \"string\",\n            \"ws_name\": \"string\",\n            \"ws_objective\": \"string\",\n            \"ws_owner\": \"string\",\n            \"ws_lead\": \"string\",\n            \"ws_status\": \"string\",\n            \"ws_type\": \"string\",\n            \"ws_effort\": {\n              \"low_effort\": \"string\",\n              \"medium_effort\": \"string\",\n              \"large_effort\": \"string\"\n            },\n            \"ws_pace\": \"string\",\n            \"ws_health\": \"string\",\n            \"ws_priority\": \"string\",\n            \"ws_progress\": \"string\",\n            \"ws_start_date\": \"string\",\n            \"ws_target_date\": \"string\",\n            \"ws_completion_date\": \"string\",\n            \"ws_team_id\": \"string\",\n            \"ws_team_name\": \"string\"\n          }\n        ]\n      },\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddc39ba6-b0f8-46db-8c24-01d77eaed64b",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path",
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9eea030e-b212-4682-9e50-5c3f5eccb5f0",
+          "name": "List details of all action items belonging to the specified team.",
+          "request": {
+            "name": "List details of all action items belonging to the specified team.",
+            "description": {
+              "content": "List details of all action items belonging to the specified team.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team",
+                ":team_id_path",
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id_path",
+                  "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c964e9f9-6233-4eed-ad99-0831ff6d24ce",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 6104,\n    \"team\": {\n      \"team_id\": \"string\",\n      \"external_id\": \"string\",\n      \"parent_team_id\": \"string\",\n      \"dotted_team_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"team_name\": \"string\",\n      \"team_owner\": \"string\",\n      \"team_type\": \"string\",\n      \"level\": \"string\",\n      \"created_from\": \"string\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"team_state\": \"string\",\n      \"team_activity\": {\n        \"activity_count\": \"string\",\n        \"activity\": [\n          {\n            \"ai_id\": \"string\",\n            \"ai_description\": \"string\",\n            \"ai_created_at\": \"string\",\n            \"ai_state\": \"string\",\n            \"ai_rating\": \"string\",\n            \"ai_priority\": \"string\",\n            \"ai_effort\": \"string\",\n            \"ai_files\": [\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              },\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              }\n            ],\n            \"ai_sub_actions\": [\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              },\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              }\n            ],\n            \"ai_comments\": [\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              },\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              }\n            ],\n            \"ai_due_date\": \"string\",\n            \"ai_workstream\": \"string\",\n            \"ai_team\": \"string\",\n            \"ai_workstream_name\": \"string\",\n            \"ai_loop_members\": [\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              },\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              }\n            ],\n            \"ai_tags\": \"string\",\n            \"ai_due_before\": \"string\",\n            \"ai_owner\": \"string\",\n            \"ai_created_by\": \"string\",\n            \"ai_url\": \"string\",\n            \"ai_completed_at\": \"string\"\n          },\n          {\n            \"ai_id\": \"string\",\n            \"ai_description\": \"string\",\n            \"ai_created_at\": \"string\",\n            \"ai_state\": \"string\",\n            \"ai_rating\": \"string\",\n            \"ai_priority\": \"string\",\n            \"ai_effort\": \"string\",\n            \"ai_files\": [\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              },\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              }\n            ],\n            \"ai_sub_actions\": [\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              },\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              }\n            ],\n            \"ai_comments\": [\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              },\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              }\n            ],\n            \"ai_due_date\": \"string\",\n            \"ai_workstream\": \"string\",\n            \"ai_team\": \"string\",\n            \"ai_workstream_name\": \"string\",\n            \"ai_loop_members\": [\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              },\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              }\n            ],\n            \"ai_tags\": \"string\",\n            \"ai_due_before\": \"string\",\n            \"ai_owner\": \"string\",\n            \"ai_created_by\": \"string\",\n            \"ai_url\": \"string\",\n            \"ai_completed_at\": \"string\"\n          }\n        ]\n      },\n      \"team_members\": [\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"first_name\": \"string\",\n          \"last_name\": \"string\",\n          \"email\": \"string\",\n          \"team_role\": \"string\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c182c01d-8b72-406f-9514-8d24cad03235",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team",
+                    ":team_id_path",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id_path",
+                      "description": "(Required) The unique numerical identifier in WorkBoard for a team."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ae474af9-3f1d-451e-91ce-417c6d201994",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Team API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

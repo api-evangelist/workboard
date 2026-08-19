@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "d93ab3fc-b8e1-4221-919a-fb144989c258",
+      "name": "Webhook",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d406485c-94d8-4d07-ae7a-ff3b9b071cb5",
+          "name": "Update progress on Metrics using webhooks.",
+          "request": {
+            "name": "Update progress on Metrics using webhooks.",
+            "description": {
+              "content": "WorkBoard's webhooks allow you to post data from your external applications into WorkBoard by sending a formatted JSON payload via HTTP POST request to the secret WorkBoard URL generated for your application. Currently WorkBoard only supports incoming webhooks; outgoing webhooks will be available soon. <p>WorkBoard's incoming webhooks offer an easy way to update metric data in WorkBoard using a simple HTTP post.</p> <p>For more advanced applications which you can customize per your requirements, you can code your own POST requests using the global hook URL which WorkBoard will generate for you.</p> <p>**[Click here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)** to get your webhook URL.</p><p>Note: If you haven't yet tried one of our pre-built connectors, you will first need to click one of the three options (Google Spreadsheet, Microsoft Excel, or From CSV) to generate your private `webhook_hash`.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hook",
+                ":webhook_hash"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_hash",
+                  "description": "(Required) The hash you can retrieve by **[clicking here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)**"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metric_id\": \"<string>\",\n  \"metric_data\": \"<string>\",\n  \"metric_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60dc5247-4c1a-4fb9-b745-7c661ad4ad67",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hook",
+                    ":webhook_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_hash",
+                      "description": "(Required) The hash you can retrieve by **[clicking here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)**"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metric_id\": \"<string>\",\n  \"metric_data\": \"<string>\",\n  \"metric_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 606\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c106039-fc85-4890-93ed-1fc4a2cdd06f",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hook",
+                    ":webhook_hash"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_hash",
+                      "description": "(Required) The hash you can retrieve by **[clicking here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)**"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metric_id\": \"<string>\",\n  \"metric_data\": \"<string>\",\n  \"metric_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fded53e9-a82b-4cba-b5cf-10f495230731",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Webhook API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

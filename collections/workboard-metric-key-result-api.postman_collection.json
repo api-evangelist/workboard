@@ -1,0 +1,1894 @@
+{
+  "item": [
+    {
+      "id": "02b07ca1-254d-4054-91d4-141539e02789",
+      "name": "Metric (Key Result)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b75e4b10-838e-457a-a6c9-8a8a604bea2d",
+          "name": "Request metrics (key results) the user (token owner) has access to. Use a Data-Admin token to gain access to metrics across your organization.",
+          "request": {
+            "name": "Request metrics (key results) the user (token owner) has access to. Use a Data-Admin token to gain access to metrics across your organization.",
+            "description": {
+              "content": "By default, when no additional parameters are passed, this returns the Metrics the token owner has ownership of. If the token owner doesn't own any Metrics, the results will be empty.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metric_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each metric in WorkBoard. Include the metric_id parameter in the request to limit the response to a specific metric."
+                },
+                {
+                  "disabled": false,
+                  "key": "goal_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each goal in WorkBoard. Include this parameter to return metrics from the specified goal only."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_metric_data",
+                  "value": "<string>",
+                  "description": "Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of team metrics returned per page when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 15."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specify the starting point for the number of team metrics returned when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9ebe7cf5-7b3f-4917-997a-9bfafe2a18ae",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "goal_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_metric_data",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3211,\n    \"metric\": {\n      \"metric_id\": \"string\",\n      \"metric_goal_id\": \"string\",\n      \"metric_owner\": \"string\",\n      \"metric_real_owner\": \"string\",\n      \"metric_name\": \"string\",\n      \"metric_update_interval\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_update_interval_day\": \"string\",\n      \"metric_unit\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_progress_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_counting_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_initial_data\": \"string\",\n      \"metric_target\": \"string\",\n      \"metric_progress\": \"string\",\n      \"metric_progress_color\": \"string\",\n      \"metric_last_update\": \"string\",\n      \"metric_next_update\": \"string\",\n      \"metric_source_from\": \"string\",\n      \"metric_create_at\": \"string\",\n      \"metric_modified_at\": \"string\",\n      \"metric_created_by\": \"string\",\n      \"metric_updated_by\": \"string\",\n      \"metric_status\": \"string\",\n      \"metric_permission\": \"string\",\n      \"metric_confidence\": [\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 9212\n        },\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 7642\n        }\n      ],\n      \"child_kr\": [\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        },\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        }\n      ],\n      \"metric_automation\": {},\n      \"metric_achieve_target\": \"string\",\n      \"metric_data\": [\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        },\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        }\n      ],\n      \"metric_comments\": [\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        },\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        }\n      ],\n      \"metric_mit_start_date\": \"string\",\n      \"metric_mit_end_date\": \"string\",\n      \"metric_goal_source\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2db23a88-f651-41cf-915b-4a104cdf808d",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "goal_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include_metric_data",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2e65100-46e3-48d4-8a7f-408caabfe378",
+          "name": "GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric.",
+          "request": {
+            "name": "GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_metric_data",
+                  "value": "<string>",
+                  "description": "Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf7f3f75-2120-485e-974b-a4239e00da03",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_metric_data",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 9983,\n    \"metric\": {\n      \"metric_id\": \"string\",\n      \"metric_goal_id\": \"string\",\n      \"metric_owner\": \"string\",\n      \"metric_real_owner\": \"string\",\n      \"metric_name\": \"string\",\n      \"metric_update_interval\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_update_interval_day\": \"string\",\n      \"metric_unit\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_progress_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_counting_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_initial_data\": \"string\",\n      \"metric_target\": \"string\",\n      \"metric_progress\": \"string\",\n      \"metric_progress_color\": \"string\",\n      \"metric_last_update\": \"string\",\n      \"metric_next_update\": \"string\",\n      \"metric_source_from\": \"string\",\n      \"metric_create_at\": \"string\",\n      \"metric_modified_at\": \"string\",\n      \"metric_created_by\": \"string\",\n      \"metric_updated_by\": \"string\",\n      \"metric_status\": \"string\",\n      \"metric_permission\": \"string\",\n      \"metric_confidence\": [\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 9134\n        },\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 7468\n        }\n      ],\n      \"child_kr\": [\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        },\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        }\n      ],\n      \"metric_automation\": {},\n      \"metric_achieve_target\": \"string\",\n      \"metric_data\": [\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        },\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        }\n      ],\n      \"metric_comments\": [\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        },\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        }\n      ],\n      \"metric_mit_start_date\": \"string\",\n      \"metric_mit_end_date\": \"string\",\n      \"metric_goal_source\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99e5739e-3d4b-4761-8bfb-3f1ffcaed41a",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_metric_data",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "077e47e0-e1fe-4f49-8495-9fc9952baaa1",
+          "name": "Update metric information",
+          "request": {
+            "name": "Update metric information",
+            "description": {
+              "content": "Update progress of an individual metric. If you do not include the `metric_data_id` parameter, the value will be applied to the most recent update date according to the metric update frequency set in WorkBoard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force_update",
+                  "value": "<string>",
+                  "description": "Set to `yes` to force the update through. This allows updating closed metrics, metrics on closed objectives, metrics on objectives that have passed their target date, and applying updates to previous data points via `update_start_date` and `update_end_date` that fall outside the objective's time period."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metric_data\": \"<string>\",\n  \"metric_data_id\": \"<string>\",\n  \"metric_comment\": \"<string>\",\n  \"update_start_date\": \"<string>\",\n  \"update_end_date\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da9c0eea-0f78-44fc-b87f-5a4b7b970054",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_update",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metric_data\": \"<string>\",\n  \"metric_data_id\": \"<string>\",\n  \"metric_comment\": \"<string>\",\n  \"update_start_date\": \"<string>\",\n  \"update_end_date\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 1087,\n    \"metric\": {\n      \"metric_id\": \"string\",\n      \"metric_goal_id\": \"string\",\n      \"metric_owner\": \"string\",\n      \"metric_real_owner\": \"string\",\n      \"metric_name\": \"string\",\n      \"metric_update_interval\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_update_interval_day\": \"string\",\n      \"metric_unit\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_progress_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_counting_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_initial_data\": \"string\",\n      \"metric_target\": \"string\",\n      \"metric_progress\": \"string\",\n      \"metric_progress_color\": \"string\",\n      \"metric_last_update\": \"string\",\n      \"metric_next_update\": \"string\",\n      \"metric_source_from\": \"string\",\n      \"metric_create_at\": \"string\",\n      \"metric_modified_at\": \"string\",\n      \"metric_created_by\": \"string\",\n      \"metric_updated_by\": \"string\",\n      \"metric_status\": \"string\",\n      \"metric_permission\": \"string\",\n      \"metric_confidence\": [\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        },\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        }\n      ],\n      \"metric_achieve_target\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2195ff5d-9aa6-47d4-bf46-7e1bbe1063b8",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_update",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metric_data\": \"<string>\",\n  \"metric_data_id\": \"<string>\",\n  \"metric_comment\": \"<string>\",\n  \"update_start_date\": \"<string>\",\n  \"update_end_date\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67bead42-e8d4-4a15-9678-d5991c821a5a",
+          "name": "Update the confidence score (RAG) of a metric (key result)",
+          "request": {
+            "name": "Update the confidence score (RAG) of a metric (key result)",
+            "description": {
+              "content": "Update the confidence score and comment on a metric. The confidence_score values map to: 0 = No Rating, 1 = Low, 2 = Medium, 3 = High.\n\nThis would appear as a separate confidence update in the Metric history and not a progress update with a confidence update.\n\n**Note:** The metric must be in an active state. Attempting to update confidence on a deleted metric will result in a 500 error with the message \"deleted_metric\".",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path",
+                "confidence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confidence_score\": \"<integer>\",\n  \"confidence_comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69072e34-ab61-45c0-93d9-ecbb4436f8bc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "confidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confidence_score\": \"<integer>\",\n  \"confidence_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 719,\n    \"metric\": {\n      \"metric_id\": \"string\",\n      \"metric_goal_id\": \"string\",\n      \"metric_owner\": \"string\",\n      \"metric_real_owner\": \"string\",\n      \"metric_name\": \"string\",\n      \"metric_update_interval\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_update_interval_day\": \"string\",\n      \"metric_unit\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_progress_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_counting_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"metric_initial_data\": \"string\",\n      \"metric_target\": \"string\",\n      \"metric_progress\": \"string\",\n      \"metric_progress_color\": \"string\",\n      \"metric_last_update\": \"string\",\n      \"metric_next_update\": \"string\",\n      \"metric_source_from\": \"string\",\n      \"metric_create_at\": \"string\",\n      \"metric_modified_at\": \"string\",\n      \"metric_created_by\": \"string\",\n      \"metric_updated_by\": \"string\",\n      \"metric_status\": \"string\",\n      \"metric_permission\": \"string\",\n      \"metric_confidence\": [\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 421\n        },\n        {\n          \"confidence\": \"string\",\n          \"comment\": \"string\",\n          \"modified_at\": \"string\",\n          \"metric_data_id\": 302\n        }\n      ],\n      \"child_kr\": [\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        },\n        {\n          \"metric_id\": \"string\",\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"metric\": \"string\",\n          \"target\": \"string\",\n          \"initial_data\": \"string\",\n          \"graph_type\": \"string\",\n          \"counting\": \"string\",\n          \"owner\": \"string\",\n          \"interval\": \"string\",\n          \"create_at\": \"string\",\n          \"last_mod\": \"string\",\n          \"goal_id\": \"string\",\n          \"permission\": \"string\",\n          \"progress\": \"string\",\n          \"progress_color\": \"string\",\n          \"last_run\": \"string\",\n          \"next_run\": \"string\",\n          \"repeat_id\": \"string\",\n          \"source\": \"string\",\n          \"status\": \"string\",\n          \"weekly_update_day\": \"string\",\n          \"progress_type\": \"string\",\n          \"measure_metric_data\": \"string\",\n          \"multiply_data\": \"string\",\n          \"lower_limit\": \"string\",\n          \"upper_limit\": \"string\",\n          \"progress_consider\": \"string\",\n          \"type\": \"string\",\n          \"message\": \"string\",\n          \"goal_align_check\": \"string\",\n          \"goal_roll_up_check\": \"string\",\n          \"is_encrypted\": \"string\",\n          \"multiplier\": \"string\",\n          \"weightage\": \"string\",\n          \"stop_update\": \"string\",\n          \"achieve_target\": \"string\",\n          \"cascade_goal_id\": \"string\",\n          \"created_by\": \"string\",\n          \"modified_at\": \"string\",\n          \"start_date\": \"string\",\n          \"end_date\": \"string\",\n          \"description\": \"string\",\n          \"parent_goal_id\": \"string\",\n          \"real_owner\": \"string\",\n          \"parent\": \"string\",\n          \"quarter_target_type\": \"string\",\n          \"quarter_name\": \"string\",\n          \"period_name\": {},\n          \"rag_score\": \"string\",\n          \"last_update\": \"string\",\n          \"created_from\": \"string\",\n          \"stretch_target\": \"string\",\n          \"fy_quarter_kr\": \"string\"\n        }\n      ],\n      \"metric_automation\": {},\n      \"metric_achieve_target\": \"string\",\n      \"metric_data\": [\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        },\n        {\n          \"metric_data_id\": \"string\",\n          \"metric_data_value\": \"string\",\n          \"metric_data_created_at\": \"string\",\n          \"metric_data_created_by\": \"string\",\n          \"metric_data_updated_at\": \"string\",\n          \"metric_data_comment\": \"string\"\n        }\n      ],\n      \"metric_comments\": [\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        },\n        {\n          \"comment\": \"string\",\n          \"modified_at\": \"string\"\n        }\n      ],\n      \"metric_mit_start_date\": \"string\",\n      \"metric_mit_end_date\": \"string\",\n      \"metric_goal_source\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea67575c-5b2a-48e3-b4c5-13fca8c86690",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "confidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confidence_score\": \"<integer>\",\n  \"confidence_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cefdbdc8-2736-4c03-a282-4f3360dfdecf",
+              "name": "The metric has been deleted and cannot be updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "confidence"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confidence_score\": \"<integer>\",\n  \"confidence_comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"deleted_metric\",\n  \"data\": {\n    \"errorCode\": 500,\n    \"message\": \"deleted_metric\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac689d7a-4d0b-4d3e-901e-445117525374",
+          "name": "Returns all tags mapped to the given metric in the system.",
+          "request": {
+            "name": "Returns all tags mapped to the given metric in the system.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e535fa87-bc84-4086-9553-03077eefc154",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 2520,\n    \"tags\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"group_status\": \"string\",\n        \"updated_by\": \"string\",\n        \"updated_date\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"string\",\n        \"group_id\": \"string\",\n        \"group_name\": \"string\",\n        \"group_status\": \"string\",\n        \"updated_by\": \"string\",\n        \"updated_date\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5d6910e-3cac-4ffc-b27b-d2bdc6047a21",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5da5f436-e675-413e-a9f5-92b0be5a4ffd",
+          "name": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+          "request": {
+            "name": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8c41823-d012-458f-b14b-f7c0cc783076",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00ae2fe0-ec7b-4435-b19e-2b15b40a6130",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1fe60c7-d56c-428a-bb0a-c7336937ef7a",
+          "name": "Delete given tag lists mapped to the metric.",
+          "request": {
+            "name": "Delete given tag lists mapped to the metric.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                ":metric_id_path",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metric_id\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "87a4f748-057e-468b-a16d-0295580f89f3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metric_id\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8170e081-6e31-4737-872f-43c3e342afd3",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    ":metric_id_path",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metric_id\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55ba044b-e774-4b4d-8072-2faedf3049dd",
+          "name": "Returns all key result tags mapped to the given metrics in the system.",
+          "request": {
+            "name": "Returns all key result tags mapped to the given metrics in the system.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                "krtags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metric_ids",
+                  "value": "<string>",
+                  "description": "(Required) The comma separated list of unique numerical ids assigned to each metric in WorkBoard."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4c40b5dc-8f80-449f-b97a-fd7b2676e6c4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "krtags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 276,\n    \"metrics\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"tags\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"group_id\": \"string\",\n            \"group_name\": \"string\",\n            \"group_status\": \"string\",\n            \"updated_by\": \"string\",\n            \"updated_date\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"group_id\": \"string\",\n            \"group_name\": \"string\",\n            \"group_status\": \"string\",\n            \"updated_by\": \"string\",\n            \"updated_date\": \"string\"\n          }\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"tags\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"group_id\": \"string\",\n            \"group_name\": \"string\",\n            \"group_status\": \"string\",\n            \"updated_by\": \"string\",\n            \"updated_date\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"status\": \"string\",\n            \"group_id\": \"string\",\n            \"group_name\": \"string\",\n            \"group_status\": \"string\",\n            \"updated_by\": \"string\",\n            \"updated_date\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2385103c-3d17-48d5-9fdd-e5e5dc61eb7e",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "krtags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric_ids",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82477202-557f-4998-a1fd-a958a552c60d",
+          "name": "Returns all metrics mapped to the given `tag_id`.",
+          "request": {
+            "name": "Returns all metrics mapped to the given `tag_id`.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tag_id",
+                  "value": "<string>",
+                  "description": "(Required) A unique numerical id assigned to each tag, which returns all metrics mapped to that tag."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f9bd94c2-2e36-4d08-a5dd-750a7d640605",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tag_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 4139,\n    \"metrics\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": 9867,\n        \"updated_by\": \"string\",\n        \"updated_date\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": 6692,\n        \"updated_by\": \"string\",\n        \"updated_date\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d170020-235a-4dc0-84e6-60fd69bc534c",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tag_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae51a7a4-4087-4d0d-83a6-eb2b0a65c1f1",
+          "name": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+          "request": {
+            "name": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metric",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metrics\": [\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aef91048-0bcd-44e7-8ea3-726bf1c4fe38",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": [\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cc83517-a24e-445e-a45c-4b3a6f792916",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metric",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": [\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"metric_id\": \"<string>\",\n      \"tag_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a5eae42f-202b-4b11-ad37-c88da25012da",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Metric (Key Result) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

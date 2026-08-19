@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Activity (Action Items) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activity (Action Items)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/activity",
+            "params": [
+              {
+                "name": "ai_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each action item in WorkBoard."
+              },
+              {
+                "name": "ai_owner",
+                "value": "",
+                "type": "query",
+                "description": "The numerical user id or email address of the user who currently owns the action item."
+              },
+              {
+                "name": "next_page_token",
+                "value": "",
+                "type": "query",
+                "description": "If you have made a pagination request, you will receive a next_page_token value which can be passed as a parameter in your next request."
+              },
+              {
+                "name": "due_date_range",
+                "value": "",
+                "type": "query",
+                "description": "Return action items with due dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "Return action items with the specified priority ratings. Permitted values are: \"1\" (highest), \"2\" (high), \"3\" (normal)"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Return action items with the specified state. Permitted values are: \"0\" (done), \"1\" (doing), \"2\" (next), \"4\" (pause)"
+              },
+              {
+                "name": "ai_state",
+                "value": "",
+                "type": "query",
+                "description": "Return action items with the specified state. Multiple values can be comma separated. Permitted values are: \"0\" (done), \"1\" (doing), \"2\" (next), \"4\" (pause)"
+              },
+              {
+                "name": "rag",
+                "value": "",
+                "type": "query",
+                "description": "Return action items with the specified level of effort. Permitted values are: \"1\" (easy), \"2\" (medium), \"3\" (huge)"
+              },
+              {
+                "name": "effort",
+                "value": "",
+                "type": "query",
+                "description": "The numeric value for the effort: 1 = easy, 2 = medium, 3 = huge."
+              },
+              {
+                "name": "opt_filters",
+                "value": "",
+                "type": "query",
+                "description": "Limit responses based on action item properties. Only one value may be passed in this parameter (commas are not allowed). Possible values are: due_today, due_this_week, request_for_me, work_i_delegated, In_the_loop, late, risk"
+              },
+              {
+                "name": "ai_tags[]",
+                "value": "",
+                "type": "query",
+                "description": "An array of the numerical tag identifiers for Action Items."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of teams returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set."
+        },
+        {
+          "info": {
+            "name": "Create an action item.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/activity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new action item. Request parameters should be passed in the POST request or in the payload (as JSON). To create an action item with a comment, sub-action, or tag, it should be passed as raw JSON, along with the ai_id either as a request parameter or in the URL."
+        },
+        {
+          "info": {
+            "name": "List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/activity/:ai_id_path",
+            "params": [
+              {
+                "name": "ai_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical id assigned to each action item in WorkBoard."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set."
+        },
+        {
+          "info": {
+            "name": "Update an activity.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/activity/:ai_id_path",
+            "params": [
+              {
+                "name": "ai_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical id assigned to each action item in WorkBoard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing action item. Request parameters should be passed in the payload (as JSON). Note that the ai_id parameter is required.<br/>To update an action item with a comment, sub-action, or tag, it should be passed as raw JSON, along with the `ai_id` either as a request parameter or in the URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

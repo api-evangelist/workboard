@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Metric (Key Result) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metric (Key Result)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request metrics (key results) the user (token owner) has access to. Use a Data-Admin token to gain access to metrics across your organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric",
+            "params": [
+              {
+                "name": "metric_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each metric in WorkBoard. Include the metric_id parameter in the request to limit the response to a specific metric."
+              },
+              {
+                "name": "goal_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each goal in WorkBoard. Include this parameter to return metrics from the specified goal only."
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team."
+              },
+              {
+                "name": "include_metric_data",
+                "value": "",
+                "type": "query",
+                "description": "Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of team metrics returned per page when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 15."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the number of team metrics returned when used with `team_id`. Permitted values are integers greater than or equal to 0. The default value is 0."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "By default, when no additional parameters are passed, this returns the Metrics the token owner has ownership of. If the token owner doesn't own any Metrics, the results will be empty."
+        },
+        {
+          "info": {
+            "name": "GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              },
+              {
+                "name": "include_metric_data",
+                "value": "",
+                "type": "query",
+                "description": "Include this parameter to indicate whether to include metric data for charts in the response. This will also include any metric comments."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric."
+        },
+        {
+          "info": {
+            "name": "Update metric information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              },
+              {
+                "name": "force_update",
+                "value": "",
+                "type": "query",
+                "description": "Set to `yes` to force the update through. This allows updating closed metrics, metrics on closed objectives, metrics on objectives that have passed their target date, and applying updates to previous data points via `update_start_date` and `update_end_date` that fall outside the objective's time period."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update progress of an individual metric. If you do not include the `metric_data_id` parameter, the value will be applied to the most recent update date according to the metric update frequency set in WorkBoard."
+        },
+        {
+          "info": {
+            "name": "Update the confidence score (RAG) of a metric (key result)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/confidence",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the confidence score and comment on a metric. The confidence_score values map to: 0 = No Rating, 1 = Low, 2 = Medium, 3 = High.\n\nThis would appear as a separate confidence update in the Metric history and not a progress update with a confidence update.\n\n**Note:** The metric must be in an active state. Attempting to update confidence on a deleted metric will result in a 500 error with the message \"deleted_metric\"."
+        },
+        {
+          "info": {
+            "name": "Returns all tags mapped to the given metric in the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all tags mapped to the given metric in the system."
+        },
+        {
+          "info": {
+            "name": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered."
+        },
+        {
+          "info": {
+            "name": "Delete given tag lists mapped to the metric.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete given tag lists mapped to the metric."
+        },
+        {
+          "info": {
+            "name": "Returns all key result tags mapped to the given metrics in the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/krtags",
+            "params": [
+              {
+                "name": "metric_ids",
+                "value": "",
+                "type": "query",
+                "description": "The comma separated list of unique numerical ids assigned to each metric in WorkBoard."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all key result tags mapped to the given metrics in the system."
+        },
+        {
+          "info": {
+            "name": "Returns all metrics mapped to the given `tag_id`.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/tags",
+            "params": [
+              {
+                "name": "tag_id",
+                "value": "",
+                "type": "query",
+                "description": "A unique numerical id assigned to each tag, which returns all metrics mapped to that tag."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all metrics mapped to the given `tag_id`."
+        },
+        {
+          "info": {
+            "name": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

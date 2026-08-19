@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Datastream API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datastream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the details of datastreams to which the authenticated user has access.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/stream",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the details of datastreams to which the authenticated user has access."
+        },
+        {
+          "info": {
+            "name": "Create a datastream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/stream",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a datastream."
+        },
+        {
+          "info": {
+            "name": "Update the value(s) in your datastream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/stream/:stream_id",
+            "headers": [
+              {
+                "name": "X-Stream-Signature",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "stream_id",
+                "value": "",
+                "type": "path",
+                "description": "Obtained from within WorkBoard when you create a Datastream"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the value(s) in your datastream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

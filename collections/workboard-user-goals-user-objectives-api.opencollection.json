@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) User Goals (User Objectives) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Goals (User Objectives)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all of a user's goals.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/user/:user_id_path/goal",
+            "params": [
+              {
+                "name": "user_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier for a user in WorkBoard."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**This will return the user and a goal object with an individual object for each goal's details.**"
+        },
+        {
+          "info": {
+            "name": "Get a user's specific goal.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/user/:user_id_path/goal/:goal_id_path",
+            "params": [
+              {
+                "name": "user_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier for a user in WorkBoard."
+              },
+              {
+                "name": "goal_id_path",
+                "value": "",
+                "type": "path",
+                "description": "A unique numerical id assigned to each goal."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**This will return the user and a single goal object.**"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

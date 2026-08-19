@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Workstream API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workstream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the details of Team Workstreams to which the authenticated user (token user) has access.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/workstream",
+            "params": [
+              {
+                "name": "ws_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each Workstream in WorkBoard."
+              },
+              {
+                "name": "ws_owner",
+                "value": "",
+                "type": "query",
+                "description": "`Data-Admin` The numerical user id or email address of the user. The response will include all team Workstreams the user has access to."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "<strong>Note:</strong><br/>The use of a `Data-Admin` token will not return all Workstreams for all users.<br/>If no query string parameters are set, this will return Team Workstreams for Teams which the authenticated user (token user) is a member of. Personal Workstreams are not returned in the response."
+        },
+        {
+          "info": {
+            "name": "Create a Workstream for a team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/workstream",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users."
+        },
+        {
+          "info": {
+            "name": "Update a Workstream for a team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/workstream/:ws_id_path",
+            "params": [
+              {
+                "name": "ws_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical id assigned to each Workstream in WorkBoard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users."
+        },
+        {
+          "info": {
+            "name": "Delete a Workstream with all its action items. A successful request will return a 204 code.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/workstream/:ws_id_path",
+            "params": [
+              {
+                "name": "ws_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical id assigned to each Workstream in WorkBoard."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Workstream with all its action items. A successful request will return a 204 code."
+        },
+        {
+          "info": {
+            "name": "List details of all action items belonging to the specified Workstream.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/workstream/:ws_id_path/activity",
+            "params": [
+              {
+                "name": "ws_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical id assigned to each Workstream in WorkBoard."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List details of all action items belonging to the specified Workstream. <br/><strong>Note:</strong> This will only return Workstreams the user has access to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

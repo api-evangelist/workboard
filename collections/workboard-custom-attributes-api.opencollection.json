@@ -1,0 +1,524 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) custom-attributes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "custom-attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List custom field definitions for the org",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/definitions",
+            "params": [
+              {
+                "name": "objectType",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single object type. Omit to return definitions for every object type."
+              }
+            ]
+          },
+          "docs": "Returns every active custom field definition (id, name, fieldType, options for selects, objectType, and objectSubtype for work_item fields). Use this to discover attribute IDs and names before reading or writing values.\n\nOmit `objectType` to receive definitions across every object type in a single response."
+        },
+        {
+          "info": {
+            "name": "List every object that has a value for a custom attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/:attributeId/objects",
+            "params": [
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Page size (1-100). Defaults to 50."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of rows to skip. Defaults to 0."
+              }
+            ]
+          },
+          "docs": "Returns objects in the caller's org that have a value set for the given custom attribute, scoped to objects the caller can view.\n\n**Scope:**\n- **Data-Admin** callers (including superusers) see every object org-wide.\n- **Non-Data-Admin** callers on objective / key_result / work_item attributes see every object they can view per-row (owner, team membership, explicit grant, public-to-internal-people, etc., as enforced by wobo-okr for OKRs and by Activity::canViewActionItem for work items). This mat"
+        },
+        {
+          "info": {
+            "name": "Get custom attribute values for an Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/objectives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Objective (goal) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by ID"
+              },
+              {
+                "name": "attributeName",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by name (case-insensitive)"
+              }
+            ]
+          },
+          "docs": "Get custom attribute values for an Objective"
+        },
+        {
+          "info": {
+            "name": "Create (set) a custom attribute value on an Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/objectives/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Objective (goal) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create (set) a custom attribute value on an Objective"
+        },
+        {
+          "info": {
+            "name": "Update a custom attribute value on an Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/objectives/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Objective (goal) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a custom attribute value on an Objective"
+        },
+        {
+          "info": {
+            "name": "Clear a custom attribute value from an Objective",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/objectives/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Objective (goal) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ]
+          },
+          "docs": "Clear a custom attribute value from an Objective"
+        },
+        {
+          "info": {
+            "name": "Get custom attribute values for a Key Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/key-results/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Key Result (metric) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by ID"
+              },
+              {
+                "name": "attributeName",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by name (case-insensitive)"
+              }
+            ]
+          },
+          "docs": "Get custom attribute values for a Key Result"
+        },
+        {
+          "info": {
+            "name": "Create (set) a custom attribute value on a Key Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/key-results/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Key Result (metric) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create (set) a custom attribute value on a Key Result"
+        },
+        {
+          "info": {
+            "name": "Update a custom attribute value on a Key Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/key-results/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Key Result (metric) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a custom attribute value on a Key Result"
+        },
+        {
+          "info": {
+            "name": "Clear a custom attribute value from a Key Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/key-results/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Key Result (metric) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ]
+          },
+          "docs": "Clear a custom attribute value from a Key Result"
+        },
+        {
+          "info": {
+            "name": "Get custom attribute values for a Work Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/work-items/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Work item (workstream) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by ID"
+              },
+              {
+                "name": "attributeName",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by name (case-insensitive)"
+              }
+            ]
+          },
+          "docs": "Get custom attribute values for a Work Item"
+        },
+        {
+          "info": {
+            "name": "Create (set) a custom attribute value on a Work Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/work-items/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Work item (workstream) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create (set) a custom attribute value on a Work Item"
+        },
+        {
+          "info": {
+            "name": "Update a custom attribute value on a Work Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/work-items/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Work item (workstream) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a custom attribute value on a Work Item"
+        },
+        {
+          "info": {
+            "name": "Clear a custom attribute value from a Work Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/work-items/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Work item (workstream) ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ]
+          },
+          "docs": "Clear a custom attribute value from a Work Item"
+        },
+        {
+          "info": {
+            "name": "Get custom attribute values for a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by ID"
+              },
+              {
+                "name": "attributeName",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a single attribute by name (case-insensitive)"
+              }
+            ]
+          },
+          "docs": "Returns custom attribute values for a user. A regular token may only read its own user ID. A **Data Admin Token** (issued via WBAdmin) may read any user in the org."
+        },
+        {
+          "info": {
+            "name": "Create (set) a custom attribute value on a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/users/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requires a **Data Admin Token** to write attributes on behalf of another user."
+        },
+        {
+          "info": {
+            "name": "Update a custom attribute value on a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/users/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requires a **Data Admin Token** to update attributes on behalf of another user."
+        },
+        {
+          "info": {
+            "name": "Clear a custom attribute value from a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/attributes/users/:id/:attributeId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID"
+              },
+              {
+                "name": "attributeId",
+                "value": "",
+                "type": "path",
+                "description": "Custom attribute definition ID"
+              }
+            ]
+          },
+          "docs": "Requires a **Data Admin Token** to delete attributes on behalf of another user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

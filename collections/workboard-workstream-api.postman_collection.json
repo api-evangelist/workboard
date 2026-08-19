@@ -1,0 +1,846 @@
+{
+  "item": [
+    {
+      "id": "169c0680-931d-43f5-9cf9-a9840e02cd13",
+      "name": "Workstream",
+      "description": {
+        "content": "[WorkBoard's help center documentation on Workstreams.](https://support.workboard.com/hc/en-us/articles/115005163567-Workstreams#workstreams-0-0)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "daeeb3a2-e1e9-435c-a42b-e69f0728e008",
+          "name": "Get the details of Team Workstreams to which the authenticated user (token user) has access.",
+          "request": {
+            "name": "Get the details of Team Workstreams to which the authenticated user (token user) has access.",
+            "description": {
+              "content": "<strong>Note:</strong><br/>The use of a `Data-Admin` token will not return all Workstreams for all users.<br/>If no query string parameters are set, this will return Team Workstreams for Teams which the authenticated user (token user) is a member of. Personal Workstreams are not returned in the response.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workstream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ws_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each Workstream in WorkBoard."
+                },
+                {
+                  "disabled": false,
+                  "key": "ws_owner",
+                  "value": "<integer>",
+                  "description": "`Data-Admin` The numerical user id or email address of the user. The response will include all team Workstreams the user has access to."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4d37ba9-c5b1-4098-96ad-610a860a1706",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ws_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ws_owner",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3864,\n    \"workstream\": {\n      \"ws_id\": \"string\",\n      \"ws_name\": \"string\",\n      \"ws_objective\": \"string\",\n      \"ws_owner\": \"string\",\n      \"ws_lead\": \"string\",\n      \"ws_status\": \"string\",\n      \"ws_type\": \"string\",\n      \"ws_effort\": {\n        \"low_effort\": \"string\",\n        \"medium_effort\": \"string\",\n        \"large_effort\": \"string\"\n      },\n      \"ws_pace\": \"string\",\n      \"ws_health\": \"string\",\n      \"ws_priority\": \"string\",\n      \"ws_progress\": \"string\",\n      \"ws_start_date\": \"string\",\n      \"ws_target_date\": \"string\",\n      \"ws_completion_date\": \"string\",\n      \"ws_team_id\": \"string\",\n      \"ws_team_name\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "732169eb-0ca2-4fa0-a49e-80f74256e6a6",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ws_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ws_owner",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9eed259f-fcf1-44f7-aab8-6e2b58ef71dc",
+          "name": "Create a Workstream for a team.",
+          "request": {
+            "name": "Create a Workstream for a team.",
+            "description": {
+              "content": "Create a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workstream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ws_data\": [\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    },\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4293aa5e-b7bf-4ed6-a1c7-508c2d954713",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ws_data\": [\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    },\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 9310,\n    \"workstream\": [\n      [],\n      []\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6192972-f057-4540-8bd8-b48c715e03c2",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ws_data\": [\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    },\n    {\n      \"ws_name\": \"<string>\",\n      \"ws_objective\": \"<string>\",\n      \"team_id\": \"<string>\",\n      \"ws_owner\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10497d26-efce-4fee-a419-7382c11384d5",
+          "name": "Update a Workstream for a team.",
+          "request": {
+            "name": "Update a Workstream for a team.",
+            "description": {
+              "content": "Update a new Workstream for a team, including a descriptive narrative and Workstream owner. You have to manage or co-manage this team, including Data-Admin token users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workstream",
+                ":ws_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ws_id_path",
+                  "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ws_name\": \"<string>\",\n  \"ws_start_date\": \"<string>\",\n  \"ws_end_date\": \"<string>\",\n  \"ws_pace\": \"<string>\",\n  \"ws_health\": \"<string>\",\n  \"ws_priority\": \"<string>\",\n  \"ws_shared_with\": [\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7aac1216-f65e-4301-ac5d-00c1af032f0a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ws_name\": \"<string>\",\n  \"ws_start_date\": \"<string>\",\n  \"ws_end_date\": \"<string>\",\n  \"ws_pace\": \"<string>\",\n  \"ws_health\": \"<string>\",\n  \"ws_priority\": \"<string>\",\n  \"ws_shared_with\": [\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 9310,\n    \"workstream\": [\n      [],\n      []\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36650997-dfa7-4aca-b0fb-fbb0215e6732",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ws_name\": \"<string>\",\n  \"ws_start_date\": \"<string>\",\n  \"ws_end_date\": \"<string>\",\n  \"ws_pace\": \"<string>\",\n  \"ws_health\": \"<string>\",\n  \"ws_priority\": \"<string>\",\n  \"ws_shared_with\": [\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"ws_access\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9243f582-3dd1-42e5-baa6-a2dd7172766e",
+          "name": "Delete a Workstream with all its action items. A successful request will return a 204 code.",
+          "request": {
+            "name": "Delete a Workstream with all its action items. A successful request will return a 204 code.",
+            "description": {
+              "content": "Delete a Workstream with all its action items. A successful request will return a 204 code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workstream",
+                ":ws_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ws_id_path",
+                  "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a688578-b29f-40a9-98ef-2784ef618547",
+              "name": "Success returns a 204 header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eff9b8eb-331a-474e-bdbb-0bb1c1269480",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aff9ec67-c5d6-4b46-bc2d-74786bb2391e",
+          "name": "List details of all action items belonging to the specified Workstream.",
+          "request": {
+            "name": "List details of all action items belonging to the specified Workstream.",
+            "description": {
+              "content": "List details of all action items belonging to the specified Workstream. <br/><strong>Note:</strong> This will only return Workstreams the user has access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "workstream",
+                ":ws_id_path",
+                "activity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "ws_id_path",
+                  "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66135b55-3ed6-4cd0-9db8-1965021db5ee",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 6159,\n    \"workstream\": {\n      \"ws_id\": \"string\",\n      \"ws_name\": \"string\",\n      \"ws_objective\": \"string\",\n      \"ws_owner\": \"string\",\n      \"ws_lead\": \"string\",\n      \"ws_status\": \"string\",\n      \"ws_type\": \"string\",\n      \"ws_effort\": {\n        \"low_effort\": \"string\",\n        \"medium_effort\": \"string\",\n        \"large_effort\": \"string\"\n      },\n      \"ws_pace\": \"string\",\n      \"ws_health\": \"string\",\n      \"ws_priority\": \"string\",\n      \"ws_progress\": \"string\",\n      \"ws_start_date\": \"string\",\n      \"ws_target_date\": \"string\",\n      \"ws_completion_date\": \"string\",\n      \"ws_team_id\": \"string\",\n      \"ws_team_name\": \"string\",\n      \"ws_activity\": {\n        \"activity\": [\n          {\n            \"ai_id\": \"string\",\n            \"ai_description\": \"string\",\n            \"ai_created_at\": \"string\",\n            \"ai_state\": \"string\",\n            \"ai_rating\": \"string\",\n            \"ai_priority\": \"string\",\n            \"ai_effort\": \"string\",\n            \"ai_files\": [\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              },\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              }\n            ],\n            \"ai_sub_actions\": [\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              },\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              }\n            ],\n            \"ai_comments\": [\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              },\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              }\n            ],\n            \"ai_due_date\": \"string\",\n            \"ai_workstream\": \"string\",\n            \"ai_team\": \"string\",\n            \"ai_workstream_name\": \"string\",\n            \"ai_loop_members\": [\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              },\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              }\n            ],\n            \"ai_tags\": \"string\",\n            \"ai_due_before\": \"string\",\n            \"ai_owner\": \"string\",\n            \"ai_created_by\": \"string\",\n            \"ai_url\": \"string\",\n            \"ai_completed_at\": \"string\"\n          },\n          {\n            \"ai_id\": \"string\",\n            \"ai_description\": \"string\",\n            \"ai_created_at\": \"string\",\n            \"ai_state\": \"string\",\n            \"ai_rating\": \"string\",\n            \"ai_priority\": \"string\",\n            \"ai_effort\": \"string\",\n            \"ai_files\": [\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              },\n              {\n                \"file_id\": \"string\",\n                \"file_name\": \"string\",\n                \"file_url\": \"string\",\n                \"file_owner\": \"string\"\n              }\n            ],\n            \"ai_sub_actions\": [\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              },\n              {\n                \"sub_ai_id\": \"string\",\n                \"sub_ai_description\": \"string\",\n                \"sub_ai_owner\": \"string\"\n              }\n            ],\n            \"ai_comments\": [\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              },\n              {\n                \"comment_id\": \"string\",\n                \"comment\": \"string\",\n                \"comment_owner\": \"string\",\n                \"comment_timestamp\": \"string\"\n              }\n            ],\n            \"ai_due_date\": \"string\",\n            \"ai_workstream\": \"string\",\n            \"ai_team\": \"string\",\n            \"ai_workstream_name\": \"string\",\n            \"ai_loop_members\": [\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              },\n              {\n                \"user_id\": \"string\",\n                \"user_email\": \"string\"\n              }\n            ],\n            \"ai_tags\": \"string\",\n            \"ai_due_before\": \"string\",\n            \"ai_owner\": \"string\",\n            \"ai_created_by\": \"string\",\n            \"ai_url\": \"string\",\n            \"ai_completed_at\": \"string\"\n          }\n        ],\n        \"activity_count\": 610\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feca47de-9bbf-4702-a9e0-2c361fa2e7de",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workstream",
+                    ":ws_id_path",
+                    "activity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "ws_id_path",
+                      "description": "(Required) The unique numerical id assigned to each Workstream in WorkBoard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "73a0d3cf-f152-4f9b-9b81-1b1e201e8793",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Workstream API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

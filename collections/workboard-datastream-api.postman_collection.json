@@ -1,0 +1,510 @@
+{
+  "item": [
+    {
+      "id": "01966039-55c5-4e65-bf0e-ba7d8d668dcd",
+      "name": "Datastream",
+      "description": {
+        "content": "[WorkBoard's help center documentation on Datastreams.](https://support.workboard.com/hc/en-us/articles/360006666652-Pushing-Business-Data-into-Workboard-with-Data-Streams#pushing-business-data-into-workboard-with-data-streams-0-0)",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3d815f3-5d67-428e-b089-6961e4303dd2",
+          "name": "Get the details of datastreams to which the authenticated user has access.",
+          "request": {
+            "name": "Get the details of datastreams to which the authenticated user has access.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81ae6e56-41d1-4d65-be38-695d2e8beb98",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 5201,\n    \"stream\": [\n      {\n        \"stream_id\": \"string\",\n        \"stream_private_key\": \"string\",\n        \"stream_name\": \"string\",\n        \"stream_frequency\": \"string\",\n        \"stream_category\": \"string\",\n        \"stream_data_type\": \"string\",\n        \"stream_description\": \"string\",\n        \"stream_active\": \"string\",\n        \"stream_connector_id\": \"string\",\n        \"stream_data_last_updated\": \"string\",\n        \"stream_last_data_value\": \"string\"\n      },\n      {\n        \"stream_id\": \"string\",\n        \"stream_private_key\": \"string\",\n        \"stream_name\": \"string\",\n        \"stream_frequency\": \"string\",\n        \"stream_category\": \"string\",\n        \"stream_data_type\": \"string\",\n        \"stream_description\": \"string\",\n        \"stream_active\": \"string\",\n        \"stream_connector_id\": \"string\",\n        \"stream_data_last_updated\": \"string\",\n        \"stream_last_data_value\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71a947f4-ba83-4359-ab53-3fb020a20ca0",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40d61073-0d1b-46f8-8e30-f7ddc533f699",
+          "name": "Create a datastream.",
+          "request": {
+            "name": "Create a datastream.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"stream_name\": \"<string>\",\n  \"stream_description\": \"<string>\",\n  \"stream_data_type\": \"<string>\",\n  \"stream_frequency\": \"<string>\",\n  \"stream_category\": \"<string>\",\n  \"stream_permission\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b7c0c36-feec-43ac-9e31-95e740fe117d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stream_name\": \"<string>\",\n  \"stream_description\": \"<string>\",\n  \"stream_data_type\": \"<string>\",\n  \"stream_frequency\": \"<string>\",\n  \"stream_category\": \"<string>\",\n  \"stream_permission\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 535,\n    \"stream\": {\n      \"stream_id\": \"string\",\n      \"stream_private_key\": \"string\",\n      \"stream_name\": \"string\",\n      \"stream_frequency\": \"string\",\n      \"stream_category\": \"string\",\n      \"stream_data_type\": \"string\",\n      \"stream_description\": \"string\",\n      \"stream_active\": \"string\",\n      \"stream_connector_id\": \"string\",\n      \"stream_data_last_updated\": \"string\",\n      \"stream_last_data_value\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab7e1100-64c0-4552-89f8-66712a996ecf",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"stream_name\": \"<string>\",\n  \"stream_description\": \"<string>\",\n  \"stream_data_type\": \"<string>\",\n  \"stream_frequency\": \"<string>\",\n  \"stream_category\": \"<string>\",\n  \"stream_permission\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c00c6dac-4752-4a91-81fc-95e4701121ac",
+          "name": "Update the value(s) in your datastream.",
+          "request": {
+            "name": "Update the value(s) in your datastream.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stream",
+                ":stream_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "stream_id",
+                  "description": "(Required) Obtained from within WorkBoard when you create a Datastream"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Obtained from within WorkBoard when you create a Datastream",
+                "key": "X-Stream-Signature",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"stream\": {\n      \"connector\": {\n        \"connector_data\": {\n          \"value\": \"<string>\",\n          \"date\": \"<string>\"\n        },\n        \"connector_id\": \"<string>\",\n        \"connector_attributes\": {\n          \"source\": \"<string>\",\n          \"comment\": \"<string>\"\n        },\n        \"connector_property\": {\n          \"comment\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e49c36dd-1c2a-434f-a79e-6809409f8f06",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream",
+                    ":stream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) Obtained from within WorkBoard when you create a Datastream"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Obtained from within WorkBoard when you create a Datastream",
+                    "key": "X-Stream-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"stream\": {\n      \"connector\": {\n        \"connector_data\": {\n          \"value\": \"<string>\",\n          \"date\": \"<string>\"\n        },\n        \"connector_id\": \"<string>\",\n        \"connector_attributes\": {\n          \"source\": \"<string>\",\n          \"comment\": \"<string>\"\n        },\n        \"connector_property\": {\n          \"comment\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 5201,\n    \"stream\": [\n      {\n        \"stream_id\": \"string\",\n        \"stream_private_key\": \"string\",\n        \"stream_name\": \"string\",\n        \"stream_frequency\": \"string\",\n        \"stream_category\": \"string\",\n        \"stream_data_type\": \"string\",\n        \"stream_description\": \"string\",\n        \"stream_active\": \"string\",\n        \"stream_connector_id\": \"string\",\n        \"stream_data_last_updated\": \"string\",\n        \"stream_last_data_value\": \"string\"\n      },\n      {\n        \"stream_id\": \"string\",\n        \"stream_private_key\": \"string\",\n        \"stream_name\": \"string\",\n        \"stream_frequency\": \"string\",\n        \"stream_category\": \"string\",\n        \"stream_data_type\": \"string\",\n        \"stream_description\": \"string\",\n        \"stream_active\": \"string\",\n        \"stream_connector_id\": \"string\",\n        \"stream_data_last_updated\": \"string\",\n        \"stream_last_data_value\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4676131-a2be-40ba-8b26-dd7ee805cb59",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stream",
+                    ":stream_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "stream_id",
+                      "description": "(Required) Obtained from within WorkBoard when you create a Datastream"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Obtained from within WorkBoard when you create a Datastream",
+                    "key": "X-Stream-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"stream\": {\n      \"connector\": {\n        \"connector_data\": {\n          \"value\": \"<string>\",\n          \"date\": \"<string>\"\n        },\n        \"connector_id\": \"<string>\",\n        \"connector_attributes\": {\n          \"source\": \"<string>\",\n          \"comment\": \"<string>\"\n        },\n        \"connector_property\": {\n          \"comment\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "238e4e62-c295-408c-8e5c-fb42c686e5d0",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Datastream API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

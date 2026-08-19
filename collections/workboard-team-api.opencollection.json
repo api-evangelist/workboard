@@ -1,0 +1,227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Team API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "This behaves the same as the `team_id` parameter above. Do not use both `id` and `team_id`."
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "This will get the team by its `external_id`. Do not use in combination with `id` or `team_id`."
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Limit the teams returned based on whether the authenticated user is a team owner or member. Possible values: \"owner\", \"member\"."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "If the current authenticated user is an org data admin, pass this parameter with the value \"org_teams\" to return a dump of all organization teams."
+              },
+              {
+                "name": "created_at_range",
+                "value": "",
+                "type": "query",
+                "description": "Return teams with creation dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate"
+              },
+              {
+                "name": "updated_at_range",
+                "value": "",
+                "type": "query",
+                "description": "Return teams with last modified dates in the specified range. Dates must be formatted as UTC timestamps and comma-separated: startdate,enddate"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of teams returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team."
+        },
+        {
+          "info": {
+            "name": "Create a new functional team or working group, and add Workstreams and team members.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new functional team or working group, and add Workstreams and team members."
+        },
+        {
+          "info": {
+            "name": "Delete a team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "The unique numerical id assigned to each team in WorkBoard. If you do not include this parameter, the request will return all teams to which the authenticated user belongs."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**CAUTION**: Delete an entire team and all its Workstreams and action items. A successful request will return a 204 code. If you are deleting a functional team, the child teams will be deleted as well."
+        },
+        {
+          "info": {
+            "name": "Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team/:team_id_path",
+            "params": [
+              {
+                "name": "team_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier in WorkBoard for a team."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of."
+        },
+        {
+          "info": {
+            "name": "Update a team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team/:team_id_path",
+            "params": [
+              {
+                "name": "team_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier in WorkBoard for a team."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Change the name of a team, add new and existing users to the team roster, change a member's role on the team, remove users from the team, or add new Workstreams. If you are using a personal access token, you must be the manager of the team to use this request.<br/>Note: If you update a team with a new manager, the previous manager will be demoted to a co-manager."
+        },
+        {
+          "info": {
+            "name": "Get all Workstreams belonging to the specified team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team/:team_id_path/workstream",
+            "params": [
+              {
+                "name": "team_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier in WorkBoard for a team."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all Workstreams belonging to the specified team."
+        },
+        {
+          "info": {
+            "name": "List details of all action items belonging to the specified team.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/team/:team_id_path/activity",
+            "params": [
+              {
+                "name": "team_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique numerical identifier in WorkBoard for a team."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List details of all action items belonging to the specified team."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

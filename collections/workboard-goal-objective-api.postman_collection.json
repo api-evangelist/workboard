@@ -1,0 +1,1136 @@
+{
+  "item": [
+    {
+      "id": "7c347e9a-ca78-41b2-96b6-889ed9bff09a",
+      "name": "Goal (Objective)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "576f4302-f55e-4990-bb52-7a5d5739a38b",
+          "name": "Get Goals using parameters to filter results.",
+          "request": {
+            "name": "Get Goals using parameters to filter results.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "goal_owner_id",
+                  "value": "<integer>",
+                  "description": "Either the unique user id or email address belonging to the goal owner. Include this parameter to return all goals belonging to the specified owner. (Note, if both `goal_owner_id` and `goal_id` parameters are include in the request, `goal_owner_id` will be ignored)."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_id",
+                  "value": "<integer>",
+                  "description": "The unique numerical id assigned to each team in WorkBoard. Include this parameter to return metrics belonging to the specified team."
+                },
+                {
+                  "disabled": false,
+                  "key": "team_owner_id",
+                  "value": "<string>",
+                  "description": "Either the unique user id or email address belonging to the team owner. Include this parameter to return all goals belonging to the specified team owner. (Note, if both `team_owner_id` and `team_id` parameters are include in the request, `team_owner_id` will be ignored.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "goal_status",
+                  "value": "<integer>",
+                  "description": "The current state of the goal; permitted values are \"1\" (active) or \"2\" (closed). If you want both closed and active goals, then set `goal_status` to the comma separated values: \"1,2\""
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "This will return the `goal_custom_permission` object, which includes data related to any custom permissions."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_attributes",
+                  "value": "<string>",
+                  "description": "This will return the `custom_attributes` array when set to 1, which includes goals custom fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "15",
+                  "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5afa4b2f-f751-49d4-bcac-d6026c1b0a36",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "goal_owner_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_owner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "goal_status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 1150,\n    \"goal\": {\n      \"goal_id\": \"string\",\n      \"goal_name\": \"string\",\n      \"goal_narrative\": \"string\",\n      \"goal_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"goal_owner\": \"string\",\n      \"goal_create_at\": \"string\",\n      \"goal_modified_at\": \"string\",\n      \"goal_created_by\": \"string\",\n      \"goal_updated_by\": \"string\",\n      \"goal_start_date\": \"string\",\n      \"goal_target_date\": \"string\",\n      \"goal_progress\": \"string\",\n      \"goal_progress_color\": \"string\",\n      \"goal_status\": \"string\",\n      \"goal_permission\": \"string\",\n      \"goal_category\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"goal_workstreams\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"custom_attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        }\n      ],\n      \"goal_custom_permission\": {\n        \"goal_permission_team_ids\": \"string\"\n      },\n      \"goal_owner_full_name\": \"string\",\n      \"goal_team_id\": \"string\",\n      \"goal_team_name\": \"string\",\n      \"goal_metrics\": [\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        },\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        }\n      ],\n      \"goal_metrics_count\": \"string\",\n      \"goal_comments\": [\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        },\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        }\n      ],\n      \"goal_comments_count\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06c75c03-85ad-4a4f-b613-cf9acc8e2597",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "goal_owner_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "team_owner_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "goal_status",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "15"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9f05888-c418-45dc-b292-fa771ca79819",
+          "name": "Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.",
+          "request": {
+            "name": "Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.",
+            "description": {
+              "content": "Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"goals\": [\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6f2fcf74-8c16-4ed0-883e-44eb4e03aff2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"goals\": [\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 4671,\n    \"goal\": {\n      \"goals\": [\n        {\n          \"goal_id\": \"string\",\n          \"goal_name\": \"string\",\n          \"goal_narrative\": \"string\",\n          \"goal_type\": {\n            \"id\": 3266,\n            \"name\": \"string\"\n          },\n          \"goal_owner\": \"string\",\n          \"goal_create_at\": \"string\",\n          \"goal_modified_at\": \"string\",\n          \"goal_created_by\": \"string\",\n          \"goal_start_date\": \"string\",\n          \"goal_target_date\": \"string\",\n          \"goal_progress\": \"string\",\n          \"goal_status\": \"string\",\n          \"goal_permission\": \"string\",\n          \"goal_owner_full_name\": \"string\"\n        },\n        {\n          \"goal_id\": \"string\",\n          \"goal_name\": \"string\",\n          \"goal_narrative\": \"string\",\n          \"goal_type\": {\n            \"id\": 1796,\n            \"name\": \"string\"\n          },\n          \"goal_owner\": \"string\",\n          \"goal_create_at\": \"string\",\n          \"goal_modified_at\": \"string\",\n          \"goal_created_by\": \"string\",\n          \"goal_start_date\": \"string\",\n          \"goal_target_date\": \"string\",\n          \"goal_progress\": \"string\",\n          \"goal_status\": \"string\",\n          \"goal_permission\": \"string\",\n          \"goal_owner_full_name\": \"string\"\n        }\n      ],\n      \"error\": [\n        {\n          \"error\": \"string\",\n          \"for_row\": {}\n        },\n        {\n          \"error\": \"string\",\n          \"for_row\": {}\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cabf6551-5b65-440a-b196-a0bd89fac97b",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"goals\": [\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"goal_name\": \"<string>\",\n      \"goal_narrative\": \"<string>\",\n      \"goal_owner\": \"<string>\",\n      \"goal_type\": \"<string>\",\n      \"goal_start_date\": \"<string>\",\n      \"goal_target_date\": \"<string>\",\n      \"goal_permission\": \"<string>\",\n      \"goal_team\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_category\": [\n        {\n          \"id\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\"\n        }\n      ],\n      \"goal_metrics\": [\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        },\n        {\n          \"metric_name\": \"<string>\",\n          \"metric_owner\": \"<string>\",\n          \"metric_source_from\": \"<string>\",\n          \"metric_update_interval\": \"<string>\",\n          \"metric_counting_type\": \"<string>\",\n          \"metric_progress_type\": \"<string>\",\n          \"metric_initial_data\": \"<string>\",\n          \"metric_target\": \"<string>\",\n          \"metric_unit\": \"<string>\",\n          \"metric_permission\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11379440-f906-4ec6-9e7d-814f53ad6a6f",
+          "name": "Get Goals using parameters to filter results.",
+          "request": {
+            "name": "Get Goals using parameters to filter results.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "This will return the `goal_custom_permission` object, which includes data related to any custom permissions."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_attributes",
+                  "value": "<string>",
+                  "description": "This will return the `custom_attributes` array when set to 1, which includes goals custom fields."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "goal_id_path",
+                  "description": "(Required) Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87361b85-f196-4d92-b649-9758a0e1ce57",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 1150,\n    \"goal\": {\n      \"goal_id\": \"string\",\n      \"goal_name\": \"string\",\n      \"goal_narrative\": \"string\",\n      \"goal_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"goal_owner\": \"string\",\n      \"goal_create_at\": \"string\",\n      \"goal_modified_at\": \"string\",\n      \"goal_created_by\": \"string\",\n      \"goal_updated_by\": \"string\",\n      \"goal_start_date\": \"string\",\n      \"goal_target_date\": \"string\",\n      \"goal_progress\": \"string\",\n      \"goal_progress_color\": \"string\",\n      \"goal_status\": \"string\",\n      \"goal_permission\": \"string\",\n      \"goal_category\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"goal_workstreams\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"custom_attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        }\n      ],\n      \"goal_custom_permission\": {\n        \"goal_permission_team_ids\": \"string\"\n      },\n      \"goal_owner_full_name\": \"string\",\n      \"goal_team_id\": \"string\",\n      \"goal_team_name\": \"string\",\n      \"goal_metrics\": [\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        },\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        }\n      ],\n      \"goal_metrics_count\": \"string\",\n      \"goal_comments\": [\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        },\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        }\n      ],\n      \"goal_comments_count\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "277e63aa-5efb-4e52-9093-de49fddd7ccd",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) Optional. A unique numerical id assigned to each goal. Include this parameter to return attributes of the specified goal only; otherwise all goals will be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76fdccf5-b895-4c18-9948-a50b10a24f94",
+          "name": "List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.",
+          "request": {
+            "name": "List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.",
+            "description": {
+              "content": "List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id_path",
+                "metric",
+                ":metric_id_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "goal_id_path",
+                  "description": "(Required) A unique numerical id assigned to each goal."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "metric_id_path",
+                  "description": "(Required) The unique metric_id to each metric."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f7069691-ff68-44c4-a83f-52905445a247",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 1150,\n    \"goal\": {\n      \"goal_id\": \"string\",\n      \"goal_name\": \"string\",\n      \"goal_narrative\": \"string\",\n      \"goal_type\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"goal_owner\": \"string\",\n      \"goal_create_at\": \"string\",\n      \"goal_modified_at\": \"string\",\n      \"goal_created_by\": \"string\",\n      \"goal_updated_by\": \"string\",\n      \"goal_start_date\": \"string\",\n      \"goal_target_date\": \"string\",\n      \"goal_progress\": \"string\",\n      \"goal_progress_color\": \"string\",\n      \"goal_status\": \"string\",\n      \"goal_permission\": \"string\",\n      \"goal_category\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"goal_workstreams\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\"\n        }\n      ],\n      \"custom_attributes\": [\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"value\": \"string\",\n          \"status\": \"string\"\n        }\n      ],\n      \"goal_custom_permission\": {\n        \"goal_permission_team_ids\": \"string\"\n      },\n      \"goal_owner_full_name\": \"string\",\n      \"goal_team_id\": \"string\",\n      \"goal_team_name\": \"string\",\n      \"goal_metrics\": [\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        },\n        {\n          \"metric_id\": \"string\",\n          \"metric_owner\": \"string\",\n          \"metric_real_owner\": \"string\",\n          \"metric_name\": \"string\",\n          \"metric_update_interval\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_update_interval_day\": \"string\",\n          \"metric_unit\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_progress_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_counting_type\": {\n            \"id\": \"string\",\n            \"name\": \"string\"\n          },\n          \"metric_initial_data\": \"string\",\n          \"metric_target\": \"string\",\n          \"metric_achieve_target\": \"string\",\n          \"metric_create_at\": \"string\",\n          \"metric_modified_at\": \"string\",\n          \"metric_created_by\": \"string\",\n          \"metric_updated_by\": \"string\",\n          \"metric_progress\": \"string\",\n          \"metric_progress_color\": \"string\",\n          \"metric_last_update\": \"string\",\n          \"metric_next_update\": \"string\",\n          \"metric_source_from\": \"string\",\n          \"metric_source_from_id\": \"string\",\n          \"last_metric_comment\": {\n            \"comment\": \"string\",\n            \"comment_last_updated\": \"string\"\n          }\n        }\n      ],\n      \"goal_metrics_count\": \"string\",\n      \"goal_comments\": [\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        },\n        {\n          \"comment_id\": \"string\",\n          \"comment_text\": \"string\",\n          \"comment_owner\": \"string\",\n          \"comment_owner_name\": \"string\",\n          \"comment_added_at\": \"string\",\n          \"comment_last_updated\": \"string\"\n        }\n      ],\n      \"goal_comments_count\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "083835ca-a6fa-4c59-8372-1afed2d87d44",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "metric",
+                    ":metric_id_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "metric_id_path",
+                      "description": "(Required) The unique metric_id to each metric."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20b1d8f5-2be6-4ad8-a16a-7ce572357c26",
+          "name": "Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.",
+          "request": {
+            "name": "Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.",
+            "description": {
+              "content": "List the associated `strategies` and `pillars` to which the `goal_id_path` is related. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id_path",
+                "pillars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "goal_id_path",
+                  "description": "(Required) A unique numerical id assigned to each goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e423b5fa-4587-4a95-8b2f-0934a1e2ffde",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "pillars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 456,\n    \"strategies\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"endDate\": \"1976-07-05\",\n        \"startDate\": \"1978-08-03\",\n        \"narrative\": \"string\",\n        \"strategyType\": \"string\",\n        \"timeHorizon\": \"string\",\n        \"iterationCadence\": \"string\",\n        \"pillars\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"narrative\": \"string\",\n            \"objectives\": [\n              \"string\",\n              \"string\"\n            ],\n            \"outcomes\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1955-03-19\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1999-12-01\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              }\n            ],\n            \"assumptions\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              }\n            ],\n            \"investmentPlans\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              }\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"narrative\": \"string\",\n            \"objectives\": [\n              \"string\",\n              \"string\"\n            ],\n            \"outcomes\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"2022-08-21\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1960-04-24\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              }\n            ],\n            \"assumptions\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              }\n            ],\n            \"investmentPlans\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"endDate\": \"1996-05-08\",\n        \"startDate\": \"2012-11-27\",\n        \"narrative\": \"string\",\n        \"strategyType\": \"string\",\n        \"timeHorizon\": \"string\",\n        \"iterationCadence\": \"string\",\n        \"pillars\": [\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"narrative\": \"string\",\n            \"objectives\": [\n              \"string\",\n              \"string\"\n            ],\n            \"outcomes\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1991-01-25\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1973-04-27\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              }\n            ],\n            \"assumptions\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              }\n            ],\n            \"investmentPlans\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              }\n            ]\n          },\n          {\n            \"id\": \"string\",\n            \"name\": \"string\",\n            \"narrative\": \"string\",\n            \"objectives\": [\n              \"string\",\n              \"string\"\n            ],\n            \"outcomes\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1993-03-31\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"endDate\": \"1958-11-13\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"unitOfMeasurement\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"automatedCalcType\": \"string\"\n              }\n            ],\n            \"assumptions\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"status\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ]\n              }\n            ],\n            \"investmentPlans\": [\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              },\n              {\n                \"id\": \"string\",\n                \"narrative\": \"string\",\n                \"startValue\": \"string\",\n                \"targetValue\": \"string\",\n                \"currentValue\": \"string\",\n                \"description\": \"string\",\n                \"keyResults\": [\n                  \"string\",\n                  \"string\"\n                ],\n                \"unitOfMeasurement\": \"string\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5687fd67-d5c0-4443-af00-4cde6e3d2c4a",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "pillars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "410b836f-d1cb-444a-b9ce-fa5a9e75ebfe",
+          "name": "List aligned and dependent goals associated with the goal specified by the goal_id parameter. Note, the logged in user must have Data-Admin permission in order to view the goal alignment.",
+          "request": {
+            "name": "List aligned and dependent goals associated with the goal specified by the goal_id parameter. Note, the logged in user must have Data-Admin permission in order to view the goal alignment.",
+            "description": {
+              "content": "List aligned and dependent goals associated with the goal specified by the `goal_id` parameter. Note, the logged in user must have `Data-Admin` permission in order to view the goal alignment. If `goal_id` is aligned to another goal, the first goal returned will be the goal that `goal_id` is aligned to. If `goal_id` is not aligned and has goals aligned to it, `goal_id` will be the first goal. If `goal_id` has no aligned goals, then `goal_id` goal will be returned without any `goal_alignments`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "goal",
+                ":goal_id_path",
+                "alignment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "goal_id_path",
+                  "description": "(Required) A unique numerical id assigned to each goal."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f184b976-dfe5-4cd9-b0dd-76962751348b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"message\": \"string\",\n  \"data\": {\n    \"totalCount\": 3489,\n    \"alignment\": [\n      {\n        \"goal_id\": \"string\",\n        \"goal_name\": \"string\",\n        \"goal_owner\": \"string\",\n        \"goal_team_name\": \"string\",\n        \"goal_target_date\": \"string\",\n        \"goal_progress\": \"string\",\n        \"goal_progress_color\": \"string\",\n        \"goal_alignments\": [\n          {\n            \"goal_id\": \"string\",\n            \"goal_name\": \"string\",\n            \"goal_owner\": \"string\",\n            \"goal_team_name\": \"string\",\n            \"goal_target_date\": \"string\",\n            \"goal_progress\": \"string\",\n            \"goal_progress_color\": \"string\",\n            \"goal_alignments\": [\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              },\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              }\n            ]\n          },\n          {\n            \"goal_id\": \"string\",\n            \"goal_name\": \"string\",\n            \"goal_owner\": \"string\",\n            \"goal_team_name\": \"string\",\n            \"goal_target_date\": \"string\",\n            \"goal_progress\": \"string\",\n            \"goal_progress_color\": \"string\",\n            \"goal_alignments\": [\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              },\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"goal_id\": \"string\",\n        \"goal_name\": \"string\",\n        \"goal_owner\": \"string\",\n        \"goal_team_name\": \"string\",\n        \"goal_target_date\": \"string\",\n        \"goal_progress\": \"string\",\n        \"goal_progress_color\": \"string\",\n        \"goal_alignments\": [\n          {\n            \"goal_id\": \"string\",\n            \"goal_name\": \"string\",\n            \"goal_owner\": \"string\",\n            \"goal_team_name\": \"string\",\n            \"goal_target_date\": \"string\",\n            \"goal_progress\": \"string\",\n            \"goal_progress_color\": \"string\",\n            \"goal_alignments\": [\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              },\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              }\n            ]\n          },\n          {\n            \"goal_id\": \"string\",\n            \"goal_name\": \"string\",\n            \"goal_owner\": \"string\",\n            \"goal_team_name\": \"string\",\n            \"goal_target_date\": \"string\",\n            \"goal_progress\": \"string\",\n            \"goal_progress_color\": \"string\",\n            \"goal_alignments\": [\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              },\n              {\n                \"goal_id\": \"string\",\n                \"goal_name\": \"string\",\n                \"goal_owner\": \"string\",\n                \"goal_team_name\": \"string\",\n                \"goal_target_date\": \"string\",\n                \"goal_progress\": \"string\",\n                \"goal_progress_color\": \"string\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1250527-bf65-4a37-826e-298748e41559",
+              "name": "Unauthorized / Invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "goal",
+                    ":goal_id_path",
+                    "alignment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "goal_id_path",
+                      "description": "(Required) A unique numerical id assigned to each goal."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"error\": \"\",\n  \"error_description\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://demo.biz.wobo-int.com/wb/apis",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "37e6ab53-f87f-47cd-bf1a-0e0bc1ab4276",
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Goal (Objective) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>",
+      "type": "text/plain"
+    }
+  }
+}

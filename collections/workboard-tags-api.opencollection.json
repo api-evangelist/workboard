@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Tags API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns all tags mapped to the given metric in the system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all tags mapped to the given metric in the system."
+        },
+        {
+          "info": {
+            "name": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered."
+        },
+        {
+          "info": {
+            "name": "Delete given tag lists mapped to the metric.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/:metric_id_path/tags",
+            "params": [
+              {
+                "name": "metric_id_path",
+                "value": "",
+                "type": "path",
+                "description": "The unique metric_id to each metric."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete given tag lists mapped to the metric."
+        },
+        {
+          "info": {
+            "name": "Returns all metrics mapped to the given `tag_id`.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/tags",
+            "params": [
+              {
+                "name": "tag_id",
+                "value": "",
+                "type": "query",
+                "description": "A unique numerical id assigned to each tag, which returns all metrics mapped to that tag."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all metrics mapped to the given `tag_id`."
+        },
+        {
+          "info": {
+            "name": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/metric/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered."
+        },
+        {
+          "info": {
+            "name": "Returns all key result tags in the system and allows for filtering tags by parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/tags",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Optional. A unique numerical id assigned to each tag. Include this parameter to return attributes of the specified tag only; otherwise all tags will be returned."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "1 for Active, 2 archived. Include the status parameter in the request to limit the response of tags with a particular status."
+              },
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "A numeric value for filtering tags available in the specific Tag group."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of tags returned per page. Permitted values are integers greater than or equal to 0. The default value is 15."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Specify the starting point for the results returned. Permitted values are integers greater than or equal to 0. The default value is 0."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all key result tags in the system and allows for filtering tags by parameters."
+        },
+        {
+          "info": {
+            "name": "Returns the specified key result tag.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/tags/:tag_id_path",
+            "params": [
+              {
+                "name": "tag_id_path",
+                "value": "",
+                "type": "path",
+                "description": "A unique numerical id assigned to each tag. Include this parameter to return attributes of the specified tag only; otherwise all tags will be returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the specified key result tag."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

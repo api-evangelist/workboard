@@ -3,193 +3,196 @@ method: searched
 status: published
 source: https://support.myworkboard.com/en/collections/19633939-mcp-server
 docs:
-  - https://support.myworkboard.com/en/articles/15080469-workboard-mcp-integration-overview
-  - https://support.myworkboard.com/en/articles/15080137-connect-an-ai-client-to-workboard-mcp
-  - https://support.myworkboard.com/en/articles/15080146-workboard-mcp-available-tools
+- https://support.myworkboard.com/en/articles/15080469-workboard-mcp-integration-overview
+- https://support.myworkboard.com/en/articles/15080137-connect-an-ai-client-to-workboard-mcp
+- https://support.myworkboard.com/en/articles/15080146-workboard-mcp-available-tools
 server:
   name: workboard
   transport: http
   url: https://www.myworkboard.com/wb/mcp
   authentication:
-    - type: oauth2
-      notes: >-
-        Register an app in WorkBoard to obtain client_id/client_secret; user
-        authenticates via browser login and grants scope permissions. Claude
-        Desktop redirect URI: https://claude.ai/api/mcp/auth_callback.
-    - type: bearer
-      notes: >-
-        Personal Access Token generated from WorkBoard Settings -> Custom
-        Integrations -> App tab; shown once, passed as
-        "Authorization: Bearer <token>"; cannot be reused for other
-        WorkBoard APIs. Tokens are verified and discarded per request.
-  clients_documented: [Claude Desktop, ChatGPT, Cursor, Workato, custom tools]
+  - type: oauth2
+    notes: 'Register an app in WorkBoard to obtain client_id/client_secret; user authenticates via browser
+      login and grants scope permissions. Claude Desktop redirect URI: https://claude.ai/api/mcp/auth_callback.'
+  - type: bearer
+    notes: 'Personal Access Token generated from WorkBoard Settings -> Custom Integrations -> App tab;
+      shown once, passed as "Authorization: Bearer <token>"; cannot be reused for other WorkBoard APIs.
+      Tokens are verified and discarded per request.'
+  clients_documented:
+  - Claude Desktop
+  - ChatGPT
+  - Cursor
+  - Workato
+  - custom tools
   security: MCP access is scoped to each user's authorization.
 tools:
-  # Users & Organization
-  - name: get_current_user
-    description: Returns your WorkBoard profile and account info
-  - name: get_user_context
-    description: Returns a user's profile, org info, and settings
-  - name: get_my_direct_reports
-    description: Returns your direct and dotted-line reports
-  - name: get_org_structure
-    description: Returns the full organization hierarchy and reporting structure
-  - name: get_managed_teams
-    description: Returns teams you manage or co-manage
-  - name: search
-    description: Unified search across users, okrs, action_items, workstreams, and biz_reviews
-  - name: get_current_date
-    description: Provides today's date in user's timezone for relative time expressions
-  # Objectives & Key Results
-  - name: get_team_objectives
-    description: Returns all active objectives for a team
-  - name: get_team_objectives_filtered
-    description: Returns team objectives with filters - by RAG status, date range, closed objectives, or category
-  - name: get_objective_key_results
-    description: Returns all key results for an objective
-  - name: get_key_result_details
-    description: Returns detailed info for a KR including current and target values
-  - name: get_key_result_graph_data
-    description: Returns historical progress data for a KR
-  - name: get_objective_alignment
-    description: Displays alignment mapping for objectives
-  - name: get_object_relations
-    description: Returns all relationships for a key result or objective
-  - name: kr_relationship_map
-    description: Returns the alignment map for a key result
-  - name: get_objective_financials
-    description: Returns budget, spend, and forecast data linked to an objective
-  - name: update_key_result
-    description: Updates a key result's latest or selected value, confidence and narrative
-  - name: add_objective_comment
-    description: Adds a comment to an objective or one of its key results
-  - name: get_objective_comments
-    description: Returns comments on an objective or key result
-  # Scorecards
-  - name: search_scorecards
-    description: Searches scorecards by name or owner
-  - name: scorecard_get
-    description: Retrieves a Scorecard with its metadata and access lists
-  - name: scorecard_list_columns
-    description: Lists the columns on a Scorecard
-  - name: scorecard_create_columns
-    description: Creates one or more new columns on a Scorecard
-  - name: scorecard_remove_column
-    description: Removes a single column from a Scorecard
-  - name: scorecard_rename
-    description: Changes the Scorecard's display name
-  - name: scorecard_get_csv
-    description: Exports a Scorecard's full content as a CSV table
-  - name: scorecard_create_automation
-    description: Creates a Scorecard pre-populated from a team or result-owner filter
-  - name: scorecard_get_automation_teams
-    description: Lists the teams whose Key Results / KPIs feed the Scorecard's auto-populated rows
-  - name: scorecard_set_automation_teams
-    description: Replaces the full set of teams driving a Scorecard's automation
-  - name: scorecard_set_org_shared
-    description: Sets whether a Scorecard is shared with the whole organization
-  - name: scorecard_add_to_collections
-    description: Adds scorecards to collections (additive operation)
-  - name: scorecard_find_collections
-    description: Finds collections by name
-  - name: scorecard_get_columns_catalog
-    description: Retrieves the catalogue of available Scorecard column types
-  # KPIs
-  - name: get_my_kpis
-    description: Returns all active KPIs where you are the owner or co-owner
-  - name: create_kpi
-    description: Creates a new KPI (metric)
-  - name: list_kpis
-    description: Lists active KPIs, filterable by owner/team/cadence
-  - name: get_kpi_details
-    description: Full config, ownership, monitoring bounds, and current value for one KPI
-  - name: get_kpi_data
-    description: Returns the logged data points (measurements) for a KPI
-  - name: get_latest_kpi_data
-    description: Most recent data point within the KPI's current cadence window
-  - name: get_kpi_trend
-    description: Aggregated trend for a KPI over a date range
-  - name: get_team_kpis
-    description: All active KPIs a given team is responsible for
-  - name: update_kpi
-    description: Update fields on an existing KPI (name, description, owner, measurement type, cadence)
-  - name: log_kpi_data
-    description: Logs a new value against a KPI
-  - name: get_kpi_comments
-    description: Returns comments on a KPI
-  - name: add_kpi_comment
-    description: Adds a comment to a KPI
-  - name: update_kpi_comment
-    description: Edits an existing KPI comment
-  # Actions & Workstreams
-  - name: get_workstream_action_items
-    description: Returns all actions for one or more workstreams
-  - name: get_action_item_comments
-    description: Returns comments on a specific action
-  - name: create_activity
-    description: Creates a new action with optional owner, due date, priority, and workstream
-  - name: update_activity
-    description: Updates fields on an existing action (state, owner, due date, priority, rating)
-  - name: add_activity_comment
-    description: Adds a comment to an action
-  - name: add_activity_links
-    description: Attaches one or more URLs to an action
-  - name: create_workstream
-    description: Creates a new workstream for a team
-  # Business Reviews
-  - name: rbr_create_biz_review
-    description: Creates a new Biz Review
-  - name: rbr_get_biz_review
-    description: Retrieves a Biz Review with its metadata
-  - name: rbr_update_biz_review
-    description: Updates fields on an existing Biz Review (name, description, etc.)
-  - name: rbr_set_biz_review_collections
-    description: Sets the Collections a Biz Review belongs to
-  - name: rbr_create_kr_tray
-    description: Creates a Key Results tray on a Biz Review
-  - name: rbr_get_kr_tray
-    description: Retrieves a Key Results tray with its attached Key Results
-  - name: rbr_update_kr_tray
-    description: Updates fields on an existing KR tray
-  - name: rbr_add_kr_tray_items
-    description: Appends Key Results to an existing KR tray
-  - name: rbr_create_objective_tray
-    description: Creates an Objective tray on a Biz Review
-  - name: rbr_get_objective_tray
-    description: Retrieves an Objective tray with its attached Objectives
-  - name: rbr_update_objective_tray
-    description: Updates fields on an existing Objective tray
-  - name: rbr_add_objective_tray_items
-    description: Appends Objectives to an existing Objective tray
-  - name: rbr_create_text_tray
-    description: Creates a Text tray on a Biz Review
-  - name: rbr_get_text_tray
-    description: Retrieves a Text tray with its HTML body
-  - name: rbr_update_text_tray
-    description: Updates fields on an existing Text tray
-  - name: rbr_create_kpi_tray
-    description: Creates a KPIs tray on a Biz Review
-  - name: rbr_get_kpi_tray
-    description: Retrieves a KPIs tray with its attached KPIs
-  - name: rbr_update_kpi_tray
-    description: Updates fields on an existing KPI tray
-  - name: rbr_add_kpi_tray_items
-    description: Appends KPIs to an existing KPI tray
-  - name: rbr_remove_kpi_tray_items
-    description: Detaches specific KPIs from an existing KPI tray
-  # Meetings
-  - name: get_meeting
-    description: Returns a single meeting's details, attendees, and agenda topics
-  - name: add_meeting_topic
-    description: Adds a topic to a meeting's agenda
-  - name: update_meeting_topic
-    description: Edits an existing meeting topic's text in place
-  - name: add_meeting_takeaway
-    description: Adds a takeaway to a meeting
-  - name: update_meeting_takeaway
-    description: Edits an existing meeting takeaway's text in place
-  # Utilities
-  - name: get_wobo_url
-    description: Builds a direct WorkBoard link to any entity (objective, KR, team, action, workstream, etc.)
-  - name: add_to_favorites
-    description: Adds an object to the current user's favourites (objectives, workstreams, teams, meetings, action items, business reviews)
+- name: get_current_user
+  description: Returns your WorkBoard profile and account info
+- name: get_user_context
+  description: Returns a user's profile, org info, and settings
+- name: get_my_direct_reports
+  description: Returns your direct and dotted-line reports
+- name: get_org_structure
+  description: Returns the full organization hierarchy and reporting structure
+- name: get_managed_teams
+  description: Returns teams you manage or co-manage
+- name: search
+  description: Unified search across users, okrs, action_items, workstreams, and biz_reviews
+- name: get_current_date
+  description: Provides today's date in user's timezone for relative time expressions
+- name: get_team_objectives
+  description: Returns all active objectives for a team
+- name: get_team_objectives_filtered
+  description: Returns team objectives with filters - by RAG status, date range, closed objectives, or
+    category
+- name: get_objective_key_results
+  description: Returns all key results for an objective
+- name: get_key_result_details
+  description: Returns detailed info for a KR including current and target values
+- name: get_key_result_graph_data
+  description: Returns historical progress data for a KR
+- name: get_objective_alignment
+  description: Displays alignment mapping for objectives
+- name: get_object_relations
+  description: Returns all relationships for a key result or objective
+- name: kr_relationship_map
+  description: Returns the alignment map for a key result
+- name: get_objective_financials
+  description: Returns budget, spend, and forecast data linked to an objective
+- name: update_key_result
+  description: Updates a key result's latest or selected value, confidence and narrative
+- name: add_objective_comment
+  description: Adds a comment to an objective or one of its key results
+- name: get_objective_comments
+  description: Returns comments on an objective or key result
+- name: search_scorecards
+  description: Searches scorecards by name or owner
+- name: scorecard_get
+  description: Retrieves a Scorecard with its metadata and access lists
+- name: scorecard_list_columns
+  description: Lists the columns on a Scorecard
+- name: scorecard_create_columns
+  description: Creates one or more new columns on a Scorecard
+- name: scorecard_remove_column
+  description: Removes a single column from a Scorecard
+- name: scorecard_rename
+  description: Changes the Scorecard's display name
+- name: scorecard_get_csv
+  description: Exports a Scorecard's full content as a CSV table
+- name: scorecard_create_automation
+  description: Creates a Scorecard pre-populated from a team or result-owner filter
+- name: scorecard_get_automation_teams
+  description: Lists the teams whose Key Results / KPIs feed the Scorecard's auto-populated rows
+- name: scorecard_set_automation_teams
+  description: Replaces the full set of teams driving a Scorecard's automation
+- name: scorecard_set_org_shared
+  description: Sets whether a Scorecard is shared with the whole organization
+- name: scorecard_add_to_collections
+  description: Adds scorecards to collections (additive operation)
+- name: scorecard_find_collections
+  description: Finds collections by name
+- name: scorecard_get_columns_catalog
+  description: Retrieves the catalogue of available Scorecard column types
+- name: get_my_kpis
+  description: Returns all active KPIs where you are the owner or co-owner
+- name: create_kpi
+  description: Creates a new KPI (metric)
+- name: list_kpis
+  description: Lists active KPIs, filterable by owner/team/cadence
+- name: get_kpi_details
+  description: Full config, ownership, monitoring bounds, and current value for one KPI
+- name: get_kpi_data
+  description: Returns the logged data points (measurements) for a KPI
+- name: get_latest_kpi_data
+  description: Most recent data point within the KPI's current cadence window
+- name: get_kpi_trend
+  description: Aggregated trend for a KPI over a date range
+- name: get_team_kpis
+  description: All active KPIs a given team is responsible for
+- name: update_kpi
+  description: Update fields on an existing KPI (name, description, owner, measurement type, cadence)
+- name: log_kpi_data
+  description: Logs a new value against a KPI
+- name: get_kpi_comments
+  description: Returns comments on a KPI
+- name: add_kpi_comment
+  description: Adds a comment to a KPI
+- name: update_kpi_comment
+  description: Edits an existing KPI comment
+- name: get_workstream_action_items
+  description: Returns all actions for one or more workstreams
+- name: get_action_item_comments
+  description: Returns comments on a specific action
+- name: create_activity
+  description: Creates a new action with optional owner, due date, priority, and workstream
+- name: update_activity
+  description: Updates fields on an existing action (state, owner, due date, priority, rating)
+- name: add_activity_comment
+  description: Adds a comment to an action
+- name: add_activity_links
+  description: Attaches one or more URLs to an action
+- name: create_workstream
+  description: Creates a new workstream for a team
+- name: rbr_create_biz_review
+  description: Creates a new Biz Review
+- name: rbr_get_biz_review
+  description: Retrieves a Biz Review with its metadata
+- name: rbr_update_biz_review
+  description: Updates fields on an existing Biz Review (name, description, etc.)
+- name: rbr_set_biz_review_collections
+  description: Sets the Collections a Biz Review belongs to
+- name: rbr_create_kr_tray
+  description: Creates a Key Results tray on a Biz Review
+- name: rbr_get_kr_tray
+  description: Retrieves a Key Results tray with its attached Key Results
+- name: rbr_update_kr_tray
+  description: Updates fields on an existing KR tray
+- name: rbr_add_kr_tray_items
+  description: Appends Key Results to an existing KR tray
+- name: rbr_create_objective_tray
+  description: Creates an Objective tray on a Biz Review
+- name: rbr_get_objective_tray
+  description: Retrieves an Objective tray with its attached Objectives
+- name: rbr_update_objective_tray
+  description: Updates fields on an existing Objective tray
+- name: rbr_add_objective_tray_items
+  description: Appends Objectives to an existing Objective tray
+- name: rbr_create_text_tray
+  description: Creates a Text tray on a Biz Review
+- name: rbr_get_text_tray
+  description: Retrieves a Text tray with its HTML body
+- name: rbr_update_text_tray
+  description: Updates fields on an existing Text tray
+- name: rbr_create_kpi_tray
+  description: Creates a KPIs tray on a Biz Review
+- name: rbr_get_kpi_tray
+  description: Retrieves a KPIs tray with its attached KPIs
+- name: rbr_update_kpi_tray
+  description: Updates fields on an existing KPI tray
+- name: rbr_add_kpi_tray_items
+  description: Appends KPIs to an existing KPI tray
+- name: rbr_remove_kpi_tray_items
+  description: Detaches specific KPIs from an existing KPI tray
+- name: get_meeting
+  description: Returns a single meeting's details, attendees, and agenda topics
+- name: add_meeting_topic
+  description: Adds a topic to a meeting's agenda
+- name: update_meeting_topic
+  description: Edits an existing meeting topic's text in place
+- name: add_meeting_takeaway
+  description: Adds a takeaway to a meeting
+- name: update_meeting_takeaway
+  description: Edits an existing meeting takeaway's text in place
+- name: get_wobo_url
+  description: Builds a direct WorkBoard link to any entity (objective, KR, team, action, workstream,
+    etc.)
+- name: add_to_favorites
+  description: Adds an object to the current user's favourites (objectives, workstreams, teams, meetings,
+    action items, business reviews)
+deployment:
+  mode: remote
+  endpoint: https://www.myworkboard.com/wb/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

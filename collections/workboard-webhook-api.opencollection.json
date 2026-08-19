@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkBoard External Public Activity (Action Items) Activity (Action Items) Webhook API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update progress on Metrics using webhooks.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://demo.biz.wobo-int.com/wb/apis/hook/:webhook_hash",
+            "params": [
+              {
+                "name": "webhook_hash",
+                "value": "",
+                "type": "path",
+                "description": "The hash you can retrieve by **[clicking here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)**"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "WorkBoard's webhooks allow you to post data from your external applications into WorkBoard by sending a formatted JSON payload via HTTP POST request to the secret WorkBoard URL generated for your application. Currently WorkBoard only supports incoming webhooks; outgoing webhooks will be available soon. <p>WorkBoard's incoming webhooks offer an easy way to update metric data in WorkBoard using a simple HTTP post.</p> <p>For more advanced applications which you can customize per your requirements,"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
