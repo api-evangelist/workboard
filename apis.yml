@@ -55,6 +55,11 @@ apis:
   - SCIM
   - Provisioning
   - Identity
+  - User
+  tags_raw:
+  - SCIM
+  - Provisioning
+  - Identity
   - Users
   properties:
   - type: Documentation
@@ -81,6 +86,8 @@ apis:
   humanURL: https://apidocs.myworkboard.com/
   baseURL: https://www.myworkboard.com/wb/apis
   tags:
+  - Custom Attributes
+  tags_raw:
   - custom-attributes
   properties:
   - type: OpenAPI
