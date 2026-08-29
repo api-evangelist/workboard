@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Goal (Objective) API
+  title: WorkBoard External Public Goal (Objective) API
   description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
   version: 1.0.0
 servers:
@@ -146,8 +146,9 @@ paths:
                                   name:
                                     type: string
                             custom_attributes:
-                              nullable: true
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: object
                                 description: An array of objects for each custom attribute value.
@@ -166,8 +167,9 @@ paths:
                                     type: string
                             goal_custom_permission:
                               description: Returned when `include=custom_permission` is included.
-                              type: object
-                              nullable: true
+                              type:
+                              - object
+                              - 'null'
                               properties:
                                 goal_permission_team_ids:
                                   description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -356,8 +358,9 @@ paths:
                                           name:
                                             type: string
                                     custom_attributes:
-                                      nullable: true
-                                      type: array
+                                      type:
+                                      - array
+                                      - 'null'
                                       items:
                                         type: object
                                         description: An array of objects for each custom attribute value.
@@ -376,8 +379,9 @@ paths:
                                             type: string
                                     goal_custom_permission:
                                       description: Returned when `include=custom_permission` is included.
-                                      type: object
-                                      nullable: true
+                                      type:
+                                      - object
+                                      - 'null'
                                       properties:
                                         goal_permission_team_ids:
                                           description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -567,8 +571,9 @@ paths:
                                           name:
                                             type: string
                                     custom_attributes:
-                                      nullable: true
-                                      type: array
+                                      type:
+                                      - array
+                                      - 'null'
                                       items:
                                         type: object
                                         description: An array of objects for each custom attribute value.
@@ -587,8 +592,9 @@ paths:
                                             type: string
                                     goal_custom_permission:
                                       description: Returned when `include=custom_permission` is included.
-                                      type: object
-                                      nullable: true
+                                      type:
+                                      - object
+                                      - 'null'
                                       properties:
                                         goal_permission_team_ids:
                                           description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -1022,8 +1028,9 @@ paths:
                                   name:
                                     type: string
                             custom_attributes:
-                              nullable: true
-                              type: array
+                              type:
+                              - array
+                              - 'null'
                               items:
                                 type: object
                                 description: An array of objects for each custom attribute value.
@@ -1042,8 +1049,9 @@ paths:
                                     type: string
                             goal_custom_permission:
                               description: Returned when `include=custom_permission` is included.
-                              type: object
-                              nullable: true
+                              type:
+                              - object
+                              - 'null'
                               properties:
                                 goal_permission_team_ids:
                                   description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -1232,8 +1240,9 @@ paths:
                                           name:
                                             type: string
                                     custom_attributes:
-                                      nullable: true
-                                      type: array
+                                      type:
+                                      - array
+                                      - 'null'
                                       items:
                                         type: object
                                         description: An array of objects for each custom attribute value.
@@ -1252,8 +1261,9 @@ paths:
                                             type: string
                                     goal_custom_permission:
                                       description: Returned when `include=custom_permission` is included.
-                                      type: object
-                                      nullable: true
+                                      type:
+                                      - object
+                                      - 'null'
                                       properties:
                                         goal_permission_team_ids:
                                           description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -1443,8 +1453,9 @@ paths:
                                           name:
                                             type: string
                                     custom_attributes:
-                                      nullable: true
-                                      type: array
+                                      type:
+                                      - array
+                                      - 'null'
                                       items:
                                         type: object
                                         description: An array of objects for each custom attribute value.
@@ -1463,8 +1474,9 @@ paths:
                                             type: string
                                     goal_custom_permission:
                                       description: Returned when `include=custom_permission` is included.
-                                      type: object
-                                      nullable: true
+                                      type:
+                                      - object
+                                      - 'null'
                                       properties:
                                         goal_permission_team_ids:
                                           description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -1696,8 +1708,9 @@ paths:
                                 name:
                                   type: string
                           custom_attributes:
-                            nullable: true
-                            type: array
+                            type:
+                            - array
+                            - 'null'
                             items:
                               type: object
                               description: An array of objects for each custom attribute value.
@@ -1716,8 +1729,9 @@ paths:
                                   type: string
                           goal_custom_permission:
                             description: Returned when `include=custom_permission` is included.
-                            type: object
-                            nullable: true
+                            type:
+                            - object
+                            - 'null'
                             properties:
                               goal_permission_team_ids:
                                 description: Comma separated string of the team identifiers that have permission to view the goal.
@@ -1884,8 +1898,9 @@ paths:
                       totalCount:
                         type: integer
                       strategies:
-                        type: array
-                        nullable: true
+                        type:
+                        - array
+                        - 'null'
                         items:
                           type: object
                           properties:

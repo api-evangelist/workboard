@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Team API
+  title: WorkBoard External Public Team API
   description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
   version: 1.0.0
 servers:
@@ -108,8 +108,9 @@ paths:
                               type: string
                               description: '"functional" or "working_group"'
                             level:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             created_from:
                               type: string
                             created_at:
@@ -158,8 +159,9 @@ paths:
                                 type: string
                                 description: '"functional" or "working_group"'
                               level:
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               created_from:
                                 type: string
                               created_at:
@@ -171,16 +173,19 @@ paths:
                                 description: '"1" = active or "0" = archived'
                               team_role:
                                 description: Return when the `role` parameter is used.
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               team_role_name:
                                 description: Return when the `role` parameter is used.
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
                               is_team_owner:
                                 description: Return when the `role` parameter is used.
-                                type: string
-                                nullable: true
+                                type:
+                                - string
+                                - 'null'
         '400':
           description: Unauthorized / Invalid
           content:
@@ -300,8 +305,9 @@ paths:
                             type: string
                             description: '"functional" or "working_group"'
                           level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           created_from:
                             type: string
                           created_at:
@@ -436,8 +442,9 @@ paths:
                             type: string
                             description: '"functional" or "working_group"'
                           level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           created_from:
                             type: string
                           created_at:
@@ -584,8 +591,9 @@ paths:
                             type: string
                             description: '"functional" or "working_group"'
                           level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           created_from:
                             type: string
                           created_at:
@@ -687,8 +695,9 @@ paths:
                             type: string
                             description: '"functional" or "working_group"'
                           level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           created_from:
                             type: string
                           created_at:
@@ -738,16 +747,19 @@ paths:
                                     ws_priority:
                                       type: string
                                     ws_progress:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     ws_start_date:
                                       type: string
                                     ws_target_date:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     ws_completion_date:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     ws_team_id:
                                       type: string
                                     ws_team_name:
@@ -842,8 +854,9 @@ paths:
                           team_type:
                             type: string
                           level:
-                            type: string
-                            nullable: true
+                            type:
+                            - string
+                            - 'null'
                           created_from:
                             type: string
                           created_at:
@@ -918,8 +931,9 @@ paths:
                                     ai_workstream:
                                       type: string
                                     ai_team:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     ai_workstream_name:
                                       type: string
                                     ai_loop_members:
@@ -932,8 +946,9 @@ paths:
                                           user_email:
                                             type: string
                                     ai_tags:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     ai_due_before:
                                       type: string
                                     ai_owner:
@@ -943,8 +958,9 @@ paths:
                                     ai_url:
                                       type: string
                                     ai_completed_at:
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                           team_members:
                             description: Only returned on a request where a single team object is returned.
                             type: array

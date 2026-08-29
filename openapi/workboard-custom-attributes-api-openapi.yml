@@ -1,11 +1,15 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) custom-attributes API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
-  version: 1.0.0
+  title: Workboard Public API v2 Custom Attributes API
+  description: '**Authentication:** All endpoints require an `Authorization: Bearer <token>` header. Use an instant token or OAuth access token obtained from your Workboard instance. Click the **Authorize** button above and paste your token to try endpoints directly.
+
+
+    **WorkBoard''s production server API root for version two is https://www.myworkboard.com/wb/apis/v2**'
+  version: '2.0'
+  contact: {}
 servers:
-- url: https://demo.biz.wobo-int.com/wb/apis
-  description: Demo Server
+- url: https://www.myworkboard.com/wb/apis/v2
+  description: Workboard API
 tags:
 - name: custom-attributes
   description: Read and write custom field values on Objectives, Key Results, Work Items, and Users
@@ -1053,6 +1057,18 @@ components:
       - definition
       - objects
       - pagination
+    SetAttributeValue:
+      type: object
+      properties:
+        value:
+          description: Value to set. Pass a string for text/textarea/single_select; pass a string array for multi_select.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+      required:
+      - value
     ApiErrorResponse:
       type: object
       properties:
@@ -1081,14 +1097,50 @@ components:
       - error
       - message
       - code
-    SetAttributeResponse:
+    InvalidCustomAttributeValueErrorResponse:
       type: object
       properties:
-        success:
-          type: boolean
-          description: Whether the operation succeeded
+        statusCode:
+          type: number
+          description: HTTP status code for the failure
+          example: 400
+        error:
+          type: string
+          description: HTTP status label
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable failure summary
+          example: Validation failed
+        code:
+          type: object
+          description: Stable machine-readable code for client branching
+          example: WB_REQUEST_VALIDATION_FAILED
+        details:
+          description: Additional structured context about the failure
+          allOf:
+          - $ref: '#/components/schemas/InvalidCustomAttributeValueErrorDetails'
       required:
-      - success
+      - statusCode
+      - error
+      - message
+      - code
+    ApiErrorDetails:
+      type: object
+      properties:
+        errors:
+          description: Detailed validation or parsing errors when available.
+          type: array
+          items:
+            type: string
+        invalidValues:
+          description: Submitted custom attribute values that were rejected.
+          type: array
+          items:
+            type: string
+        upstreamStatus:
+          type: number
+          description: Original upstream HTTP status code when the failure came from a downstream service.
     ObjectCustomAttributesResponse:
       type: object
       properties:
@@ -1112,64 +1164,6 @@ components:
       - id
       - objectType
       - customAttributes
-    CustomAttributeValue:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Attribute definition ID
-        name:
-          type: string
-          description: Attribute name / label
-        value:
-          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-        fieldType:
-          type: string
-          description: Field type
-          enum:
-          - text
-          - textarea
-          - single_select
-          - multi_select
-        objectSubtype:
-          type: string
-          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
-      required:
-      - id
-      - name
-      - value
-    ApiErrorDetails:
-      type: object
-      properties:
-        errors:
-          description: Detailed validation or parsing errors when available.
-          type: array
-          items:
-            type: string
-        invalidValues:
-          description: Submitted custom attribute values that were rejected.
-          type: array
-          items:
-            type: string
-        upstreamStatus:
-          type: number
-          description: Original upstream HTTP status code when the failure came from a downstream service.
-    OrgDefinitionsResponse:
-      type: object
-      properties:
-        definitions:
-          description: Custom field definitions for the org
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeDefinition'
-      required:
-      - definitions
     AttributeObject:
       type: object
       properties:
@@ -1211,51 +1205,26 @@ components:
       - objectId
       - objectType
       - value
-    InvalidCustomAttributeValueErrorResponse:
+    InvalidCustomAttributeValueErrorDetails:
       type: object
       properties:
-        statusCode:
-          type: number
-          description: HTTP status code for the failure
-          example: 400
-        error:
-          type: string
-          description: HTTP status label
-          example: Bad Request
-        message:
-          type: string
-          description: Human-readable failure summary
-          example: Validation failed
-        code:
-          type: object
-          description: Stable machine-readable code for client branching
-          example: WB_REQUEST_VALIDATION_FAILED
-        details:
-          description: Additional structured context about the failure
-          allOf:
-          - $ref: '#/components/schemas/InvalidCustomAttributeValueErrorDetails'
+        invalidValues:
+          description: Submitted custom attribute values that were rejected.
+          example:
+          - '4'
+          type: array
+          items:
+            type: string
       required:
-      - statusCode
-      - error
-      - message
-      - code
-    AttributeObjectsPagination:
+      - invalidValues
+    SetAttributeResponse:
       type: object
       properties:
-        limit:
-          type: number
-          description: Page size used for this response
-        offset:
-          type: number
-          description: Offset that was applied to produce this page
-        nextOffset:
-          type: number
-          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
-          nullable: true
+        success:
+          type: boolean
+          description: Whether the operation succeeded
       required:
-      - limit
-      - offset
-      - nextOffset
+      - success
     CustomAttributeDefinition:
       type: object
       properties:
@@ -1295,33 +1264,68 @@ components:
       - fieldType
       - options
       - objectType
-    InvalidCustomAttributeValueErrorDetails:
+    OrgDefinitionsResponse:
       type: object
       properties:
-        invalidValues:
-          description: Submitted custom attribute values that were rejected.
-          example:
-          - '4'
+        definitions:
+          description: Custom field definitions for the org
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/CustomAttributeDefinition'
       required:
-      - invalidValues
-    SetAttributeValue:
+      - definitions
+    AttributeObjectsPagination:
       type: object
       properties:
+        limit:
+          type: number
+          description: Page size used for this response
+        offset:
+          type: number
+          description: Offset that was applied to produce this page
+        nextOffset:
+          type:
+          - number
+          - 'null'
+          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
+      required:
+      - limit
+      - offset
+      - nextOffset
+    CustomAttributeValue:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Attribute definition ID
+        name:
+          type: string
+          description: Attribute name / label
         value:
-          description: Value to set. Pass a string for text/textarea/single_select; pass a string array for multi_select.
+          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
           oneOf:
           - type: string
           - type: array
             items:
               type: string
+          - type: 'null'
+        fieldType:
+          type: string
+          description: Field type
+          enum:
+          - text
+          - textarea
+          - single_select
+          - multi_select
+        objectSubtype:
+          type: string
+          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
       required:
+      - id
+      - name
       - value
   securitySchemes:
-    bearerAuth:
-      type: http
-      description: JWT Authorization header using the Bearer scheme.
+    bearer:
       scheme: bearer
       bearerFormat: JWT
+      type: http

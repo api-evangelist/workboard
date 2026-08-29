@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Metric (Key Result) API
+  title: WorkBoard External Public Metric (Key Result) API
   description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
   version: 1.0.0
 servers:
@@ -153,8 +153,9 @@ paths:
                                   modified_at:
                                     type: string
                                   metric_data_id:
-                                    type: integer
-                                    nullable: true
+                                    type:
+                                    - integer
+                                    - 'null'
                                     description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
                             child_kr:
                               description: The children of the current metric (Key Result).
@@ -279,8 +280,9 @@ paths:
                                     type: string
                             metric_automation:
                               description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
-                              type: object
-                              nullable: true
+                              type:
+                              - object
+                              - 'null'
                               oneOf:
                               - type: object
                                 properties:
@@ -310,8 +312,9 @@ paths:
                                     type: string
                                   metric_data_value:
                                     description: Will be `null` when there was not an update.
-                                    type: string
-                                    nullable: true
+                                    type:
+                                    - string
+                                    - 'null'
                                   metric_data_created_at:
                                     description: The timestamp for when the metric should be updated based upon the update cadence.
                                     type: string
@@ -429,8 +432,9 @@ paths:
                                     modified_at:
                                       type: string
                                     metric_data_id:
-                                      type: integer
-                                      nullable: true
+                                      type:
+                                      - integer
+                                      - 'null'
                                       description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
                               child_kr:
                                 description: The children of the current metric (Key Result).
@@ -555,8 +559,9 @@ paths:
                                       type: string
                               metric_automation:
                                 description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
-                                type: object
-                                nullable: true
+                                type:
+                                - object
+                                - 'null'
                                 oneOf:
                                 - type: object
                                   properties:
@@ -586,8 +591,9 @@ paths:
                                       type: string
                                     metric_data_value:
                                       description: Will be `null` when there was not an update.
-                                      type: string
-                                      nullable: true
+                                      type:
+                                      - string
+                                      - 'null'
                                     metric_data_created_at:
                                       description: The timestamp for when the metric should be updated based upon the update cadence.
                                       type: string
@@ -762,8 +768,9 @@ paths:
                                 modified_at:
                                   type: string
                                 metric_data_id:
-                                  type: integer
-                                  nullable: true
+                                  type:
+                                  - integer
+                                  - 'null'
                                   description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
                           child_kr:
                             description: The children of the current metric (Key Result).
@@ -888,8 +895,9 @@ paths:
                                   type: string
                           metric_automation:
                             description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
-                            type: object
-                            nullable: true
+                            type:
+                            - object
+                            - 'null'
                             oneOf:
                             - type: object
                               properties:
@@ -919,8 +927,9 @@ paths:
                                   type: string
                                 metric_data_value:
                                   description: Will be `null` when there was not an update.
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 metric_data_created_at:
                                   description: The timestamp for when the metric should be updated based upon the update cadence.
                                   type: string
@@ -1284,8 +1293,9 @@ paths:
                                 modified_at:
                                   type: string
                                 metric_data_id:
-                                  type: integer
-                                  nullable: true
+                                  type:
+                                  - integer
+                                  - 'null'
                                   description: Only returned when querying (GET) for a single metric with the metric_id in the path. This value corresponds to an id in the metric_data array and links the confidence update to a specific metric data point. The metric_data array is only returned when include_metric_data=yes is part of the query string.
                           child_kr:
                             description: The children of the current metric (Key Result).
@@ -1410,8 +1420,9 @@ paths:
                                   type: string
                           metric_automation:
                             description: The automation information for a Metric is available for some of our integrations. `null` if no automation is available.
-                            type: object
-                            nullable: true
+                            type:
+                            - object
+                            - 'null'
                             oneOf:
                             - type: object
                               properties:
@@ -1441,8 +1452,9 @@ paths:
                                   type: string
                                 metric_data_value:
                                   description: Will be `null` when there was not an update.
-                                  type: string
-                                  nullable: true
+                                  type:
+                                  - string
+                                  - 'null'
                                 metric_data_created_at:
                                   description: The timestamp for when the metric should be updated based upon the update cadence.
                                   type: string

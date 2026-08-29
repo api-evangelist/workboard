@@ -1,21 +1,11 @@
 {
   "provider": "workboard",
   "sources": [
-    "workboard-activity-action-items-api-openapi.yml",
-    "workboard-custom-attributes-api-openapi.yml",
-    "workboard-datastream-api-openapi.yml",
-    "workboard-goal-objective-api-openapi.yml",
-    "workboard-metric-key-result-api-openapi.yml",
-    "workboard-tags-api-openapi.yml",
-    "workboard-team-api-openapi.yml",
-    "workboard-user-api-openapi.yml",
-    "workboard-user-goals-user-objectives-api-openapi.yml",
-    "workboard-webhook-api-openapi.yml",
-    "workboard-workstream-api-openapi.yml"
+    "_original/external-v1-openapi-original.yml",
+    "_original/public-v2-openapi-original.yml"
   ],
   "outputs": [
     "workboard-activity-action-items-api-openapi.yml",
-    "workboard-custom-attributes-api-openapi.yml",
     "workboard-datastream-api-openapi.yml",
     "workboard-goal-objective-api-openapi.yml",
     "workboard-metric-key-result-api-openapi.yml",
@@ -24,11 +14,28 @@
     "workboard-user-api-openapi.yml",
     "workboard-user-goals-user-objectives-api-openapi.yml",
     "workboard-webhook-api-openapi.yml",
-    "workboard-workstream-api-openapi.yml"
+    "workboard-workstream-api-openapi.yml",
+    "workboard-custom-attributes-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "external-v1-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "public-v2-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "workboard-activity-action-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-custom-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-datastream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-goal-objective-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-metric-key-result-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-team-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-user-goals-user-objectives-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-webhook-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-workstream-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

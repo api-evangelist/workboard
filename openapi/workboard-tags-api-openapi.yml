@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkBoard External Public Activity (Action Items) Activity (Action Items) Tags API
+  title: WorkBoard External Public Tags API
   description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
   version: 1.0.0
 servers:
@@ -397,11 +397,13 @@ paths:
                             created_by:
                               type: string
                             updated_date:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             updated_by:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
         '400':
           description: Unauthorized / Invalid
           content:
@@ -476,11 +478,13 @@ paths:
                             created_by:
                               type: string
                             updated_date:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
                             updated_by:
-                              type: string
-                              nullable: true
+                              type:
+                              - string
+                              - 'null'
         '400':
           description: Unauthorized / Invalid
           content:
