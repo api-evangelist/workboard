@@ -98,7 +98,7 @@ apis:
   humanURL: https://apidocs.myworkboard.com/
   baseURL: https://www.myworkboard.com/wb/apis
   tags:
-  - Custom Attributes
+  - custom-attributes
   tags_raw:
   - custom-attributes
   properties:
