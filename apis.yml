@@ -108,21 +108,6 @@ apis:
     url: https://apidocs.myworkboard.com/
   - type: ChangeLog
     url: https://apidocs.myworkboard.com/changes.html
-- aid: workboard:workboard-datastream-api
-  name: WorkBoard Datastream API
-  description: >-
-    [WorkBoard's help center documentation on Datastreams.](https://support.workboard.com/hc/en-us/articles/360006666652-Pushing-Business-Data-into-Workboard-with-Data-Streams#pushing-business-data-into-workboard-with-data-streams-0-0)
-  humanURL: https://apidocs.myworkboard.com/
-  baseURL: https://www.myworkboard.com/wb/apis
-  tags:
-  - Datastream
-  properties:
-  - type: OpenAPI
-    url: openapi/workboard-datastream-api-openapi.yml
-  - type: Documentation
-    url: https://apidocs.myworkboard.com/
-  - type: ChangeLog
-    url: https://apidocs.myworkboard.com/changes.html
 - aid: workboard:workboard-goal-objective-api
   name: WorkBoard Goal (Objective) API
   description: The Goal (Objective) API from WorkBoard — 5 operation(s) for goal (objective).
@@ -233,6 +218,21 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/workboard-workstream-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.myworkboard.com/
+  - type: ChangeLog
+    url: https://apidocs.myworkboard.com/changes.html
+- aid: workboard:workboard-data-stream-api
+  name: WorkBoard Data Stream API
+  description: WorkBoard's help center documentation on Datastreams.
+  humanURL: >-
+    https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
+  baseURL: https://myworkboard.com/wb/apis/scim
+  tags:
+  - Data Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/workboard-data-stream-api-openapi.yml
   - type: Documentation
     url: https://apidocs.myworkboard.com/
   - type: ChangeLog
