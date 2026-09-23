@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Workboard Public API v2 Custom Attributes API
-  description: '**Authentication:** All endpoints require an `Authorization: Bearer <token>` header. Use an instant token or OAuth access token obtained from your Workboard instance. Click the **Authorize** button above and paste your token to try endpoints directly.
+  description: '**Authentication:** All endpoints require an `Authorization: Bearer ` header. Use an instant token or OAuth access token obtained from your Workboard instance. Click the **Authorize** button above and paste your token to try endpoints directly.
 
 
     **WorkBoard''s production server API root for version two is https://www.myworkboard.com/wb/apis/v2**'
@@ -11,7 +11,7 @@ servers:
 - url: https://www.myworkboard.com/wb/apis/v2
   description: Workboard API
 tags:
-- name: custom-attributes
+- name: Custom Attributes
   description: Read and write custom field values on Objectives, Key Results, Work Items, and Users
 paths:
   /attributes/definitions:
@@ -62,7 +62,7 @@ paths:
       - bearer: []
       summary: List custom field definitions for the org
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/{attributeId}/objects:
     get:
       description: 'Returns objects in the caller''s org that have a value set for the given custom attribute, scoped to objects the caller can view.
@@ -136,7 +136,7 @@ paths:
       - bearer: []
       summary: List every object that has a value for a custom attribute
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/objectives/{id}:
     get:
       operationId: CustomAttributesController_getObjectiveAttributes
@@ -188,7 +188,7 @@ paths:
       - bearer: []
       summary: Get custom attribute values for an Objective
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/objectives/{id}/{attributeId}:
     post:
       operationId: CustomAttributesController_createObjectiveAttributeValue
@@ -252,7 +252,7 @@ paths:
       - bearer: []
       summary: Create (set) a custom attribute value on an Objective
       tags:
-      - custom-attributes
+      - Custom Attributes
     put:
       operationId: CustomAttributesController_setObjectiveAttributeValue
       parameters:
@@ -315,7 +315,7 @@ paths:
       - bearer: []
       summary: Update a custom attribute value on an Objective
       tags:
-      - custom-attributes
+      - Custom Attributes
     delete:
       operationId: CustomAttributesController_deleteObjectiveAttributeValue
       parameters:
@@ -362,7 +362,7 @@ paths:
       - bearer: []
       summary: Clear a custom attribute value from an Objective
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/key-results/{id}:
     get:
       operationId: CustomAttributesController_getKeyResultAttributes
@@ -414,7 +414,7 @@ paths:
       - bearer: []
       summary: Get custom attribute values for a Key Result
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/key-results/{id}/{attributeId}:
     post:
       operationId: CustomAttributesController_createKeyResultAttributeValue
@@ -478,7 +478,7 @@ paths:
       - bearer: []
       summary: Create (set) a custom attribute value on a Key Result
       tags:
-      - custom-attributes
+      - Custom Attributes
     put:
       operationId: CustomAttributesController_setKeyResultAttributeValue
       parameters:
@@ -541,7 +541,7 @@ paths:
       - bearer: []
       summary: Update a custom attribute value on a Key Result
       tags:
-      - custom-attributes
+      - Custom Attributes
     delete:
       operationId: CustomAttributesController_deleteKeyResultAttributeValue
       parameters:
@@ -588,7 +588,7 @@ paths:
       - bearer: []
       summary: Clear a custom attribute value from a Key Result
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/work-items/{id}:
     get:
       operationId: CustomAttributesController_getWorkItemAttributes
@@ -640,7 +640,7 @@ paths:
       - bearer: []
       summary: Get custom attribute values for a Work Item
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/work-items/{id}/{attributeId}:
     post:
       operationId: CustomAttributesController_createWorkItemAttributeValue
@@ -698,7 +698,7 @@ paths:
       - bearer: []
       summary: Create (set) a custom attribute value on a Work Item
       tags:
-      - custom-attributes
+      - Custom Attributes
     put:
       operationId: CustomAttributesController_setWorkItemAttributeValue
       parameters:
@@ -755,7 +755,7 @@ paths:
       - bearer: []
       summary: Update a custom attribute value on a Work Item
       tags:
-      - custom-attributes
+      - Custom Attributes
     delete:
       operationId: CustomAttributesController_deleteWorkItemAttributeValue
       parameters:
@@ -796,7 +796,7 @@ paths:
       - bearer: []
       summary: Clear a custom attribute value from a Work Item
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/users/{id}:
     get:
       description: Returns custom attribute values for a user. A regular token may only read its own user ID. A **Data Admin Token** (issued via WBAdmin) may read any user in the org.
@@ -855,7 +855,7 @@ paths:
       - bearer: []
       summary: Get custom attribute values for a User
       tags:
-      - custom-attributes
+      - Custom Attributes
   /attributes/users/{id}/{attributeId}:
     post:
       description: Requires a **Data Admin Token** to write attributes on behalf of another user.
@@ -920,7 +920,7 @@ paths:
       - bearer: []
       summary: Create (set) a custom attribute value on a User
       tags:
-      - custom-attributes
+      - Custom Attributes
     put:
       description: Requires a **Data Admin Token** to update attributes on behalf of another user.
       operationId: CustomAttributesController_setUserAttributeValue
@@ -984,7 +984,7 @@ paths:
       - bearer: []
       summary: Update a custom attribute value on a User
       tags:
-      - custom-attributes
+      - Custom Attributes
     delete:
       description: Requires a **Data Admin Token** to delete attributes on behalf of another user.
       operationId: CustomAttributesController_deleteUserAttributeValue
@@ -1032,9 +1032,120 @@ paths:
       - bearer: []
       summary: Clear a custom attribute value from a User
       tags:
-      - custom-attributes
+      - Custom Attributes
 components:
   schemas:
+    AttributeObjectsPagination:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Page size used for this response
+        offset:
+          type: number
+          description: Offset that was applied to produce this page
+        nextOffset:
+          type:
+          - number
+          - 'null'
+          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
+      required:
+      - limit
+      - offset
+      - nextOffset
+    ApiErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          description: HTTP status code for the failure
+          example: 400
+        error:
+          type: string
+          description: HTTP status label
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable failure summary
+          example: Validation failed
+        code:
+          type: object
+          description: Stable machine-readable code for client branching
+          example: WB_REQUEST_VALIDATION_FAILED
+        details:
+          description: Additional structured context about the failure
+          allOf:
+          - $ref: '#/components/schemas/ApiErrorDetails'
+      required:
+      - statusCode
+      - error
+      - message
+      - code
+    ObjectCustomAttributesResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Object ID
+        objectType:
+          type: string
+          description: Object type
+          enum:
+          - objective
+          - key_result
+          - work_item
+          - user
+        customAttributes:
+          description: Custom attribute values
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeValue'
+      required:
+      - id
+      - objectType
+      - customAttributes
+    OrgDefinitionsResponse:
+      type: object
+      properties:
+        definitions:
+          description: Custom field definitions for the org
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeDefinition'
+      required:
+      - definitions
+    CustomAttributeValue:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Attribute definition ID
+        name:
+          type: string
+          description: Attribute name / label
+        value:
+          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+        fieldType:
+          type: string
+          description: Field type
+          enum:
+          - text
+          - textarea
+          - single_select
+          - multi_select
+        objectSubtype:
+          type: string
+          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
+      required:
+      - id
+      - name
+      - value
     AttributeObjectsResponse:
       type: object
       properties:
@@ -1069,34 +1180,6 @@ components:
               type: string
       required:
       - value
-    ApiErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          description: HTTP status code for the failure
-          example: 400
-        error:
-          type: string
-          description: HTTP status label
-          example: Bad Request
-        message:
-          type: string
-          description: Human-readable failure summary
-          example: Validation failed
-        code:
-          type: object
-          description: Stable machine-readable code for client branching
-          example: WB_REQUEST_VALIDATION_FAILED
-        details:
-          description: Additional structured context about the failure
-          allOf:
-          - $ref: '#/components/schemas/ApiErrorDetails'
-      required:
-      - statusCode
-      - error
-      - message
-      - code
     InvalidCustomAttributeValueErrorResponse:
       type: object
       properties:
@@ -1141,29 +1224,18 @@ components:
         upstreamStatus:
           type: number
           description: Original upstream HTTP status code when the failure came from a downstream service.
-    ObjectCustomAttributesResponse:
+    InvalidCustomAttributeValueErrorDetails:
       type: object
       properties:
-        id:
-          type: number
-          description: Object ID
-        objectType:
-          type: string
-          description: Object type
-          enum:
-          - objective
-          - key_result
-          - work_item
-          - user
-        customAttributes:
-          description: Custom attribute values
+        invalidValues:
+          description: Submitted custom attribute values that were rejected.
+          example:
+          - '4'
           type: array
           items:
-            $ref: '#/components/schemas/CustomAttributeValue'
+            type: string
       required:
-      - id
-      - objectType
-      - customAttributes
+      - invalidValues
     AttributeObject:
       type: object
       properties:
@@ -1205,18 +1277,6 @@ components:
       - objectId
       - objectType
       - value
-    InvalidCustomAttributeValueErrorDetails:
-      type: object
-      properties:
-        invalidValues:
-          description: Submitted custom attribute values that were rejected.
-          example:
-          - '4'
-          type: array
-          items:
-            type: string
-      required:
-      - invalidValues
     SetAttributeResponse:
       type: object
       properties:
@@ -1264,66 +1324,6 @@ components:
       - fieldType
       - options
       - objectType
-    OrgDefinitionsResponse:
-      type: object
-      properties:
-        definitions:
-          description: Custom field definitions for the org
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeDefinition'
-      required:
-      - definitions
-    AttributeObjectsPagination:
-      type: object
-      properties:
-        limit:
-          type: number
-          description: Page size used for this response
-        offset:
-          type: number
-          description: Offset that was applied to produce this page
-        nextOffset:
-          type:
-          - number
-          - 'null'
-          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
-      required:
-      - limit
-      - offset
-      - nextOffset
-    CustomAttributeValue:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Attribute definition ID
-        name:
-          type: string
-          description: Attribute name / label
-        value:
-          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-        fieldType:
-          type: string
-          description: Field type
-          enum:
-          - text
-          - textarea
-          - single_select
-          - multi_select
-        objectSubtype:
-          type: string
-          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
-      required:
-      - id
-      - name
-      - value
   securitySchemes:
     bearer:
       scheme: bearer

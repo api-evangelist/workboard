@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Team API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,7 +11,7 @@ tags:
 paths:
   /team:
     get:
-      summary: Get a team or teams that the user token is a member of. If the token is a Data-Admin token, get all teams or a single team.
+      summary: Get a team or teams that the user token is a member of.
       description: ''
       tags:
       - Team
@@ -205,8 +205,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getTeam
+      x-operation-id-source: derived
     post:
-      summary: Create a new functional team or working group, and add Workstreams and team members.
+      summary: Create a new functional team or working group, and add Workstreams and team…
       description: ''
       tags:
       - Team
@@ -353,8 +355,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postTeam
+      x-operation-id-source: derived
     patch:
-      summary: Delete a team.
+      summary: Delete a team
       description: '**CAUTION**: Delete an entire team and all its Workstreams and action items. A successful request will return a 204 code. If you are deleting a functional team, the child teams will be deleted as well.'
       tags:
       - Team
@@ -387,9 +391,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: patchTeam
+      x-operation-id-source: derived
   /team/{team_id_path}:
     get:
-      summary: Get a team that the user token is a member of. If the token is a Data-Admin token, get a single team that user is not a part of.
+      summary: Get a team that the user token is a member of.
       description: ''
       tags:
       - Team
@@ -490,9 +496,13 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getTeamByTeamIdPath
+      x-operation-id-source: derived
     put:
-      summary: Update a team.
-      description: 'Change the name of a team, add new and existing users to the team roster, change a member''s role on the team, remove users from the team, or add new Workstreams. If you are using a personal access token, you must be the manager of the team to use this request.<br/>Note: If you update a team with a new manager, the previous manager will be demoted to a co-manager.'
+      summary: Update a team
+      description: 'Change the name of a team, add new and existing users to the team roster, change a member''s role on the team, remove users from the team, or add new Workstreams. If you are using a personal access token, you must be the manager of the team to use this request.
+
+        Note: If you update a team with a new manager, the previous manager will be demoted to a co-manager.'
       tags:
       - Team
       parameters:
@@ -639,9 +649,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: putTeamByTeamIdPath
+      x-operation-id-source: derived
   /team/{team_id_path}/workstream:
     get:
-      summary: Get all Workstreams belonging to the specified team.
+      summary: Get all Workstreams belonging to the specified team
       description: Get all Workstreams belonging to the specified team.
       tags:
       - Team
@@ -799,9 +811,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getTeamByTeamIdPathWorkstream
+      x-operation-id-source: derived
   /team/{team_id_path}/activity:
     get:
-      summary: List details of all action items belonging to the specified team.
+      summary: List details of all action items belonging to the specified team
       description: List details of all action items belonging to the specified team.
       tags:
       - Team
@@ -996,6 +1010,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getTeamByTeamIdPathActivity
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

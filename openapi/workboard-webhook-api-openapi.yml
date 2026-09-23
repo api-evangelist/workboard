@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Webhook API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,8 +11,19 @@ tags:
 paths:
   /hook/{webhook_hash}:
     post:
-      summary: Update progress on Metrics using webhooks.
-      description: 'WorkBoard''s webhooks allow you to post data from your external applications into WorkBoard by sending a formatted JSON payload via HTTP POST request to the secret WorkBoard URL generated for your application. Currently WorkBoard only supports incoming webhooks; outgoing webhooks will be available soon. <p>WorkBoard''s incoming webhooks offer an easy way to update metric data in WorkBoard using a simple HTTP post.</p> <p>For more advanced applications which you can customize per your requirements, you can code your own POST requests using the global hook URL which WorkBoard will generate for you.</p> <p>**[Click here](https://www.myworkboard.com/wb/user/profile/edit?do=mgApp)** to get your webhook URL.</p><p>Note: If you haven''t yet tried one of our pre-built connectors, you will first need to click one of the three options (Google Spreadsheet, Microsoft Excel, or From CSV) to generate your private `webhook_hash`.</p>'
+      summary: Update progress on Metrics using webhooks
+      description: 'WorkBoard''s webhooks allow you to post data from your external applications into WorkBoard by sending a formatted JSON payload via HTTP POST request to the secret WorkBoard URL generated for your application. Currently WorkBoard only supports incoming webhooks; outgoing webhooks will be available soon.
+
+        WorkBoard''s incoming webhooks offer an easy way to update metric data in WorkBoard using a simple HTTP post.
+
+
+        For more advanced applications which you can customize per your requirements, you can code your own POST requests using the global hook URL which WorkBoard will generate for you.
+
+
+        **Click here** to get your webhook URL.
+
+
+        Note: If you haven''t yet tried one of our pre-built connectors, you will first need to click one of the three options (Google Spreadsheet, Microsoft Excel, or From CSV) to generate your private `webhook_hash`.'
       tags:
       - Webhook
       parameters:
@@ -76,6 +87,8 @@ paths:
                   success: false
                   error: ''
                   error_description: ''
+      operationId: postHookByWebhookHash
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

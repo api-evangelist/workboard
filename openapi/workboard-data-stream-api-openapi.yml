@@ -1,21 +1,21 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Datastream API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
   description: Demo Server
 tags:
-- name: Datastream
-  description: '[WorkBoard''s help center documentation on Datastreams.](https://support.workboard.com/hc/en-us/articles/360006666652-Pushing-Business-Data-into-Workboard-with-Data-Streams#pushing-business-data-into-workboard-with-data-streams-0-0)'
+- name: Data Stream
+  description: WorkBoard's help center documentation on Datastreams.
 paths:
   /stream:
     get:
-      summary: Get the details of datastreams to which the authenticated user has access.
+      summary: Get the details of datastreams to which the authenticated user has access
       description: ''
       tags:
-      - Datastream
+      - Data Stream
       responses:
         '200':
           description: Success
@@ -88,11 +88,13 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getStream
+      x-operation-id-source: derived
     post:
-      summary: Create a datastream.
+      summary: Create a datastream
       description: ''
       tags:
-      - Datastream
+      - Data Stream
       requestBody:
         content:
           application/json:
@@ -201,12 +203,14 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postStream
+      x-operation-id-source: derived
   /stream/{stream_id}:
     post:
-      summary: Update the value(s) in your datastream.
+      summary: Update the value(s) in your datastream
       description: ''
       tags:
-      - Datastream
+      - Data Stream
       parameters:
       - in: header
         name: X-Stream-Signature
@@ -343,6 +347,8 @@ paths:
                   success: false
                   error: ''
                   error_description: ''
+      operationId: postStreamByStreamId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Goal (Objective) API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,7 +11,7 @@ tags:
 paths:
   /goal:
     get:
-      summary: Get Goals using parameters to filter results.
+      summary: Get Goals using parameters to filter results
       description: ''
       tags:
       - Goal (Objective)
@@ -727,8 +727,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getGoal
+      x-operation-id-source: derived
     post:
-      summary: Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.
+      summary: Create a goal for a user in your organization, including metrics sourced from…
       description: Create a goal for a user in your organization, including metrics sourced from the same person. Make sure you have `Data-Admin` permission for your access token.
       tags:
       - Goal (Objective)
@@ -921,9 +923,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postGoal
+      x-operation-id-source: derived
   /goal/{goal_id_path}:
     get:
-      summary: Get Goals using parameters to filter results.
+      summary: Get Goals using parameters to filter results
       description: ''
       tags:
       - Goal (Objective)
@@ -1609,9 +1613,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getGoalByGoalIdPath
+      x-operation-id-source: derived
   /goal/{goal_id_path}/metric/{metric_id_path}:
     get:
-      summary: List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.
+      summary: List data for one metric (specified by the metric_id parameter) associated with…
       description: List data for one metric (specified by the metric_id parameter) associated with the goal specified by the goal_id parameter.
       tags:
       - Goal (Objective)
@@ -1864,9 +1870,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getGoalByGoalIdPathMetricByMetricIdPath
+      x-operation-id-source: derived
   /goal/{goal_id_path}/pillars:
     get:
-      summary: Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.
+      summary: Get a Goal's associated `strategies` and `pillars` from WorkBoard Strategy.
       description: List the associated `strategies` and `pillars` to which the `goal_id_path` is related. Note, the logged in user must have Data-Admin permission and have access to WorkBoard Strategy in order to view the goal pillars.
       tags:
       - Goal (Objective)
@@ -2029,9 +2037,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getGoalByGoalIdPathPillars
+      x-operation-id-source: derived
   /goal/{goal_id_path}/alignment:
     get:
-      summary: List aligned and dependent goals associated with the goal specified by the goal_id parameter. Note, the logged in user must have Data-Admin permission in order to view the goal alignment.
+      summary: List aligned and dependent goals associated with the goal specified by the…
       description: List aligned and dependent goals associated with the goal specified by the `goal_id` parameter. Note, the logged in user must have `Data-Admin` permission in order to view the goal alignment. If `goal_id` is aligned to another goal, the first goal returned will be the goal that `goal_id` is aligned to. If `goal_id` is not aligned and has goals aligned to it, `goal_id` will be the first goal. If `goal_id` has no aligned goals, then `goal_id` goal will be returned without any `goal_alignments`.
       tags:
       - Goal (Objective)
@@ -2139,6 +2149,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getGoalByGoalIdPathAlignment
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

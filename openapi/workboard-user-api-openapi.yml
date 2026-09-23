@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public User API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,7 +11,7 @@ tags:
 paths:
   /user:
     get:
-      summary: Get an individual user, or all users with a Data-Admin token.
+      summary: Get an individual user, or all users with a Data-Admin token
       description: '**Without any parameters, this will return the user profile associated with the token. If the token is a ''Data-Admin'' token, some parameters will return a different result.**'
       tags:
       - User
@@ -321,6 +321,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getUser
+      x-operation-id-source: derived
     post:
       summary: 'Data-Admin: Create a user'
       description: '`Data-Admin` token can create a user.'
@@ -533,6 +535,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postUser
+      x-operation-id-source: derived
     patch:
       summary: Deactivate a user
       tags:
@@ -577,6 +581,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: patchUser
+      x-operation-id-source: derived
   /user/{user_id_path}:
     get:
       summary: 'Data-Admin: Get user by `user_id_path`'
@@ -740,8 +746,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getUserByUserIdPath
+      x-operation-id-source: derived
     put:
-      summary: Update a user and/or reactivate a user.
+      summary: Update a user and/or reactivate a user
       tags:
       - User
       parameters:
@@ -973,6 +981,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: putUserByUserIdPath
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -17,18 +17,22 @@
     "workboard-workstream-api-openapi.yml",
     "workboard-custom-attributes-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "external-v1-openapi-original.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
-    "public-v2-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0"
+    "public-v2-openapi-original.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: workboard-data-stream-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
   ],
   "skipped": [
     "workboard-activity-action-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "workboard-custom-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "workboard-datastream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workboard-data-stream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "workboard-goal-objective-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "workboard-metric-key-result-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "workboard-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Metric (Key Result) API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,7 +11,7 @@ tags:
 paths:
   /metric:
     get:
-      summary: Request metrics (key results) the user (token owner) has access to. Use a Data-Admin token to gain access to metrics across your organization.
+      summary: Request metrics (key results) the user (token owner) has access to.
       description: By default, when no additional parameters are passed, this returns the Metrics the token owner has ownership of. If the token owner doesn't own any Metrics, the results will be empty.
       tags:
       - Metric (Key Result)
@@ -645,9 +645,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getMetric
+      x-operation-id-source: derived
   /metric/{metric_id_path}:
     get:
-      summary: GET a single individual metric (key results) the user has access to. Use a `Data-Admin` token to get an organization's single metric.
+      summary: GET a single individual metric (key results) the user has access to.
       description: ''
       tags:
       - Metric (Key Result)
@@ -982,6 +984,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getMetricByMetricIdPath
+      x-operation-id-source: derived
     put:
       summary: Update metric information
       description: Update progress of an individual metric. If you do not include the `metric_data_id` parameter, the value will be applied to the most recent update date according to the metric update frequency set in WorkBoard.
@@ -1151,6 +1155,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: putMetricByMetricIdPath
+      x-operation-id-source: derived
   /metric/{metric_id_path}/confidence:
     put:
       summary: Update the confidence score (RAG) of a metric (key result)
@@ -1529,9 +1535,11 @@ paths:
                         example: deleted_metric
       security:
       - bearerAuth: []
+      operationId: putMetricByMetricIdPathConfidence
+      x-operation-id-source: derived
   /metric/{metric_id_path}/tags:
     get:
-      summary: Returns all tags mapped to the given metric in the system.
+      summary: Returns all tags mapped to the given metric in the system
       description: ''
       tags:
       - Metric (Key Result)
@@ -1602,8 +1610,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getMetricByMetricIdPathTags
+      x-operation-id-source: derived
     put:
-      summary: Add multiple tags to the given metric. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      summary: Add multiple tags to the given metric.
       description: ''
       tags:
       - Metric (Key Result)
@@ -1654,8 +1664,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: putMetricByMetricIdPathTags
+      x-operation-id-source: derived
     delete:
-      summary: Delete given tag lists mapped to the metric.
+      summary: Delete given tag lists mapped to the metric
       description: ''
       tags:
       - Metric (Key Result)
@@ -1711,9 +1723,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: deleteMetricByMetricIdPathTags
+      x-operation-id-source: derived
   /metric/krtags:
     get:
-      summary: Returns all key result tags mapped to the given metrics in the system.
+      summary: Returns all key result tags mapped to the given metrics in the system
       description: ''
       tags:
       - Metric (Key Result)
@@ -1792,9 +1806,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getMetricKrtags
+      x-operation-id-source: derived
   /metric/tags:
     get:
-      summary: Returns all metrics mapped to the given `tag_id`.
+      summary: Returns all metrics mapped to the given `tag_id`
       description: ''
       tags:
       - Metric (Key Result)
@@ -1869,8 +1885,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getMetricTags
+      x-operation-id-source: derived
     post:
-      summary: Add multiple tags to multiple metrics. Maximum tag list allowed is 50 per request. Only valid tags will be considered.
+      summary: Add multiple tags to multiple metrics.
       description: ''
       tags:
       - Metric (Key Result)
@@ -1924,6 +1942,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postMetricTags
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: WorkBoard External Public Activity (Action Items) API
-  description: <h4>This is the API documentation for WorkBoard's version 1 REST API.</h4><p>WorkBoard's API provides resources to allow developers to interact with user, goal, and metric data in WorkBoard. All resources can be accessed via REST with GET, POST, PUT, PATCH and DELETE requests. For GET requests, query parameters can be passed as part of the request URL. All GET, POST, PUT, PATCH and DELETE requests must include the Bearer Token authorization header with the provided token you generate.</p><p>Click here to view the [changelog](./changes.html).<p>Click here to view the [Open API JSON file](./openapi.json).</p><p><strong>If you are interested in working in a demo instance, please contact your WorkBoard representative.<br/>WorkBoard's production server API root is https://www.myworkboard.com/wb/apis.</strong></p>
+  description: This is the API documentation for WorkBoard's version 1 REST API.
   version: 1.0.0
 servers:
 - url: https://demo.biz.wobo-int.com/wb/apis
@@ -11,7 +11,7 @@ tags:
 paths:
   /activity:
     get:
-      summary: List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.
+      summary: List the details of existing action items.
       description: List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.
       tags:
       - Activity (Action Items)
@@ -304,8 +304,10 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getActivity
+      x-operation-id-source: derived
     post:
-      summary: Create an action item.
+      summary: Create an action item
       description: Create a new action item. Request parameters should be passed in the POST request or in the payload (as JSON). To create an action item with a comment, sub-action, or tag, it should be passed as raw JSON, along with the ai_id either as a request parameter or in the URL.
       tags:
       - Activity (Action Items)
@@ -497,9 +499,11 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: postActivity
+      x-operation-id-source: derived
   /activity/{ai_id_path}:
     get:
-      summary: List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.
+      summary: List the details of existing action items.
       description: List the details of existing action items. By default, this query will return the first 50 items that match your request parameters. Use the offset and limit parameters to return a different set.
       tags:
       - Activity (Action Items)
@@ -639,9 +643,13 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: getActivityByAiIdPath
+      x-operation-id-source: derived
     put:
-      summary: Update an activity.
-      description: Update an existing action item. Request parameters should be passed in the payload (as JSON). Note that the ai_id parameter is required.<br/>To update an action item with a comment, sub-action, or tag, it should be passed as raw JSON, along with the `ai_id` either as a request parameter or in the URL.
+      summary: Update an activity
+      description: 'Update an existing action item. Request parameters should be passed in the payload (as JSON). Note that the ai_id parameter is required.
+
+        To update an action item with a comment, sub-action, or tag, it should be passed as raw JSON, along with the `ai_id` either as a request parameter or in the URL.'
       tags:
       - Activity (Action Items)
       parameters:
@@ -837,6 +845,8 @@ paths:
                   error_description: ''
       security:
       - bearerAuth: []
+      operationId: putActivityByAiIdPath
+      x-operation-id-source: derived
 components:
   securitySchemes:
     bearerAuth:
