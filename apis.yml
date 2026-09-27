@@ -93,7 +93,7 @@ apis:
   - type: ChangeLog
     url: https://apidocs.myworkboard.com/changes.html
 - aid: workboard:workboard-custom-attributes-api
-  name: WorkBoard custom-attributes API
+  name: WorkBoard Custom Attributes API
   description: Read and write custom field values on Objectives, Key Results, Work Items, and Users
   humanURL: https://apidocs.myworkboard.com/
   baseURL: https://www.myworkboard.com/wb/apis
@@ -229,8 +229,6 @@ apis:
     https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
   baseURL: https://myworkboard.com/wb/apis/scim
   tags:
-  - Datastream
-  tags_raw:
   - Data Stream
   properties:
   - type: OpenAPI
