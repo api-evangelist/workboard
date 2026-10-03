@@ -1035,79 +1035,6 @@ paths:
       - Custom Attributes
 components:
   schemas:
-    ObjectCustomAttributesResponse:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Object ID
-        objectType:
-          type: string
-          description: Object type
-          enum:
-          - objective
-          - key_result
-          - work_item
-          - user
-        customAttributes:
-          description: Custom attribute values
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeValue'
-      required:
-      - id
-      - objectType
-      - customAttributes
-    OrgDefinitionsResponse:
-      type: object
-      properties:
-        definitions:
-          description: Custom field definitions for the org
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeDefinition'
-      required:
-      - definitions
-    SetAttributeResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the operation succeeded
-      required:
-      - success
-    CustomAttributeValue:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Attribute definition ID
-        name:
-          type: string
-          description: Attribute name / label
-        value:
-          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-          - type: 'null'
-        fieldType:
-          type: string
-          description: Field type
-          enum:
-          - text
-          - textarea
-          - single_select
-          - multi_select
-        objectSubtype:
-          type: string
-          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
-      required:
-      - id
-      - name
-      - value
     InvalidCustomAttributeValueErrorResponse:
       type: object
       properties:
@@ -1136,153 +1063,6 @@ components:
       - error
       - message
       - code
-    SetAttributeValue:
-      type: object
-      properties:
-        value:
-          description: Value to set. Pass a string for text/textarea/single_select; pass a string array for multi_select.
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-      required:
-      - value
-    AttributeObjectsResponse:
-      type: object
-      properties:
-        attributeId:
-          type: number
-          description: Custom attribute definition ID that was queried
-        definition:
-          description: The attribute definition metadata (echoed for convenience)
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeDefinition'
-        objects:
-          description: Objects in the caller's org that have a value for this attribute
-          type: array
-          items:
-            $ref: '#/components/schemas/AttributeObject'
-        pagination:
-          $ref: '#/components/schemas/AttributeObjectsPagination'
-      required:
-      - attributeId
-      - definition
-      - objects
-      - pagination
-    AttributeObjectsPagination:
-      type: object
-      properties:
-        limit:
-          type: number
-          description: Page size used for this response
-        offset:
-          type: number
-          description: Offset that was applied to produce this page
-        nextOffset:
-          type:
-          - number
-          - 'null'
-          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
-      required:
-      - limit
-      - offset
-      - nextOffset
-    CustomAttributeDefinition:
-      type: object
-      properties:
-        id:
-          type: number
-          description: Attribute definition ID
-        name:
-          type: string
-          description: Attribute name / label
-        fieldType:
-          type: string
-          description: Field type
-          enum:
-          - text
-          - textarea
-          - single_select
-          - multi_select
-        options:
-          description: Available options for single_select and multi_select fields; empty for text/textarea.
-          type: array
-          items:
-            type: string
-        objectType:
-          type: string
-          description: Object type this definition applies to
-          enum:
-          - objective
-          - key_result
-          - work_item
-          - user
-        objectSubtype:
-          type: string
-          description: 'Comma-separated list of object subtypes this definition applies to. Only present for work_item definitions. Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
-      required:
-      - id
-      - name
-      - fieldType
-      - options
-      - objectType
-    ApiErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: number
-          description: HTTP status code for the failure
-          example: 400
-        error:
-          type: string
-          description: HTTP status label
-          example: Bad Request
-        message:
-          type: string
-          description: Human-readable failure summary
-          example: Validation failed
-        code:
-          type: object
-          description: Stable machine-readable code for client branching
-          example: WB_REQUEST_VALIDATION_FAILED
-        details:
-          description: Additional structured context about the failure
-          allOf:
-          - $ref: '#/components/schemas/ApiErrorDetails'
-      required:
-      - statusCode
-      - error
-      - message
-      - code
-    InvalidCustomAttributeValueErrorDetails:
-      type: object
-      properties:
-        invalidValues:
-          description: Submitted custom attribute values that were rejected.
-          example:
-          - '4'
-          type: array
-          items:
-            type: string
-      required:
-      - invalidValues
-    ApiErrorDetails:
-      type: object
-      properties:
-        errors:
-          description: Detailed validation or parsing errors when available.
-          type: array
-          items:
-            type: string
-        invalidValues:
-          description: Submitted custom attribute values that were rejected.
-          type: array
-          items:
-            type: string
-        upstreamStatus:
-          type: number
-          description: Original upstream HTTP status code when the failure came from a downstream service.
     AttributeObject:
       type: object
       properties:
@@ -1323,6 +1103,226 @@ components:
       required:
       - objectId
       - objectType
+      - value
+    SetAttributeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the operation succeeded
+      required:
+      - success
+    AttributeObjectsResponse:
+      type: object
+      properties:
+        attributeId:
+          type: number
+          description: Custom attribute definition ID that was queried
+        definition:
+          description: The attribute definition metadata (echoed for convenience)
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeDefinition'
+        objects:
+          description: Objects in the caller's org that have a value for this attribute
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeObject'
+        pagination:
+          $ref: '#/components/schemas/AttributeObjectsPagination'
+      required:
+      - attributeId
+      - definition
+      - objects
+      - pagination
+    AttributeObjectsPagination:
+      type: object
+      properties:
+        limit:
+          type: number
+          description: Page size used for this response
+        offset:
+          type: number
+          description: Offset that was applied to produce this page
+        nextOffset:
+          type:
+          - number
+          - 'null'
+          description: Offset to pass on the next request to retrieve the following page. Null when this is the final page.
+      required:
+      - limit
+      - offset
+      - nextOffset
+    ObjectCustomAttributesResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Object ID
+        objectType:
+          type: string
+          description: Object type
+          enum:
+          - objective
+          - key_result
+          - work_item
+          - user
+        customAttributes:
+          description: Custom attribute values
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeValue'
+      required:
+      - id
+      - objectType
+      - customAttributes
+    InvalidCustomAttributeValueErrorDetails:
+      type: object
+      properties:
+        invalidValues:
+          description: Submitted custom attribute values that were rejected.
+          example:
+          - '4'
+          type: array
+          items:
+            type: string
+      required:
+      - invalidValues
+    OrgDefinitionsResponse:
+      type: object
+      properties:
+        definitions:
+          description: Custom field definitions for the org
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeDefinition'
+      required:
+      - definitions
+    CustomAttributeDefinition:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Attribute definition ID
+        name:
+          type: string
+          description: Attribute name / label
+        fieldType:
+          type: string
+          description: Field type
+          enum:
+          - text
+          - textarea
+          - single_select
+          - multi_select
+        options:
+          description: Available options for single_select and multi_select fields; empty for text/textarea.
+          type: array
+          items:
+            type: string
+        objectType:
+          type: string
+          description: Object type this definition applies to
+          enum:
+          - objective
+          - key_result
+          - work_item
+          - user
+        objectSubtype:
+          type: string
+          description: 'Comma-separated list of object subtypes this definition applies to. Only present for work_item definitions. Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
+      required:
+      - id
+      - name
+      - fieldType
+      - options
+      - objectType
+    SetAttributeValue:
+      type: object
+      properties:
+        value:
+          description: Value to set. Pass a string for text/textarea/single_select; pass a string array for multi_select.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+      required:
+      - value
+    ApiErrorDetails:
+      type: object
+      properties:
+        errors:
+          description: Detailed validation or parsing errors when available.
+          type: array
+          items:
+            type: string
+        invalidValues:
+          description: Submitted custom attribute values that were rejected.
+          type: array
+          items:
+            type: string
+        upstreamStatus:
+          type: number
+          description: Original upstream HTTP status code when the failure came from a downstream service.
+    ApiErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          description: HTTP status code for the failure
+          example: 400
+        error:
+          type: string
+          description: HTTP status label
+          example: Bad Request
+        message:
+          type: string
+          description: Human-readable failure summary
+          example: Validation failed
+        code:
+          type: object
+          description: Stable machine-readable code for client branching
+          example: WB_REQUEST_VALIDATION_FAILED
+        details:
+          description: Additional structured context about the failure
+          allOf:
+          - $ref: '#/components/schemas/ApiErrorDetails'
+      required:
+      - statusCode
+      - error
+      - message
+      - code
+    CustomAttributeValue:
+      type: object
+      properties:
+        id:
+          type: number
+          description: Attribute definition ID
+        name:
+          type: string
+          description: Attribute name / label
+        value:
+          description: Current value. String for text/textarea/single_select; string array for multi_select; null when unset.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+          - type: 'null'
+        fieldType:
+          type: string
+          description: Field type
+          enum:
+          - text
+          - textarea
+          - single_select
+          - multi_select
+        objectSubtype:
+          type: string
+          description: 'Object subtype (work items only). Values: 0 = Action, 1 = Risk, 2 = Assumption, 3 = Milestone.'
+      required:
+      - id
+      - name
       - value
   securitySchemes:
     bearer:
