@@ -229,6 +229,8 @@ apis:
     https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
   baseURL: https://myworkboard.com/wb/apis/scim
   tags:
+  - Datastream
+  tags_raw:
   - Data Stream
   properties:
   - type: OpenAPI
@@ -238,6 +240,9 @@ apis:
   - type: ChangeLog
     url: https://apidocs.myworkboard.com/changes.html
 common:
+- type: CapabilityMap
+  url: capabilities/workboard-capability-edges.yml
+  name: WorkBoard Business Capability Map
 - type: Overlay
   url: overlays/workboard-external-v1-overlay.yaml
 - type: AgenticAccess
