@@ -1,0 +1,12 @@
+{
+ "url": "https://apidocs.myworkboard.com/openapi.json",
+ "requested_url": "https://apidocs.myworkboard.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 594136,
+ "sha256": "3b811eb59764317f6f964f4f0310a90bb988b52c8b6ea0cdf77cc354fcf8a6db",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
