@@ -1,0 +1,45 @@
+slug: workboard
+provider: WorkBoard
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Goal (Objective)
+  spec_file: workboard-goal-objective-api-openapi.yml
+  capability_id: BC-100.20
+  capability_id_l1: BC-100
+  capability_name: Strategy Execution Management
+  confidence: 0.85
+  evidence: POST /goal "Create a goal for a user in your organization, including metrics sourced from…"
+    and GET /goal/{goal_id_path}/pillars "Get a Goal's associated `strategies` and `pillars` from WorkBoard
+    Strategy"
+  reason: Goals here are OKR objectives linked to strategy pillars and aligned/dependent goals — translation
+    of strategy into objectives, i.e. Strategy Execution Management, not generic goal-setting.
+- tag: Metric (Key Result)
+  spec_file: workboard-metric-key-result-api-openapi.yml
+  capability_id: BC-100.20
+  capability_id_l1: BC-100
+  capability_name: Strategy Execution Management
+  confidence: 0.85
+  evidence: GET /metric "Request metrics (key results) the user (token owner) has access to"; PUT /metric/{id}/confidence
+    "Update the confidence score (RAG) of a metric (key result)"
+  reason: Key results with RAG confidence scoring are the measurement half of the OKR model — Strategy
+    Execution Management (OKRs/scorecards).
+- tag: User Goals (User Objectives)
+  spec_file: workboard-user-goals-user-objectives-api-openapi.yml
+  capability_id: BC-100.20
+  capability_id_l1: BC-100
+  capability_name: Strategy Execution Management
+  confidence: 0.8
+  evidence: GET /user/{user_id_path}/goal "Get all of a user's goals"
+  reason: Read access to an individual's OKR objectives; same OKR/strategy-execution surface as the Goal
+    tag, just scoped per user.
