@@ -229,6 +229,8 @@ apis:
     https://support.myworkboard.com/en/articles/13516753-workboard-system-for-cross-domain-identity-management-scim-api-reference
   baseURL: https://myworkboard.com/wb/apis/scim
   tags:
+  - Datastream
+  tags_raw:
   - Data Stream
   properties:
   - type: OpenAPI
